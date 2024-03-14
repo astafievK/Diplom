@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  react:
+    container_name: diplom_react
+    image: diplom_react
+    build:
+      context: ./App
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+    stdin_open: true
+    logging:
+      driver: none
+    restart: always
+volumes:
+  db:

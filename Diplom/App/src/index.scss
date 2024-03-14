@@ -43,7 +43,7 @@ body {
     transition: all 0.3s;
 
     .button-text {
-      font-size: 2rem;
+      font-size: 16px;
       font-weight: 600;
       color: #ffffff;
       transition: all 0.3s;
@@ -67,9 +67,10 @@ body {
       .user-panel {
         display: flex;
         flex-direction: row;
-        height: 4rem;
+        height: 50px;
         align-items: center;
-        font-size: 1.5em;
+        font-size: 16px;
+        font-weight: 600;
         gap: 20px;
         width: 100%;
         padding: 0 2vw;
@@ -167,24 +168,23 @@ body {
 
       .main-panel {
         width: 100%;
-        height: 6rem;
         display: flex;
         flex-direction: row;
-        padding: 8px 3vw;
+        padding: 5px 3vw;
 
         .nav {
           display: flex;
           flex-direction: row;
-          gap: 25px;
+          gap: 15px;
 
           .nav-item {
             display: flex;
             align-items: center;
             position: relative;
-            padding: 0 10px;
+            padding: 0 5px;
             color: rgba($color-font, 0.7);
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: 22px;
             transition: color 0.3s;
             text-wrap: nowrap;
 
@@ -244,7 +244,7 @@ body {
           span {
             color: rgba($color-font, 0.7);
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: 22px;
 
             transition: color 0.3s;
           }
@@ -279,7 +279,7 @@ body {
     }
 
     main {
-      padding: 12rem 5vw 5rem 5vw;
+      padding: 14rem 5vw 5rem 5vw;
 
       .page {
         display: flex;
@@ -293,59 +293,86 @@ body {
 
         .employers {
           margin: 0 auto;
+          width: 100%;
           display: grid;
-          gap: 2rem;
+          gap: 1rem;
 
           .employer-card {
             display: flex;
             flex-direction: row;
-            height: 200px;
             background: rgba($color-font, 0.05);
             border-radius: 7px;
             cursor: pointer;
             transition: background 0.3s;
 
-            .employer-card__photo {
-              height: 100%;
-              aspect-ratio: 4/3;
-              border-radius: 7px;
+            .photo-wrapper{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .employer-card__photo {
+                border-radius: 7px;
+              }
             }
 
             .employer-card__info {
+              height: 100%;
               position: relative;
               display: flex;
-              flex-direction: column;
-              height: 100%;
+              flex-direction: row;
               flex-grow: 1;
-              padding: 22px 8px 10px 8px;
+              padding: 10px 13px 10px 13px;
 
+              .bio {
+                display: flex;
+                flex-direction: column;
 
-              .fullname {
-                font-weight: 600;
-                font-size: 1.9rem;
+                .fullname {
+                  font-weight: 600;
+                  font-size: 22px;
+                  line-height: 1.1;
+                }
+
+                .experience {
+                  font-size: 21px;
+                  margin-top: 15px;
+                  line-height: 1;
+                }
+
+                .works-count {
+                  font-size: 21px;
+                }
+
+                .categories {
+                  display: flex;
+                  flex-direction: row;
+                  margin-top: 10px;
+                  gap: 4px;
+                  flex-wrap: wrap;
+
+                  .category {
+                    border: 1px solid white;
+                    border-radius: 7px;
+                    padding: 2px 4px;
+                    font-size: 13px;
+                    text-align: center;
+                    text-transform: uppercase;
+                  }
+                }
               }
+            }
 
-              .experience {
-                font-size: 1.75rem;
-                margin-top: 10px;
-              }
-
-              .works-count {
-                font-size: 1.75rem;
-              }
-
-              .advice {
-                position: absolute;
-                opacity: 0;
-                bottom: 0px;
-                left: 50%;
-                width: 100%;
-                transform: translateX(-50%);
-                font-size: 1.2rem;
-                margin-top: auto;
-                text-align: center;
-                transition: all 0.3s;
-              }
+            .advice {
+              position: absolute;
+              opacity: 0;
+              bottom: 0px;
+              left: 50%;
+              width: 100%;
+              transform: translateX(-50%);
+              font-size: 14px;
+              margin-top: auto;
+              text-align: center;
+              transition: all 0.1s;
             }
 
             &:hover {
@@ -356,7 +383,7 @@ body {
                 .advice {
                   opacity: 1;
                   bottom: 5px;
-                  transition: all 0.3s;
+                  transition: all 0.1s;
                 }
               }
             }
@@ -364,23 +391,21 @@ body {
         }
 
         .works-photos-tiles {
-          display: flex;
-          width: 100%;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.15vw;
+          margin: 0 auto;
+          display: grid;
+          gap: 1rem;
 
           .tile-wrapper {
             background: pink;
             position: relative;
-            width: 27em;
-            aspect-ratio: 1/1;
+            height: 240px;
+            aspect-ratio: 4/3;
             cursor: pointer;
             transition: all 0.2s;
 
             img {
-
+              height: 100%;
+              width: 100%;
             }
 
             .spoiler {
@@ -425,12 +450,96 @@ body {
     }
   }
 
+  @media screen and (max-width: 600px) {
+    #root {
+      main {
+        padding: 14rem 1vw;
+
+        .page {
+          .employers{
+            .employer-card{
+              .employer-card__info{
+                .bio{
+                  .fullname{
+                    font-size: 15px;
+                  }
+
+                  .experience,
+                  .works-count{
+                    font-size: 14px;
+                  }
+
+                  .categories {
+                    .category {
+                      font-size: 9px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .works-photos-tiles{
+            grid-template-columns: repeat(3, 1fr);
+
+            .tile-wrapper{
+              height: 140px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1099px) {
+    #root {
+      main {
+        .page {
+          .employers{
+            .employer-card{
+              .employer-card__info{
+                .bio{
+                  .fullname{
+                    font-size: 18px;
+                  }
+
+                  .experience,
+                  .works-count{
+                    font-size: 17px;
+                  }
+
+                  .categories {
+                    .category {
+                      font-size: 11px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .works-photos-tiles{
+            grid-template-columns: repeat(3, 1fr);
+
+            .tile-wrapper{
+              height: 140px;
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 1100px) {
     #root {
       main {
         .page {
           .employers {
             grid-template-columns: repeat(2, 1fr);
+          }
+
+          .works-photos-tiles{
+            grid-template-columns: repeat(4, 1fr);
           }
         }
       }
@@ -442,7 +551,11 @@ body {
       main {
         .page {
           .employers {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .works-photos-tiles{
+            grid-template-columns: repeat(5, 1fr);
           }
         }
       }

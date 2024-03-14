@@ -9,10 +9,6 @@ const Employers: FC = () => {
             <EmployerCard/>
             <EmployerCard/>
             <EmployerCard/>
-            <EmployerCard/>
-            <EmployerCard/>
-            <EmployerCard/>
-            <EmployerCard/>
         </div>
     )
 }

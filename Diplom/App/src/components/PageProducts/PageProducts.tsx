@@ -3,7 +3,10 @@ import {FC} from "react";
 const PageProducts: FC = () => {
     return(
         <div className="page products">
-            <h1>Товары</h1>
+            <></>
+            <div className="products-wrapper">
+
+            </div>
         </div>
     )
 }

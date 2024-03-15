@@ -15,7 +15,7 @@ const WorkPhotoTile: FC = () => {
 
     return (
         <div className={'tile-wrapper'} onClick={handleClick}>
-            <img src={"../../src/assets/images/no-photo.jpg"} alt={"плитка с фото"}/>
+            <img src={"/images/no-photo.jpg"} alt={"плитка с фото"}/>
             <div className="spoiler"></div>
         </div>
     )

@@ -1,6 +1,3 @@
-@font-face {
-  font-family: Poppins-Regular;
-  src: url("./assets/fonts/poppins/Poppins-Regular.ttf"); }
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +19,7 @@ body {
   body .label-styled {
     border: 1px solid #ffffff;
     display: inline-block;
-    padding: 0 12px;
+    padding: 3px 12px;
     border-radius: 7px;
     user-select: none;
     cursor: pointer;
@@ -61,8 +58,14 @@ body {
         align-items: center;
         height: 100%;
         text-wrap: nowrap; }
-        body #root .header-wrapper .user-panel .user-panel__item:hover {
+        body #root .header-wrapper .user-panel .user-panel__item:hover, body #root .header-wrapper .user-panel .user-panel__item.selected {
           color: #e8e8e8; }
+          body #root .header-wrapper .user-panel .user-panel__item:hover .count, body #root .header-wrapper .user-panel .user-panel__item.selected .count {
+            background: #fe313a; }
+          body #root .header-wrapper .user-panel .user-panel__item:hover span, body #root .header-wrapper .user-panel .user-panel__item.selected span {
+            color: #e8e8e8; }
+          body #root .header-wrapper .user-panel .user-panel__item:hover svg path, body #root .header-wrapper .user-panel .user-panel__item.selected svg path {
+            fill: #e8e8e8; }
       body #root .header-wrapper .user-panel .fullname {
         height: 100%;
         display: flex;
@@ -79,7 +82,7 @@ body {
         margin-left: auto;
         gap: 5px; }
         body #root .header-wrapper .user-panel .cart .count {
-          border: 1px solid #a93650;
+          border: 1px solid #fe313a;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -98,7 +101,7 @@ body {
           body #root .header-wrapper .user-panel .cart svg path {
             fill: rgba(232, 232, 232, 0.7); }
         body #root .header-wrapper .user-panel .cart:hover .count {
-          background: #a93650;
+          background: #fe313a;
           transition: background 0.4s; }
         body #root .header-wrapper .user-panel .cart:hover span {
           color: #e8e8e8; }
@@ -106,18 +109,36 @@ body {
           fill: #e8e8e8; }
     body #root .header-wrapper .main-panel {
       width: 100%;
+      height: 70px;
       display: flex;
       flex-direction: row;
       padding: 5px 3vw; }
+      body #root .header-wrapper .main-panel .logo-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center; }
+        body #root .header-wrapper .main-panel .logo-wrapper img {
+          height: 100%;
+          aspect-ratio: auto;
+          border-radius: 7px; }
+        body #root .header-wrapper .main-panel .logo-wrapper .label-wrapper {
+          display: flex;
+          flex-direction: column; }
+          body #root .header-wrapper .main-panel .logo-wrapper .label-wrapper span {
+            font-family: "Roboto Light", sans-serif;
+            font-size: 23px;
+            font-weight: 800;
+            line-height: 1; }
       body #root .header-wrapper .main-panel .nav {
         display: flex;
         flex-direction: row;
-        gap: 15px; }
+        margin-left: 3rem; }
         body #root .header-wrapper .main-panel .nav .nav-item {
           display: flex;
           align-items: center;
           position: relative;
-          padding: 0 5px;
+          padding: 0 15px;
           color: rgba(232, 232, 232, 0.7);
           font-weight: 700;
           font-size: 22px;
@@ -130,10 +151,10 @@ body {
             height: 4px;
             left: 0;
             bottom: 0;
-            background: #a93650;
+            background: rgba(254, 49, 58, 0.75);
             transform: scale(0, 1);
             border-radius: 10px;
-            box-shadow: 0 0 10px 2px #a93650;
+            box-shadow: 0 0 10px 2px rgba(254, 49, 58, 0.6);
             transition: all 0.3s ease; }
           body #root .header-wrapper .main-panel .nav .nav-item:hover::after, body #root .header-wrapper .main-panel .nav .nav-item:focus::after {
             transform: scale(1, 1); }
@@ -149,10 +170,10 @@ body {
               height: 4px;
               left: 0;
               bottom: 0;
-              background: #a93650;
+              background: #fe313a;
               transform: scale(1, 1);
               border-radius: 10px;
-              box-shadow: 0 0 10px 2px #a93650;
+              box-shadow: 0 0 10px 2px #fe313a;
               transition: all 0.3s ease; }
       body #root .header-wrapper .main-panel .login-button {
         display: flex;
@@ -170,17 +191,17 @@ body {
         body #root .header-wrapper .main-panel .login-button svg path {
           fill: rgba(232, 232, 232, 0.7);
           transition: fill 0.3s; }
-        body #root .header-wrapper .main-panel .login-button:hover span {
+        body #root .header-wrapper .main-panel .login-button:hover span, body #root .header-wrapper .main-panel .login-button.selected span {
           color: #e8e8e8;
           transition: color 0.3s; }
-        body #root .header-wrapper .main-panel .login-button:hover svg path {
-          fill: #a93650;
+        body #root .header-wrapper .main-panel .login-button:hover svg path, body #root .header-wrapper .main-panel .login-button.selected svg path {
+          fill: #fe313a;
           transition: fill 0.3s; }
     body #root .header-wrapper.moved {
       background: black;
       transition: background 0.3s; }
   body #root main {
-    padding: 14rem 5vw 5rem 5vw; }
+    padding: 14rem 5vw 0 5vw; }
     body #root main .page {
       display: flex;
       flex-direction: column;
@@ -188,61 +209,66 @@ body {
       body #root main .page h1 {
         font-size: 36px;
         font-weight: 800; }
-      body #root main .page .employers {
-        margin: 0 auto;
+      body #root main .page .employers-wrapper {
         width: 100%;
         display: grid;
         gap: 1rem; }
-        body #root main .page .employers .employer-card {
+        body #root main .page .employers-wrapper .employer-card {
           display: flex;
           flex-direction: row;
           background: rgba(232, 232, 232, 0.05);
           border-radius: 7px;
           cursor: pointer;
           transition: background 0.3s; }
-          body #root main .page .employers .employer-card .photo-wrapper {
+          body #root main .page .employers-wrapper .employer-card .photo-wrapper {
             display: flex;
             align-items: center;
             justify-content: center; }
-            body #root main .page .employers .employer-card .photo-wrapper .employer-card__photo {
+            body #root main .page .employers-wrapper .employer-card .photo-wrapper .employer-card__photo {
               border-radius: 7px; }
-          body #root main .page .employers .employer-card .employer-card__info {
+          body #root main .page .employers-wrapper .employer-card .employer-card__info {
             height: 100%;
             position: relative;
             display: flex;
-            flex-direction: row;
+            gap: 10px;
+            flex-direction: column;
             flex-grow: 1;
-            padding: 10px 13px 10px 13px; }
-            body #root main .page .employers .employer-card .employer-card__info .bio {
+            padding: 20px 13px 30px 13px; }
+            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio {
               display: flex;
-              flex-direction: column; }
-              body #root main .page .employers .employer-card .employer-card__info .bio .fullname {
+              flex-direction: row; }
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
                 font-weight: 600;
                 font-size: 22px;
                 line-height: 1.1; }
-              body #root main .page .employers .employer-card .employer-card__info .bio .experience {
-                font-size: 21px;
-                margin-top: 15px;
-                line-height: 1; }
-              body #root main .page .employers .employer-card .employer-card__info .bio .works-count {
-                font-size: 21px; }
-              body #root main .page .employers .employer-card .employer-card__info .bio .categories {
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works {
                 display: flex;
-                flex-direction: row;
-                margin-top: 10px;
-                gap: 4px;
-                flex-wrap: wrap; }
-                body #root main .page .employers .employer-card .employer-card__info .bio .categories .category {
-                  border: 1px solid white;
-                  border-radius: 7px;
-                  padding: 2px 4px;
-                  font-size: 13px;
-                  text-align: center;
-                  text-transform: uppercase; }
-          body #root main .page .employers .employer-card .advice {
+                flex-direction: column;
+                gap: 5px;
+                text-wrap: nowrap;
+                margin-left: auto; }
+                body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience {
+                  font-size: 19px;
+                  line-height: 1; }
+                body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                  font-size: 19px; }
+            body #root main .page .employers-wrapper .employer-card .employer-card__info .categories {
+              display: flex;
+              flex-direction: row;
+              margin-top: auto;
+              gap: 4px;
+              flex-wrap: wrap; }
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .categories .category {
+                border: 1px solid white;
+                border-radius: 7px;
+                padding: 2px 4px;
+                font-size: 13px;
+                text-align: center;
+                text-transform: uppercase; }
+          body #root main .page .employers-wrapper .employer-card .advice {
             position: absolute;
             opacity: 0;
-            bottom: 0px;
+            bottom: 0;
             left: 50%;
             width: 100%;
             transform: translateX(-50%);
@@ -250,21 +276,21 @@ body {
             margin-top: auto;
             text-align: center;
             transition: all 0.1s; }
-          body #root main .page .employers .employer-card:hover {
+          body #root main .page .employers-wrapper .employer-card:hover {
             background: black;
             transition: background 0.3s; }
-            body #root main .page .employers .employer-card:hover .employer-card__info .advice {
+            body #root main .page .employers-wrapper .employer-card:hover .employer-card__info .advice {
               opacity: 1;
-              bottom: 5px;
+              bottom: 10px;
               transition: all 0.1s; }
       body #root main .page .works-photos-tiles {
         margin: 0 auto;
         display: grid;
         gap: 1rem; }
         body #root main .page .works-photos-tiles .tile-wrapper {
+          display: flex;
           background: pink;
           position: relative;
-          height: 240px;
           aspect-ratio: 4/3;
           cursor: pointer;
           transition: all 0.2s; }
@@ -280,10 +306,9 @@ body {
             background: transparent;
             transition: background 0.2s; }
           body #root main .page .works-photos-tiles .tile-wrapper.active {
-            scale: 1.3;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 0 1px 1px black; }
+            scale: 1.5;
+            box-shadow: 0 0 1px 1px black;
+            z-index: 2; }
             body #root main .page .works-photos-tiles .tile-wrapper.active .spoiler {
               background: transparent; }
             body #root main .page .works-photos-tiles .tile-wrapper.active:hover .spoiler {
@@ -296,39 +321,60 @@ body {
               transition: background 0.2s; }
   @media screen and (max-width: 600px) {
     body #root main {
-      padding: 14rem 1vw; }
-      body #root main .page .employers .employer-card .employer-card__info .bio .fullname {
-        font-size: 15px; }
-      body #root main .page .employers .employer-card .employer-card__info .bio .experience,
-      body #root main .page .employers .employer-card .employer-card__info .bio .works-count {
-        font-size: 14px; }
-      body #root main .page .employers .employer-card .employer-card__info .bio .categories .category {
-        font-size: 9px; }
-      body #root main .page .works-photos-tiles {
-        grid-template-columns: repeat(3, 1fr); }
-        body #root main .page .works-photos-tiles .tile-wrapper {
-          height: 140px; } }
-  @media screen and (min-width: 600px) and (max-width: 1099px) {
-    body #root main .page .employers .employer-card .employer-card__info .bio .fullname {
-      font-size: 18px; }
-    body #root main .page .employers .employer-card .employer-card__info .bio .experience,
-    body #root main .page .employers .employer-card .employer-card__info .bio .works-count {
-      font-size: 17px; }
-    body #root main .page .employers .employer-card .employer-card__info .bio .categories .category {
-      font-size: 11px; }
+      padding: 11rem 3vw 1rem 3vw; }
+      body #root main .page {
+        gap: 1.5rem; }
+        body #root main .page h1 {
+          line-height: 1;
+          font-size: 28px; }
+        body #root main .page .employers-wrapper,
+        body #root main .page .works-photos-tiles {
+          padding: 0 6vw; }
+        body #root main .page .employers-wrapper {
+          grid-template-columns: repeat(1, 1fr); }
+          body #root main .page .employers-wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .page .employers-wrapper .employer-card .employer-card__info {
+              gap: 0; }
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 21px; }
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 18px; }
+              body #root main .page .employers-wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+                body #root main .page .employers-wrapper .employer-card .employer-card__info .categories .category {
+                  font-size: 14px; }
+        body #root main .page .works-photos-tiles {
+          grid-template-columns: repeat(1, 1fr);
+          margin: 0; }
+          body #root main .page .works-photos-tiles .tile-wrapper {
+            width: 100%; } }
+  @media screen and (min-width: 600px) and (max-width: 1300px) {
+    body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
+      font-size: 20px; }
+    body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+    body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+      position: relative;
+      font-size: 16px; }
+    body #root main .page .employers-wrapper .employer-card .employer-card__info .categories .category {
+      font-size: 13px; }
     body #root main .page .works-photos-tiles {
-      grid-template-columns: repeat(3, 1fr); }
-      body #root main .page .works-photos-tiles .tile-wrapper {
-        height: 140px; } }
-  @media screen and (min-width: 1100px) {
-    body #root main .page .employers {
+      grid-template-columns: repeat(3, 1fr); } }
+  @media screen and (min-width: 1300px) {
+    body #root main .page .employers-wrapper {
       grid-template-columns: repeat(2, 1fr); }
     body #root main .page .works-photos-tiles {
       grid-template-columns: repeat(4, 1fr); } }
   @media screen and (min-width: 1510px) {
-    body #root main .page .employers {
+    body #root main .page .employers-wrapper {
       grid-template-columns: repeat(2, 1fr); }
     body #root main .page .works-photos-tiles {
-      grid-template-columns: repeat(5, 1fr); } }
+      grid-template-columns: repeat(6, 1fr); } }
+  @media screen and (min-width: 1900px) {
+    body #root main .page .employers-wrapper {
+      grid-template-columns: repeat(3, 1fr); }
+    body #root main .page .works-photos-tiles {
+      grid-template-columns: repeat(6, 1fr); } }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,33 +1,20 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import {Link} from "react-router-dom";
+import {useAppDispatch, useTypedSelector} from "../../store/hooks/redux.ts";
+import {swap} from "../../api/slices/mobileMenuSlice.ts";
 
 const Header: FC = () => {
-    const [isMoved, setIsMoved] = useState(false)
+    const dispatch = useAppDispatch()
     const [selectedNavItem, setSelectedNavItem] = useState('');
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY
-            if(scrollTop > 0){
-                setIsMoved(true)
-            } else{
-                setIsMoved(false)
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
+    const {isOpen} = useTypedSelector(state => state.mobileMenuReducer);
 
     const handleClick = (path: string) => {
         setSelectedNavItem(path);
     }
 
     return(
-        <div className={'header-wrapper' + (isMoved ? ' moved' : '')}>
+        <div className={'header-wrapper' + (isOpen ? ' opened' : '')} id={"headerWrapper"}>
             <div className={"user-panel"}>
                 <Link to={"profile"} className="fullname user-panel__item">
                     <span className="name">Кирилл</span>
@@ -42,8 +29,7 @@ const Header: FC = () => {
                         <span>10</span>
                     </div>
                     <span>Корзина</span>
-                    <svg fill="#000000"
-                         width="30px" height="30px" viewBox="0 0 902.86 902.86">
+                    <svg fill="#000000" width="30px" height="30px" viewBox="0 0 902.86 902.86">
                         <g>
                             <g>
                                 <path d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z
@@ -100,6 +86,13 @@ const Header: FC = () => {
                               d="M18.6881 10.6901C19.3396 11.4418 19.3396 12.5581 18.6881 13.3098L14.5114 18.1291C13.2988 19.5282 11 18.6707 11 16.8193L11 15L5 15C3.89543 15 3 14.1046 3 13L3 11C3 9.89541 3.89543 8.99998 5 8.99998L11 8.99998L11 7.18071C11 5.3293 13.2988 4.47176 14.5114 5.87085L18.6881 10.6901ZM16.6091 12.6549C16.9348 12.279 16.9348 11.7209 16.6091 11.345L13 7.18071L13 9.49998C13 10.3284 12.3284 11 11.5 11L5 11L5 13L11.5 13C12.3284 13 13 13.6716 13 14.5L13 16.8193L16.6091 12.6549Z"/>
                     </svg>
                 </Link>
+
+                <button className={"burger" + (isOpen ? ' active' : '')} id={"burgerBtn"} onClick={() => {
+                    dispatch(swap())
+                    isOpen
+                        ? document.getElementById('body')!.classList.remove('scroll-locked')
+                        : document.getElementById('body')!.classList.add('scroll-locked')
+                }}></button>
             </div>
         </div>
     )

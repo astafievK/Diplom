@@ -17,6 +17,10 @@ const PageHome: FC = () => {
                 <EmployerCard/>
                 <EmployerCard/>
                 <EmployerCard/>
+                <EmployerCard/>
+                <EmployerCard/>
+                <EmployerCard/>
+                <EmployerCard/>
             </div>
         </div>
     )

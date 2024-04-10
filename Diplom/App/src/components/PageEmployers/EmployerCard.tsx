@@ -7,10 +7,13 @@ const EmployerCard: FC = () => {
         <Link className={"employer-card"} to={"/"}>
             <div className="photo-wrapper">
                 <img className={"employer-card__photo"} src={"/images/no-photo.jpg"} alt={"Изображение мастера"}/>
+                <div className="advice">
+                    нажмите, чтобы увидеть портфолио
+                </div>
             </div>
             <div className="employer-card__info">
                 <div className="bio">
-                    <span className={"fullname"}>Астафьев Кирилл Александрович</span>
+                <span className={"fullname"}>Астафьев Кирилл Александрович</span>
                     <div className="exp-and-works">
                         <span className={"experience"}>10 лет стажа</span>
                         <span className={"works-count"}>192 работы</span>
@@ -23,7 +26,6 @@ const EmployerCard: FC = () => {
                     <EmployerCardCategory title={"Маникюр"}/>
                     <EmployerCardCategory title={"Маникюр"}/>
                 </div>
-                <span className="advice">нажмите, чтобы увидеть портфолио</span>
             </div>
         </Link>
     )

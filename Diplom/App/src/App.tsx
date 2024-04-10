@@ -17,6 +17,7 @@ import PageCart from "./components/PageCart/PageCart.tsx";
 import PageProducts from "./components/PageProducts/PageProducts.tsx";
 import PageServices from "./components/PageServices/PageServices.tsx";
 import PageContacts from "./components/PageContacts/PageContacts.tsx";
+import ModalMenu from "./components/ModalMenu/ModalMenu.tsx";
 
 const Root = () => {
   return (
@@ -25,6 +26,7 @@ const Root = () => {
           <main>
               <Outlet/>
           </main>
+          <ModalMenu/>
       </>
   )
 }

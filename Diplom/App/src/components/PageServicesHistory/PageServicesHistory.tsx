@@ -1,10 +1,16 @@
 import {FC} from "react";
+import {motion} from "framer-motion";
 
 const PageServicesHistory: FC = () => {
     return(
-        <div className="page services-history">
+        <motion.div
+            className="page services-history"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+        >
             <h1>История услуг</h1>
-        </div>
+        </motion.div>
     )
 }
 

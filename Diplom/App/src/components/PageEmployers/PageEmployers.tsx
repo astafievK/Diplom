@@ -1,10 +1,16 @@
 import {FC} from "react";
 import StyledCheckBox from "../StyledCheckBox/StyledCheckBox.tsx";
 import EmployerCard from "./EmployerCard.tsx";
+import {motion} from "framer-motion";
 
 const PageHome: FC = () => {
     return(
-        <div className="page employers">
+        <motion.div
+            className="page employers"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+        >
             <h1>Наши мастера</h1>
 
             <form name={"employer_category"}>
@@ -22,7 +28,7 @@ const PageHome: FC = () => {
                 <EmployerCard/>
                 <EmployerCard/>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

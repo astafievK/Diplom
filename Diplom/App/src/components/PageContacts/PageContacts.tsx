@@ -1,10 +1,16 @@
 import {FC} from "react";
+import { motion } from "framer-motion"
 
 const PageContacts: FC = () => {
     return(
-        <div className="page contacts">
+        <motion.div
+            className="page contacts"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+        >
             <h1>Контакты</h1>
-        </div>
+        </motion.div>
     )
 }
 

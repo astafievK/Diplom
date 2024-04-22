@@ -1,37 +1,33 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {useTypedSelector} from "../../store/hooks/redux.ts";
+import {useAppDispatch, useTypedSelector} from "../../store/hooks/redux.ts";
+import {close} from "../../api/slices/mobileMenuSlice.ts";
+
 const ModalMenu: FC = () => {
+    const dispatch = useAppDispatch()
     const {isOpen} = useTypedSelector(state => state.mobileMenuReducer);
 
     return (
         <div className={"mobile-menu__modal" + (isOpen ? ' active' : '')}>
-            <div className="mobile-nav__wrapper">
-                <nav className="mobile-nav main-panel">
-                    <Link className={"mobile-nav__link"} to={"employers"}>Мастера</Link>
-                    <Link className={"mobile-nav__link"} to={"works"}>Работы</Link>
-                    <Link className={"mobile-nav__link"} to={"services"}>Услуги</Link>
-                    <Link className={"mobile-nav__link"} to={"products"}>Товары</Link>
-                    <Link className={"mobile-nav__link"} to={"time"}>Выбрать время</Link>
-                    <Link className={"mobile-nav__link"} to={"contacts"}>Контакты</Link>
-                </nav>
-                <nav className="mobile-nav user-panel">
-                    <Link className={"mobile-nav__link"} to={"orders-history"}>История заказов</Link>
-                    <Link className={"mobile-nav__link"} to={"services-history"}>История услуг</Link>
-                    <Link className={"mobile-nav__link cart"} to={"cart"}>
-                        <div className="count">
-                            <span>10</span>
-                        </div>
-                        <span>Корзина</span>
-                    </Link>
-                    <Link to={"admin"} className={"mobile-nav__link"}>Панель администратора</Link>
-                </nav>
-                <Link to={"profile"} className="mobile-nav__link profile">
-                    <span className="name">Кирилл</span>
-                    <span className="surname">Астафьев</span>
-                    <span className="sep">•</span>
-                    <span className="role">Клиент</span>
-                </Link>
+            <div className="menu">
+                <Link className={"menu-link"} to={"profile"} onClick={() => { dispatch(close()) }}>Профиль</Link>
+                <Link className={"menu-link"} to={"cart"} onClick={() => { dispatch(close()) }}>Корзина</Link>
+                <Link className={"menu-link"} to={"employers"} onClick={() => { dispatch(close()) }}>Мастера</Link>
+                <Link className={"menu-link"} to={"works"} onClick={() => { dispatch(close()) }}>Работы</Link>
+                <Link className={"menu-link"} to={"services"} onClick={() => { dispatch(close()) }}>Услуги</Link>
+                <Link className={"menu-link"} to={"products"} onClick={() => { dispatch(close()) }}>Товары</Link>
+                <Link className={"menu-link"} to={"time"} onClick={() => { dispatch(close()) }}>Записаться</Link>
+                <Link className={"menu-link"} to={"contacts"} onClick={() => { dispatch(close()) }}>Контакты</Link>
+                <Link className={"menu-link"} to={"orders-history"} onClick={() => { dispatch(close()) }}>Мои заказы</Link>
+                <Link className={"menu-link"} to={"services-history"} onClick={() => { dispatch(close()) }}>Мои услуги</Link>
+                <Link className={"menu-link admin"} to={"admin"} onClick={() => { dispatch(close()) }}>Админ-ие</Link>
+                <Link className={"menu-link login"} to={"login"} onClick={() => { dispatch(close()) }}>Вход</Link>
+            </div>
+            <div className="address">
+                <span>г. Архангельск</span>
+                <span>д. Часовенское 31, строение 2</span>
+                <span>10:00-19:00 Каждый день</span>
+                <span>+79118727440</span>
             </div>
         </div>
     )

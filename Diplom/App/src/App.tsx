@@ -18,14 +18,17 @@ import PageProducts from "./components/PageProducts/PageProducts.tsx";
 import PageServices from "./components/PageServices/PageServices.tsx";
 import PageContacts from "./components/PageContacts/PageContacts.tsx";
 import ModalMenu from "./components/ModalMenu/ModalMenu.tsx";
+import {AnimatePresence} from "framer-motion";
 
 const Root = () => {
   return (
       <>
           <Header/>
-          <main>
-              <Outlet/>
-          </main>
+              <main>
+                  <AnimatePresence>
+                    <Outlet/>
+                  </AnimatePresence>
+              </main>
           <ModalMenu/>
       </>
   )
@@ -33,84 +36,31 @@ const Root = () => {
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Root />}>
-            <Route path="" element={
-                <>
-                    <PageHome/>
-                </>
-            } />
-            <Route path="/employers" element={
-                <>
-                    <PageEmployers/>
-                </>
-            } />
-            <Route path="/login" element={
-                <>
-                    <PageLogin/>
-                </>
-            } />
-            <Route path="/admin" element={
-                <>
-                    <PageAdmin/>
-                </>
-            } />
-            <Route path="/profile" element={
-                <>
-                    <PageProfile/>
-                </>
-            } />
-            <Route path="/time" element={
-                <>
-                    <PageTime/>
-                </>
-            } />
-            <Route path="/works" element={
-                <>
-                    <PageWorks/>
-                </>
-            } />
-            <Route path="/orders-history" element={
-                <>
-                    <PageOrdersHistory/>
-                </>
-            } />
-            <Route path="/services-history" element={
-                <>
-                    <PageServicesHistory/>
-                </>
-            } />
-            <Route path="/cart" element={
-                <>
-                    <PageCart/>
-                </>
-            } />
-            <Route path="/services" element={
-                <>
-                    <PageServices/>
-                </>
-            } />
-            <Route path="/products" element={
-                <>
-                    <PageProducts/>
-                </>
-            } />
-            <Route path="/contacts" element={
-                <>
-                    <PageContacts/>
-                </>
-            } />
+        <Route path="/" element={<Root/>}>
+            <Route path="" element={<PageHome/>}/>
+            <Route path="/employers" element={<PageEmployers/>}/>
+            <Route path="/login" element={<PageLogin/>}/>
+            <Route path="/admin" element={<PageAdmin/>}/>
+            <Route path="/profile" element={<PageProfile/>}/>
+            <Route path="/time" element={<PageTime/>}/>
+            <Route path="/works" element={<PageWorks/>}/>
+            <Route path="/orders-history" element={<PageOrdersHistory/>}/>
+            <Route path="/services-history" element={<PageServicesHistory/>}/>
+            <Route path="/cart" element={<PageCart/>}/>
+            <Route path="/services" element={<PageServices/>}/>
+            <Route path="/products" element={<PageProducts/>}/>
+            <Route path="/contacts" element={<PageContacts/>}/>
         </Route>
     ))
 
-
 function App() {
-  return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <RouterProvider router={router} />
-        </PersistGate>
-      </Provider>
-  )
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <RouterProvider router={router}/>
+            </PersistGate>
+        </Provider>
+    )
 }
 
 export default App

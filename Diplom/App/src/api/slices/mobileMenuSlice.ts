@@ -5,7 +5,7 @@ interface IMobileMenuSlice {
 }
 
 const mobileMenuSlice = createSlice({
-    name: 'selects',
+    name: 'mobileMenu',
     initialState: {
         isOpen: false
     } as IMobileMenuSlice,
@@ -13,10 +13,14 @@ const mobileMenuSlice = createSlice({
         swap: (state) => {
             state.isOpen = !state.isOpen
         },
+        close: (state) => {
+            state.isOpen = false;
+        },
     }
 })
 
 export const {
-    swap
+    swap,
+    close
 } = mobileMenuSlice.actions
 export default mobileMenuSlice.reducer

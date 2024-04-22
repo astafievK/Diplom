@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 import {Link} from "react-router-dom";
 import {useAppDispatch, useTypedSelector} from "../../store/hooks/redux.ts";
-import {swap} from "../../api/slices/mobileMenuSlice.ts";
+import {close, swap} from "../../api/slices/mobileMenuSlice.ts";
 
 const Header: FC = () => {
     const dispatch = useAppDispatch()
@@ -47,9 +47,16 @@ const Header: FC = () => {
                 </Link>
                 <Link to={"admin"} className={"admin user-panel__item" + (selectedNavItem === 'admin' ? " selected" : '')} onClick={() => handleClick('admin')}>Панель администратора</Link>
             </div>
-
             <div className="main-panel">
-                <Link className={"logo-wrapper" + (selectedNavItem === 'home' ? " selected" : '')} to={""} onClick={() => handleClick('home')}>
+                <Link
+                    className={"logo-wrapper" + (selectedNavItem === 'home' ? " selected" : '')}
+                    to={""}
+                    onClick={
+                    () => {
+                        handleClick('home')
+                        dispatch(close())
+                    }
+                }>
                     <img src="/images/logo.png" alt={"123"}></img>
                     <div className="label-wrapper">
                         <span>Lovely</span>
@@ -77,7 +84,7 @@ const Header: FC = () => {
                     </Link>
                 </nav>
 
-                <Link to={"/login"} className={"login-button" + (selectedNavItem === 'login' ? " selected" : '')} onClick={() => handleClick('login')}>
+                <Link to={"login"} className={"login-button" + (selectedNavItem === 'login' ? " selected" : '')} onClick={() => handleClick('login')}>
                     <span>Войти</span>
                     <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"

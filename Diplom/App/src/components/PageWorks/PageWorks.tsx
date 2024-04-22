@@ -1,9 +1,15 @@
 import {FC} from "react";
 import WorkPhotoTile from "./WorkPhotoTile.tsx";
+import {motion} from "framer-motion";
 
 const PageWorks: FC = () => {
     return(
-        <div className="page works">
+        <motion.div
+            className="page works"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+        >
             <h1>Работы мастеров</h1>
             <div className={"works-photos-tiles"}>
                 <WorkPhotoTile/>
@@ -18,7 +24,7 @@ const PageWorks: FC = () => {
                 <WorkPhotoTile/>
                 <WorkPhotoTile/>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

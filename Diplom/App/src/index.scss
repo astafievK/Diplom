@@ -1,5 +1,6 @@
 $color-primary: rgb(254, 49, 58);
 $color-secondary: #1f1f1f;
+$color-block: rgb(41,41,41);
 $color-font: #e8e8e8;
 
 *{
@@ -11,6 +12,19 @@ $color-font: #e8e8e8;
   color: $color-font;
   font-family: Poppins-Regular, sans-serif;
   text-decoration: none;
+
+  &::-webkit-scrollbar{
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background: $color-font;
+    border-radius: 7px;
+  }
+
+  &::-webkit-scrollbar-track{
+    background: transparent;
+  }
 }
 
 [class*="copyrights-pane"] {
@@ -22,6 +36,7 @@ $color-font: #e8e8e8;
   flex-direction: row;
   border-radius: 7px;
   gap: 10px;
+  filter: none;
   align-items: center;
   transition: filter .2s;
 
@@ -43,18 +58,52 @@ $color-font: #e8e8e8;
     }
   }
 
-  &:hover,
-  &:active {
-    color: white;
-    transition: color .2s, background .2s;
-  }
-
-  &.selected {
+  &:hover, {
     filter: drop-shadow(0 0 0.7rem $color-primary);
     background: transparent;
 
     transition: filter .2s;
   }
+}
+
+.modal {
+  display: flex;
+  visibility: hidden;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .spoiler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.8);
+  }
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+input{
+  text-overflow: ellipsis;
 }
 
 body, html{
@@ -95,12 +144,14 @@ body {
 
   #root {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     .header-wrapper {
       position: sticky;
       top: 0;
       background: $color-secondary;
-      box-shadow: 0 9px 26px 10px #1f1f1f;
+      box-shadow: 0 4px 20px 4px #1f1f1f;
       transition: box-shadow 500ms, background 500ms;
       z-index: 9999;
 
@@ -146,10 +197,12 @@ body {
         .fullname {
           height: 100%;
           display: flex;
+          cursor: default;
+
           gap: 2px;
 
           span {
-            color: rgba($color-font, 0.7);
+            color: rgba($color-font, 1);
           }
 
           span.sep {
@@ -217,7 +270,7 @@ body {
         }
 
         .admin {
-
+          margin-left: auto;
         }
       }
 
@@ -248,16 +301,9 @@ body {
             text-wrap: nowrap;
             transition: color .2s, background .2s;
 
-            &:hover,
-            &:active {
+            &:hover {
               background: black;
               color: $color-font;
-              transition: color .2s, background .2s;
-            }
-
-            &.selected {
-              color: black;
-              background: $color-font;
               transition: color .2s, background .2s;
             }
           }
@@ -355,9 +401,61 @@ body {
         }
       }
 
-      &.opened{
+      &.opened {
         box-shadow: none;
         background: transparent;
+      }
+    }
+
+    .footer-wrapper {
+      display: flex;
+      margin-top: auto;
+      flex-direction: row;
+      padding: 10px 30px;
+      background: black;
+
+      .phone-wrapper,
+      .address-wrapper {
+        display: none;
+        font-size: 20px;
+
+        span {
+          width: 100%;
+        }
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      .title-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+
+        a {
+          color: rgba($color-font, 0.6);
+          font-size: 22px;
+          font-weight: 800;
+          display: flex;
+          transition: color 200ms;
+
+          &:hover {
+            color: rgba($color-font, 1);
+          }
+        }
+      }
+
+      .address-wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+
+        span {
+          text-align: right;
+        }
       }
     }
 
@@ -380,7 +478,7 @@ body {
       .menu {
         display: grid;
         align-items: center;
-        height: 60%;
+        height: 40%;
         width: 100%;
         grid-template-columns: repeat(2, calc(100% / 2 - 5px / 2 * (2 - 1)));
         gap: 5px;
@@ -402,14 +500,14 @@ body {
         }
       }
 
-      .address{
+      .address {
         display: flex;
         margin-top: auto;
         flex-direction: column;
         width: 100%;
         gap: 3px;
 
-        span{
+        span {
           text-align: center;
           text-transform: uppercase;
           font-weight: 600;
@@ -422,8 +520,317 @@ body {
       }
     }
 
+    .work-photo__modal {
+      .container {
+        padding: 10px;
+        width: 100%;
+        max-width: 1000px;
+        max-height: 700px;
+
+        .photo-wrapper {
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .work-photo {
+            display: block;
+            margin: auto;
+            width: 100%;
+            user-select: none;
+          }
+        }
+
+        .info-wrapper {
+          display: flex;
+          margin-top: 20px;
+
+          .employer-label {
+            font-weight: 800;
+            line-height: 1.1;
+            font-size: 18px;
+          }
+        }
+
+        .controls {
+          display: flex;
+          flex-direction: row;
+          margin-top: 20px;
+          gap: 5px;
+          justify-content: space-between;
+
+          .control {
+            height: 40px;
+            width: 100%;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            background: $color-font;
+            border-radius: 7px;
+            font-size: 18px;
+          }
+        }
+      }
+
+      .spoiler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(black, 0.8);
+      }
+
+      &.active {
+        visibility: visible;
+      }
+    }
+
+    .add-employer__modal,
+    .change-employer__modal{
+      .container {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        gap: 15px;
+        border-radius: 7px;
+        padding: 30px 10px 20px;
+        width: 100%;
+        height: 100%;
+        max-width: 600px;
+        max-height: 850px;
+        background: $color-secondary;
+
+        .container-item {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+
+          &.photo {
+            flex-direction: column;
+            gap: 15px;
+
+            .photo-wrapper {
+              border-radius: 50%;
+              width: 140px;
+              height: 140px;
+              overflow: hidden;
+              align-self: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              img {
+                height: 100%;
+              }
+            }
+
+            .actions{
+              display: flex;
+              flex-direction: row;
+              gap: 6px;
+              height: 50px;
+
+              .file-input__wrapper {
+                flex: 4;
+                width: 100%;
+                border-radius: 7px;
+                background: $color-block;
+                height: 100%;
+                transition: background-color 200ms;
+
+                label {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  width: 100%;
+                  height: 100%;
+
+                  span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: 700;
+                  }
+
+                  #upload-photo {
+                    display: none;
+                  }
+                }
+
+                &:hover {
+                  background: black;
+                }
+              }
+
+              #input-experience {
+                flex: 1;
+                background: $color-block;
+                color: white;
+                font-size: 20px;
+                text-align: center;
+                padding: 0 15px;
+                height: 100%;
+                border-radius: 7px;
+                width: 100%;
+                border: 2px solid  $color-block;
+                cursor: pointer;
+                transition: border-color 200ms, border-radius 200ms;
+
+                &:focus {
+                  border-color: $color-primary;
+                }
+              }
+            }
+          }
+
+          &.fields {
+            flex-direction: column;
+
+            input[type=text] {
+              background: $color-block;
+              color: white;
+              font-size: 20px;
+              padding: 0 15px;
+              height: 50px;
+              border-radius: 7px;
+              width: 100%;
+              border: 2px solid $color-secondary;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms;
+
+              &:focus {
+                border-color: $color-primary;
+              }
+            }
+          }
+
+          &.services{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            border-radius: 7px;
+            gap: 5px;
+            flex-grow: 1;
+            overflow: auto;
+            min-height: 150px;
+
+            .service{
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              gap: 6px;
+
+              .service-button{
+                flex: 2;
+                background: $color-block;
+                text-align: left;
+                padding: 5px 10px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #ffffff;
+                border-radius: 7px;
+                cursor: pointer;
+                transition: background-color 200ms, color 200ms;
+
+                &.selected{
+                  background: $color-font;
+                  color: $color-block;
+                }
+              }
+
+              .price-field{
+                flex: 1;
+                background: $color-block;
+                color: white;
+                font-size: 20px;
+                padding: 0 15px;
+                height: 50px;
+                border-radius: 7px;
+                width: 100%;
+                border: 2px solid $color-block;
+                cursor: pointer;
+                transition: border-color 200ms, border-radius 200ms;
+
+                &:focus {
+                  border-color: $color-primary;
+                }
+              }
+            }
+          }
+
+          &.actions{
+            margin-top: auto;
+            display: flex;
+            gap: 15px;
+
+            button{
+              flex-grow: 1;
+              border-radius: 7px;
+              height: 45px;
+              font-size: 18px;
+              background: transparent;
+              cursor: pointer;
+              border: 2px solid transparent;
+              font-weight: 700;
+
+              transition: background-color 200ms, color 200ms;
+
+              &:hover{
+                color: black;
+              }
+            }
+
+            #create-btn{
+              border-color: lightgreen;
+
+              &:hover{
+                background: lightgreen;
+              }
+            }
+
+            #cancel-btn{
+              border-color: red;
+
+              &:hover{
+                background: red;
+              }
+            }
+
+            #save-btn{
+              border-color: dodgerblue;
+
+              &:hover{
+                background: dodgerblue;
+              }
+            }
+          }
+        }
+
+        .cross{
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          background-color: $color-font;
+          clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+        }
+      }
+    }
+
     main {
-      padding: 36px 0 9px 0;
+      flex-grow: 1;
+      padding: 18px 0;
       position: relative;
 
       .page {
@@ -441,7 +848,7 @@ body {
         }
       }
 
-      .employers {
+      .employers-container {
         .employers-wrapper {
           width: 100%;
           grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
@@ -449,96 +856,110 @@ body {
           display: grid;
           row-gap: 10px;
 
-          .employer-card {
-            display: flex;
-            position: relative;
-            flex-direction: column;
-            background: rgba($color-font, 0.05);
+          .employer-card__wrapper {
+            background: $color-block;
             border-radius: 7px;
-            cursor: pointer;
             transition: background 0.3s;
 
-            .photo-wrapper {
+            .employer-card {
               display: flex;
-              align-items: center;
               position: relative;
-              justify-content: center;
-              border-radius: 7px;
-
-              .employer-card__photo {
-                position: relative;
-                border-radius: 7px;
-                margin: 0 auto;
-                height: 100%;
-                width: 100%;
-              }
-
-              .advice {
-                position: absolute;
-                opacity: 0;
-                bottom: -10px;
-                left: 0;
-                width: 100%;
-                border-radius: 7px;
-                background: black;
-                padding: 6px 0;
-                font-weight: 600;
-                font-size: 12px;
-                margin-top: auto;
-                text-align: center;
-                z-index: 2;
-                transition: all 0.15s;
-              }
-            }
-
-            .employer-card__info {
-              height: 100%;
-              position: relative;
-              display: flex;
-              gap: 10px;
               flex-direction: column;
-              flex-grow: 1;
-              padding: 10px 7px 15px 7px;
+              border-radius: 7px;
+              cursor: pointer;
 
-              .bio {
+              .photo-wrapper {
                 display: flex;
-                flex-direction: column;
+                align-items: center;
+                position: relative;
+                justify-content: center;
+                border-radius: 7px;
 
-                .fullname {
-                  font-weight: 800;
-                  word-break: break-word;
-                  font-size: 14px;
-                  line-height: 1.1;
+                .employer-card__photo {
+                  position: relative;
+                  border-radius: 7px;
+                  margin: 0 auto;
+                  height: 100%;
+                  width: 100%;
                 }
 
-                .exp-and-works {
+                .advice {
+                  position: absolute;
+                  opacity: 0;
+                  bottom: -10px;
+                  left: 0;
+                  width: 100%;
+                  border-radius: 7px;
+                  background: black;
+                  padding: 6px 0;
+                  font-weight: 600;
+                  font-size: 12px;
+                  margin-top: auto;
+                  text-align: center;
+                  z-index: 2;
+                  transition: all 0.15s;
+                }
+              }
+
+              .employer-card__info {
+                height: 100%;
+                position: relative;
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                flex-grow: 1;
+                padding: 10px 7px 10px 7px;
+
+                .bio {
                   display: flex;
                   flex-direction: column;
-                  margin-top: 10px;
-                  gap: 2px;
-                  text-wrap: nowrap;
 
-                  .experience,
-                  .works-count {
-                    font-size: 13px;
+                  .fullname {
+                    font-weight: 800;
+                    word-break: break-word;
+                    font-size: 14px;
+                    line-height: 1.1;
+                  }
+
+                  .exp-and-works {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 10px;
+                    gap: 2px;
+                    text-wrap: nowrap;
+
+                    .experience,
+                    .works-count {
+                      font-size: 13px;
+                    }
+                  }
+                }
+
+                .categories {
+                  display: flex;
+                  flex-direction: row;
+                  margin-top: auto;
+                  gap: 4px;
+                  flex-wrap: wrap;
+
+                  .category {
+                    border: 2px solid white;
+                    border-radius: 5px;
+                    padding: 2px 4px;
+                    opacity: 0.6;
+                    font-size: 12px;
+                    text-align: center;
                   }
                 }
               }
 
-              .categories {
-                display: flex;
-                flex-direction: row;
-                margin-top: auto;
-                gap: 4px;
-                flex-wrap: wrap;
-
-                .category {
-                  border: 2px solid white;
-                  border-radius: 5px;
-                  padding: 2px 4px;
-                  opacity: 0.6;
-                  font-size: 12px;
-                  text-align: center;
+              &:hover {
+                .photo-wrapper {
+                  .advice {
+                    opacity: 1;
+                    bottom: -1px;
+                    transition: all 0.15s;
+                  }
                 }
               }
             }
@@ -546,23 +967,15 @@ body {
             &:hover {
               background: black;
               transition: background 0.3s;
-
-              .photo-wrapper {
-                .advice {
-                  opacity: 1;
-                  bottom: -1px;
-                  transition: all 0.15s;
-                }
-              }
             }
           }
         }
       }
 
-      .works {
+      .works-container {
         .works-photos-tiles {
           display: grid;
-          grid-template-columns: repeat(3, calc(100% / 3 - 5px / 3 * (3 - 1)));
+          grid-template-columns: repeat(2, calc(100% / 2 - 5px / 2 * (2 - 1)));
           gap: 5px;
 
           .tile-wrapper {
@@ -570,7 +983,6 @@ body {
             background: pink;
             position: relative;
             aspect-ratio: 4/3;
-            cursor: pointer;
             transition: all 0.2s;
 
             img {
@@ -587,32 +999,6 @@ body {
               background: transparent;
               transition: background 0.2s;
             }
-
-            &.active {
-              scale: 2;
-              box-shadow: 0 0 1px 1px black;
-              z-index: 2;
-
-              .spoiler {
-                background: transparent;
-              }
-
-              &:hover {
-                .spoiler {
-                  background: transparent;
-                }
-              }
-            }
-
-            &:hover {
-              transition: all 0.2s;
-
-              .spoiler {
-                display: block;
-                background: rgba(0, 0, 0, 0.3);
-                transition: background 0.2s;
-              }
-            }
           }
         }
       }
@@ -626,15 +1012,17 @@ body {
         .left-menu__wrapper {
           position: sticky;
           display: none;
-          box-shadow: 0 0 15px 2px black;
-          padding: 20px 12px;
+          padding: 0 15px;
+          width: 250px;
+          height: 100%;
           left: 0;
-          top: 0;
-          background: $color-secondary;
+          top: 79px;
+          background: transparent;
           border-radius: 0 7px 0 0;
 
           .left-menu {
             display: flex;
+            width: 100%;
             flex-direction: column;
             gap: 10px;
 
@@ -656,23 +1044,14 @@ body {
               }
 
               &:hover,
-              &:active {
+              &:active,
+              &.selected {
                 background: black;
                 transition: background .2s;
 
                 span {
                   transition: color .2s;
                   color: $color-font;
-                }
-              }
-
-              &.selected {
-                background: black;
-                transition: background .2s;
-
-                span {
-                  color: red;
-                  transition: color .2s;
                 }
               }
             }
@@ -686,6 +1065,7 @@ body {
           left: 0;
           bottom: 0;
           right: 0;
+          z-index: 10;
           background: black;
 
           .bottom-menu {
@@ -703,7 +1083,7 @@ body {
               justify-content: space-between;
               align-items: center;
 
-              img{
+              img {
                 height: 23px;
               }
 
@@ -726,19 +1106,290 @@ body {
           }
         }
 
-        .admin {
+        .admin-container {
           flex-grow: 1;
+        }
+
+        .admin-section {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+
+          .add-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            background: $color-block;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 300ms;
+
+            span {
+              text-align: center;
+              font-size: 16px;
+              text-transform: uppercase;
+              user-select: none;
+              font-weight: 700;
+              color: rgba($color-font, 0.7);
+              transition: color 300ms;
+            }
+
+            &:hover {
+              background: black;
+
+              span {
+                color: rgba($color-font, 1);
+              }
+            }
+          }
+
+          .employers-wrapper {
+            width: 100%;
+            grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
+            gap: 8px;
+            display: grid;
+            row-gap: 10px;
+
+            .employer-card__wrapper {
+              background: $color-block;
+              border-radius: 7px;
+              transition: background 0.3s;
+
+              .employer-card {
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                cursor: pointer;
+
+                .photo-wrapper {
+                  display: flex;
+                  align-items: center;
+                  position: relative;
+                  justify-content: center;
+                  border-radius: 7px;
+
+                  .employer-card__photo {
+                    position: relative;
+                    border-radius: 7px;
+                    margin: 0 auto;
+                    height: 100%;
+                    width: 100%;
+                  }
+
+                  .advice {
+                    position: absolute;
+                    opacity: 0;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    border-radius: 7px;
+                    background: black;
+                    padding: 6px 0;
+                    font-weight: 600;
+                    font-size: 12px;
+                    margin-top: auto;
+                    text-align: center;
+                    z-index: 2;
+                    transition: all 0.15s;
+                  }
+                }
+
+                .employer-card__info {
+                  height: 100%;
+                  position: relative;
+                  display: flex;
+                  gap: 10px;
+                  flex-direction: column;
+                  flex-grow: 1;
+                  padding: 10px 7px 10px 7px;
+
+                  .bio {
+                    display: flex;
+                    flex-direction: column;
+
+                    .fullname {
+                      font-weight: 800;
+                      word-break: break-word;
+                      font-size: 14px;
+                      line-height: 1.1;
+                    }
+
+                    .exp-and-works {
+                      display: flex;
+                      flex-direction: column;
+                      margin-top: 10px;
+                      gap: 2px;
+                      text-wrap: nowrap;
+
+                      .experience,
+                      .works-count {
+                        font-size: 13px;
+                      }
+                    }
+                  }
+
+                  .categories {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: auto;
+                    gap: 4px;
+                    flex-wrap: wrap;
+
+                    .category {
+                      border: 2px solid white;
+                      border-radius: 5px;
+                      padding: 2px 4px;
+                      opacity: 0.6;
+                      font-size: 12px;
+                      text-align: center;
+                    }
+                  }
+                }
+
+                &:hover {
+                  .photo-wrapper {
+                    .advice {
+                      opacity: 1;
+                      bottom: -1px;
+                      transition: all 0.15s;
+                    }
+                  }
+                }
+
+                .menu{
+                  .menu-button{
+
+                  }
+                }
+              }
+
+              .actions {
+                display: flex;
+                flex-direction: row;
+                border-top: 2px solid $color-secondary;
+
+                .action {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  background: transparent;
+                  padding: 10px 0;
+                  color: $color-font;
+                  font-size: 13px;
+                  font-weight: 600;
+                  width: 100%;
+                  flex: 1;
+                  transition: background 0.2s;
+
+                  &.edit {
+                    border-radius: 0 0 0 7px;
+
+                    &:hover {
+                      background: gray;
+                      transition: background 0.2s;
+                    }
+                  }
+
+                  &.delete {
+                    border-radius: 0 0 7px 0;
+
+                    &:hover {
+                      background: $color-primary;
+                      transition: background 0.2s;
+                    }
+                  }
+                }
+              }
+
+              &:hover {
+                background: black;
+                transition: background 0.3s;
+              }
+            }
+          }
+
+          .services {
+            display: grid;
+            grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+            gap: 8px;
+
+            .service-card {
+              position: relative;
+              overflow: hidden;
+              width: 100%;
+              aspect-ratio: 4/3;
+              border-radius: 7px;
+
+              .service-card__photo {
+                width: 100%;
+                transition: scale 350ms;
+              }
+
+              .service-card__info {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                background: linear-gradient(transparent 50%, black);
+                transition: background 350ms;
+
+                .label-wrapper {
+                  transform: translateY(0) translateZ(0);
+                  height: 100%;
+                  width: 100%;
+                  padding: 10px;
+                  display: flex;
+                  margin-top: auto;
+                  transition: transform 350ms;
+
+                  span {
+                    display: flex;
+                    align-items: center;
+                    font-weight: 800;
+                    margin-top: auto;
+                    font-size: 22px;
+                    line-height: 0.9;
+                    color: $color-font;
+                    transition: color 400ms;
+                  }
+                }
+              }
+
+              &:hover {
+                .service-card__photo {
+                  scale: 1.4;
+                }
+
+                .service-card__info {
+                  background: linear-gradient(transparent 0, black);
+
+                  .label-wrapper {
+                    span {
+                      color: $color-primary;
+                      transition: color 400ms;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
 
-      .orders{
-        .orders-container{
+      .orders-container {
+        .orders {
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 10px;
 
-          .order-card{
+          .order-card {
             display: flex;
             flex-direction: column;
             background: black;
@@ -752,84 +1403,95 @@ body {
               gap: 7px;
               font-size: 14px;
 
-              span{
+              span {
                 font-weight: 700;
               }
 
-              .card-header__title{
+              .card-header__title {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 gap: 5px;
 
-                .code{
+                .code {
                   font-size: 16px;
                 }
 
-                .date{
+                .date {
                   font-weight: 500;
                 }
               }
 
-              .card-header__info{
+              .card-header__info {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 gap: 5px;
 
-                .summary{
+                .summary {
                   font-size: 16px;
                 }
 
-                .status{
+                .status {
                   margin-left: auto;
                   padding: 3px 5px;
                   border-radius: 7px;
                   font-weight: 700;
 
-                  &.success{
+                  &.success {
                     background-color: green;
                   }
 
-                  &.waiting{
+                  &.waiting {
                     background-color: gray;
                   }
 
-                  &.canceled{
+                  &.canceled {
                     background-color: $color-primary;
                   }
                 }
               }
             }
 
-            .product-card{
+            .product-card {
               display: flex;
               flex-direction: row;
               padding: 8px;
 
-              .image-wrapper{
+              .image-wrapper {
                 display: flex;
                 align-items: flex-start;
-                aspect-ratio: 1/1;
 
-                img{
+                img {
                   width: 100px;
+                  border-radius: 7px;
                 }
               }
 
-              span{
-                font-size: 15px;
+              span {
+                font-size: 14px;
               }
 
-              .info{
+              .info {
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
                 margin-left: 10px;
                 flex-grow: 1;
 
-                .title{
+                .title {
                   font-weight: 700;
+                }
+
+                .code {
+                  opacity: .6;
+                }
+
+                .price {
+                  font-weight: 700;
+                  display: flex;
+                  flex-direction: row;
+                  word-break: keep-all;
                 }
               }
             }
@@ -837,168 +1499,872 @@ body {
         }
       }
 
-      .login{
+      .services-container {
+        .services {
+          display: grid;
+          grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+          gap: 8px;
+
+          .service-card {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 7px;
+
+            .service-card__photo {
+              width: 100%;
+              transition: scale 350ms;
+            }
+
+            .service-card__info {
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 2;
+              background: linear-gradient(transparent 50%, black);
+              transition: background 350ms;
+
+              .label-wrapper {
+                transform: translateY(0) translateZ(0);
+                height: 100%;
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                margin-top: auto;
+                transition: transform 350ms;
+
+                span {
+                  display: flex;
+                  align-items: center;
+                  font-weight: 800;
+                  margin-top: auto;
+                  font-size: 22px;
+                  line-height: 0.9;
+                  color: $color-font;
+                  transition: color 400ms;
+                }
+              }
+            }
+
+            &:hover {
+              .service-card__photo {
+                scale: 1.4;
+              }
+
+              .service-card__info {
+                background: linear-gradient(transparent 0, black);
+
+                .label-wrapper {
+                  span {
+                    color: $color-primary;
+                    transition: color 400ms;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .time-container {
+        h1 {
+          text-align: center;
+        }
+
+        .time {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          margin: 0 auto;
+          width: 100%;
+          max-width: 590px;
+          padding: 0 15px;
+          border-radius: 7px;
+
+          .form-elem {
+            background: $color-block;
+            border-radius: 7px;
+          }
+
+          .dropdown {
+            position: relative;
+            width: 100%;
+            display: inline-block;
+
+            .dropdown-button {
+              background: transparent;
+              width: 100%;
+              color: white;
+              user-select: none;
+              font-size: 18px;
+              padding: 0 15px;
+              height: 50px;
+              text-overflow: ellipsis;
+              border: 2px solid transparent;
+              border-radius: 7px;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms;
+
+              &::selection{
+                background: transparent;
+              }
+            }
+
+            .dropdown-content {
+              display: none;
+              width: 100%;
+              position: absolute;
+              padding: 5px;
+              margin-top: 3px;
+              max-height: 275px;
+              overflow-y: auto;
+              box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.54);
+              background: $color-block;
+              border-radius: 0 0 7px 7px;
+              min-width: 160px;
+              z-index: 1;
+
+              .dropdown-content__item {
+                color: $color-font;
+                font-size: 18px;
+                text-align: left;
+                width: 100%;
+                border-radius: 7px;
+                padding: 10px 15px;
+                text-decoration: none;
+                background: transparent;
+                cursor: pointer;
+                display: block;
+                transition: background 200ms;
+
+                &:hover {
+                  background-color: black;
+                  transition: background 200ms;
+                }
+              }
+            }
+
+            &.expanded{
+              box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+              .dropdown-button{
+                border-radius: 7px 7px 0 0;
+                border-color: $color-primary;
+              }
+
+              .dropdown-content{
+                display: block;
+              }
+            }
+          }
+
+          .radios-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 15px;
+            gap: 10px;
+
+            .radios-label__wrapper {
+              width: 100%;
+              gap: 30px;
+              align-items: center;
+              display: flex;
+              padding-left: 10px;
+
+              .label {
+                font-size: 18px;
+                opacity: .75;
+              }
+
+              .dropdown {
+                margin-left: auto;
+                width: auto;
+
+                .dropdown-button {
+                  background: $color-secondary;
+                  font-size: 18px;
+                  padding: 0;
+                  text-align: center;
+                  height: 40px;
+
+                  &::placeholder {
+                    color: $color-font;
+                    opacity: .75;
+                  }
+                }
+
+                .dropdown-content {
+                  background: $color-secondary;
+
+                  .dropdown-content__item {
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+
+            .radios {
+              display: grid;
+              grid-template-columns: repeat(3, calc(100% / 3 - 4px / 3 * (3 - 1)));
+              gap: 4px;
+
+              input[type="radio"] {
+                display: none;
+              }
+
+              label {
+                font-size: 18px;
+                font-weight: 700;
+                padding: 8px 12px;
+                background: $color-secondary;
+                border-radius: 7px;
+                cursor: pointer;
+                text-align: center;
+                user-select: none;
+                transition: background-color 200ms;
+
+                &:hover {
+                  background: black;
+                }
+              }
+
+              input[type="radio"]:checked + label {
+                background: $color-primary;
+                transition: background-color 200ms;
+              }
+            }
+          }
+
+          .client-info {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+
+            .form-elem {
+              flex-grow: 1;
+              color: white;
+              font-size: 18px;
+              padding: 0 15px;
+              height: 50px;
+              border-radius: 7px;
+              width: 100%;
+              border: 2px solid transparent;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms;
+
+              &:focus {
+                border-color: $color-primary;
+              }
+            }
+          }
+
+          #timeConfirm {
+            font-size: 18px;
+            color: black;
+            background: $color-font;
+            border-radius: 7px;
+            margin: 15px auto 0;
+            cursor: pointer;
+            font-weight: 700;
+            padding: 18px 15px;
+            transition: box-shadow 200ms;
+
+            &:hover {
+              box-shadow: 0 0 30px $color-primary;
+            }
+          }
+        }
+      }
+
+      .login-container {
         align-items: center;
 
-        .auth-form__wrapper{
-          width: 80%;
+        .auth-form__wrapper {
+          width: 90%;
           display: flex;
           flex-direction: column;
           max-width: 420px;
           background: transparent;
 
-          .label{
+          .label {
             font-size: 32px;
             text-align: center;
             color: $color-font;
             font-weight: 800;
           }
 
-          .auth-form{
+          .auth-form {
             display: flex;
             flex-direction: column;
             position: relative;
             width: 100%;
-            margin-top: 50px;
+            margin-top: 25px;
 
             #authLogin,
-            #authPassword{
+            #authPassword {
               width: 100%;
               align-self: center;
               background: white;
               padding: 15px 40px 15px 20px;
               font-weight: 800;
               color: black;
-              font-size: 24px;
+              font-size: 16px;
               border: 2px solid transparent;
               transition: all 0.3s;
 
-              &:hover{
+              &:hover {
                 background: $color-font;
               }
 
-              &:focus{
+              &:focus {
                 border-color: $color-primary;
                 background: white;
               }
-
-              &:placeholder-shown + #authSubmit{
-                opacity: 0;
-              }
-
-              &:not(:placeholder-shown) + #authSubmit{
-                opacity: 1;
-              }
             }
 
-            #authLogin{
+            #authLogin {
               border-radius: 7px 7px 0 0;
             }
 
-            #authPassword{
+            #authPassword {
               border-radius: 0 0 7px 7px;
             }
 
-            #authSubmit{
+            #authSubmit {
               position: absolute;
               border: 7px solid $color-secondary;
               aspect-ratio: 1/1;
               background-color: white;
               width: 70px;
-              visibility: hidden;
               color: $color-secondary;
               right: 0;
               top: 50%;
-              transform: translate(50%,-50%);
+              transform: translate(25%, -50%);
               border-radius: 50%;
               cursor: pointer;
               font-size: 24px;
               font-weight: 800;
               transition: all 0.3s;
 
-              &:hover{
+              &:hover {
                 background: $color-font;
               }
 
-              &:active{
+              &:active {
                 border-color: $color-primary;
                 background: white;
               }
             }
 
-            .sep{
+            .sep {
               border-bottom: 2px solid $color-secondary;
               width: 80%;
               margin-left: auto;
             }
           }
 
-          .recover{
+          .recover {
             margin-top: 10px;
             font-size: 16px;
             color: dodgerblue;
           }
         }
       }
+
+      .employer-container{
+        .employer-info{
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+
+          .info-section{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .section-title{
+              font-size: 22px;
+            }
+
+            &.head{
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 8px;
+
+              .image-wrapper{
+                border-radius: 50%;
+                width: 110px;
+                height: 110px;
+                overflow: hidden;
+                align-self: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img{
+                  height: 100%;
+                }
+              }
+
+              .employer-name{
+                text-align: center;
+                line-height: 1.05;
+              }
+
+              .info{
+                display: flex;
+                justify-content: center;
+                gap: 3px;
+
+                span{
+                  font-weight: 700;
+                  font-size: 16px;
+                  opacity: .75;
+                }
+              }
+            }
+
+            &.works{
+              .slider{
+                margin-bottom: 40px;
+
+                .flickity-viewport{
+                  border-radius: 7px;
+                  transition: height 200ms;
+
+                  .flickity-slider{
+                    .image-wrapper{
+                      width: 50%;
+                      display: flex;
+                      justify-content: center;
+                      margin-right: 5px;
+
+                      img{
+                        width: 100%;
+                        border-radius: 7px;
+                      }
+
+                      &.is-selected{
+                        transform: scale(1.1);
+                        z-index: 2;
+                      }
+                    }
+                  }
+                }
+
+                .flickity-prev-next-button {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  bottom: 0;
+                  right: 0;
+                  padding: 16px 30px;
+                  border-radius: 7px;
+                  transform: translateY(125%);
+
+                  &.previous{
+                    right: 70px;
+                  }
+
+                  &.next{
+
+                  }
+
+                  .flickity-button-icon {
+                    width: 50%;
+                    height: 50%;
+                  }
+                }
+              }
+            }
+
+            &.services{
+              .advice{
+                font-size: 13px;
+                opacity: .75;
+              }
+
+              .services-container{
+                display: grid;
+                grid-template-columns: repeat(2, calc(100% / 2 - 3px / 2 * (2 - 1)));
+                gap: 3px;
+
+                .service{
+                  display: flex;
+                  align-items: center;
+                  cursor: pointer;
+                  justify-content: center;
+                  padding: 0 10px;
+                  min-height: 55px;
+                  font-size: 15px;
+                  font-weight: 800;
+                  background: $color-block;
+                  border-radius: 7px;
+                  text-align: center;
+                  text-wrap: wrap;
+
+                  transition: background-color 200ms;
+
+                  &:hover{
+                    background: black;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     @media (min-width: 768px) {
+      .footer-wrapper {
+        .phone-wrapper,
+        .address-wrapper {
+          display: flex;
+          font-size: 14px;
+        }
+      }
+
+      .add-employer__modal,
+      .change-employer__modal {
+        .container {
+          gap: 30px;
+
+          .container-item {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+
+            &.photo {
+              .file-input__wrapper {
+                width: 100%;
+                border-radius: 7px;
+                background: $color-block;
+                height: 60px;
+                transition: background-color 200ms;
+
+                label {
+                  span {
+                    font-size: 22px;
+                  }
+                }
+              }
+            }
+
+            &.fields {
+              flex-direction: row;
+
+              input[type=text] {
+                flex-grow: 1;
+                font-size: 20px;
+              }
+            }
+
+            &.services{
+              gap: 7px;
+
+              .service-button{
+                padding: 7px 12px;
+                font-size: 18px;
+              }
+            }
+
+            &.actions{
+              button{
+                font-size: 24px;
+              }
+            }
+          }
+        }
+      }
+
       main {
         .page {
           padding: 0 16px;
 
           h1 {
-            line-height: 1;
             font-size: 28px;
           }
+        }
 
+        .employers-container {
           .employers-wrapper {
             grid-template-columns: repeat(4, calc(100% / 4 - 16px / 4 * (4 - 1)));
             gap: 16px;
 
-            .employer-card {
-              flex-direction: column;
+            .employer-card__wrapper {
+              .employer-card {
+                flex-direction: column;
 
-              .employer-card__photo {
-
-              }
-
-              .employer-card__info {
-                gap: 0;
-                padding: 10px 7px 15px 7px;
-
-                .bio {
-                  .fullname {
-                    font-size: 14px;
-                  }
-
-                  .exp-and-works {
-                    .experience,
-                    .works-count {
-                      font-size: 12px;
-                    }
+                .photo-wrapper {
+                  .advice {
+                    font-size: 11px;
                   }
                 }
 
-                .categories {
-                  margin-top: 10px;
+                .employer-card__info {
+                  gap: 0;
+                  padding: 10px 7px 10px 7px;
+
+                  .bio {
+                    .fullname {
+                      font-size: 14px;
+                    }
+
+                    .exp-and-works {
+                      .experience,
+                      .works-count {
+                        font-size: 13px;
+                      }
+                    }
+                  }
+
+                  .categories {
+                    margin-top: 10px;
+                  }
                 }
               }
             }
           }
+        }
 
+        .works-container {
           .works-photos-tiles {
-            grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1)));
+            grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
           }
         }
 
-        .page-admin__wrapper{
-          .left-menu__wrapper{
+        .page-admin__wrapper {
+          .left-menu__wrapper {
+            top: 88px;
             display: flex;
           }
-          
-          .bottom-menu__wrapper{
+
+          .bottom-menu__wrapper {
             display: none;
+          }
+
+          .admin-section {
+            .employers-wrapper {
+              grid-template-columns: repeat(3, calc(100% / 3 - 16px / 3 * (3 - 1)));
+              gap: 16px;
+
+              .employer-card__wrapper {
+                .employer-card {
+                  flex-direction: column;
+
+                  .employer-card__photo {
+
+                  }
+
+                  .employer-card__info {
+                    gap: 0;
+                    padding: 10px 7px 10px 7px;
+
+                    .bio {
+                      .fullname {
+                        font-size: 14px;
+                      }
+
+                      .exp-and-works {
+                        .experience,
+                        .works-count {
+                          font-size: 13px;
+                        }
+                      }
+                    }
+
+                    .categories {
+                      margin-top: 10px;
+                    }
+                  }
+                }
+              }
+            }
+
+            .services {
+              grid-template-columns: repeat(2, calc(100% / 2 - 10px / 2 * (2 - 1)));
+              gap: 10px;
+            }
+          }
+        }
+
+        .orders-container {
+          .orders {
+            .order-card {
+              .card-header__wrapper {
+                font-size: 18px;
+
+                .card-header__title {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 5px;
+
+                  .code {
+                    font-size: 22px;
+                  }
+                }
+
+                .card-header__info {
+                  .summary {
+                    font-size: 22px;
+                  }
+                }
+              }
+
+              .product-card {
+                .image-wrapper {
+                  img {
+                    width: 200px;
+                  }
+                }
+
+                .info {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 4px;
+                  margin-left: 10px;
+                  flex-grow: 1;
+
+                  span {
+                    font-size: 20px;
+                  }
+
+                  .title {
+                    font-size: 24px;
+                    font-weight: 700;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .services-container {
+          .services {
+            grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+            gap: 10px;
+          }
+        }
+
+        .time-container {
+          .time {
+            .dropdown {
+              .dropdown-button {
+                font-size: 20px;
+              }
+
+              .dropdown-content {
+                font-size: 20px;
+              }
+            }
+
+            .radios-wrapper {
+              .radios-label {
+                font-size: 20px;
+              }
+
+              .radios {
+                grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+                gap: 8px;
+
+                label {
+                  font-size: 20px;
+                }
+              }
+            }
+
+            .client-info {
+              .form-elem {
+                font-size: 20px;
+              }
+            }
+
+            #timeConfirm {
+              font-size: 20px;
+            }
+          }
+        }
+
+        .employer-container{
+          .employer-info{
+            .info-section{
+              .section-title{
+                font-size: 24px;
+              }
+
+              &.head{
+                .image-wrapper{
+                  width: 150px;
+                  height: 150px;
+                }
+
+                .info{
+                  span{
+                    font-size: 21px;
+                  }
+                }
+              }
+
+              &.works{
+                .slider{
+                  .flickity-viewport{
+                    .flickity-slider{
+                      .image-wrapper{
+                        width: 25%;
+                      }
+                    }
+                  }
+
+                  .flickity-prev-next-button {
+                    padding: 20px 50px;
+
+                    &.previous{
+                      right: 110px;
+                    }
+                  }
+                }
+              }
+
+              &.services{
+                .advice{
+                  font-size: 16px;
+                }
+
+                .services-container{
+                  grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+                  gap: 5px;
+
+                  .service{
+                    min-height: 80px;
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .work-photo__modal {
+        .container {
+          .photo-wrapper {
+            .work-photo {
+              width: 70%;
+            }
+          }
+
+          .info-wrapper {
+            .employer-label {
+
+            }
           }
         }
       }
@@ -1006,6 +2372,8 @@ body {
 
     @media (min-width: 1024px) {
       .header-wrapper {
+        box-shadow: 0 9px 26px 10px #1f1f1f;
+
         .user-panel {
           display: flex;
         }
@@ -1027,101 +2395,396 @@ body {
         }
       }
 
+      .footer-wrapper {
+        .phone-wrapper,
+        .address-wrapper {
+          display: flex;
+          font-size: 18px;
+        }
+
+        .title-wrapper {
+          a {
+            font-size: 24px;
+          }
+        }
+      }
+
       main {
+        padding-top: 36px;
+
         .page {
           gap: 30px;
+        }
 
-          h1 {
-            line-height: 1;
-            font-size: 28px;
-          }
-
+        .employers-container {
           .employers-wrapper {
-            .employer-card {
-              flex-direction: column;
+            .employer-card__wrapper {
+              .employer-card {
+                flex-direction: column;
 
-              .employer-card__info {
-                gap: 0;
-
-                .bio {
-                  .fullname {
-                    font-size: 19px;
-                  }
-
-                  .exp-and-works {
-                    .experience,
-                    .works-count {
-                      font-size: 18px;
-                    }
+                .photo-wrapper {
+                  .advice {
+                    font-size: 15px;
                   }
                 }
 
-                .categories {
-                  margin-top: 10px;
+                .employer-card__info {
+                  gap: 0;
 
-                  .category {
-                    font-size: 14px;
+                  .bio {
+                    .fullname {
+                      font-size: 19px;
+                    }
+
+                    .exp-and-works {
+                      .experience,
+                      .works-count {
+                        font-size: 18px;
+                      }
+                    }
+                  }
+
+                  .categories {
+                    margin-top: 10px;
+
+                    .category {
+                      font-size: 14px;
+                    }
                   }
                 }
               }
             }
           }
+        }
 
+        .works-container {
           .works-photos-tiles {
             grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1)));
+          }
+        }
+
+        .services-container {
+          .services {
+            grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+            gap: 10px;
+          }
+        }
+
+        .page-admin__wrapper {
+          .left-menu__wrapper {
+            display: flex;
+            top: 156px;
+          }
+
+          .bottom-menu__wrapper {
+            display: none;
+          }
+
+          .admin-section {
+            .add-button {
+              padding: 20px 0;
+
+              span {
+                font-size: 24px;
+              }
+            }
+
+            .employers-wrapper {
+              .employer-card__wrapper {
+                .employer-card {
+                  flex-direction: column;
+
+                  .employer-card__info {
+                    gap: 0;
+
+                    .bio {
+                      .fullname {
+                        font-size: 19px;
+                      }
+
+                      .exp-and-works {
+                        .experience,
+                        .works-count {
+                          font-size: 18px;
+                        }
+                      }
+                    }
+
+                    .categories {
+                      margin-top: 10px;
+
+                      .category {
+                        font-size: 14px;
+                      }
+                    }
+                  }
+                }
+
+                .actions {
+                  .action {
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+
+            .services {
+              grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+              gap: 10px;
+            }
+          }
+        }
+
+        .time-container {
+          .time {
+            .dropdown {
+              .dropdown-button {
+                font-size: 20px;
+              }
+
+              .dropdown-content {
+                font-size: 20px;
+              }
+            }
+
+            .radios-wrapper {
+              .radios-label {
+                font-size: 20px;
+              }
+
+              .radios {
+                grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+                gap: 8px;
+
+                label {
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+
+        .employer-container{
+          .employer-info{
+            .info-section{
+              &.head{
+                .image-wrapper{
+                  width: 200px;
+                  height: 200px;
+                }
+              }
+
+              &.works{
+                .slider{
+                  .flickity-viewport{
+                    .flickity-slider{
+                      .image-wrapper{
+                        width: 20%;
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.services{
+                .advice{
+                  font-size: 18px;
+                }
+
+                .services-container{
+                  grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+                  gap: 5px;
+
+                  .service{
+                    min-height: 100px;
+                    font-size: 22px;
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
 
     @media (min-width: 1280px) {
-      main {
-        .page {
-          h1 {
-            line-height: 1;
-            font-size: 28px;
-          }
+      .footer-wrapper {
+        .phone-wrapper,
+        .address-wrapper {
+          display: flex;
+          font-size: 20px;
+        }
 
+        .title-wrapper {
+          a {
+            font-size: 32px;
+          }
+        }
+      }
+
+      main {
+        .employers-container {
           .employers-wrapper {
             grid-template-columns: repeat(6, calc(100% / 6 - 16px / 6 * (6 - 1)));
             gap: 16px;
 
-            .employer-card {
-              flex-direction: column;
+            .employer-card__wrapper {
+              .employer-card {
+                flex-direction: column;
 
-              .employer-card__photo {
-
-              }
-
-              .employer-card__info {
-                gap: 0;
-
-                .bio {
-                  .fullname {
-                    font-size: 19px;
-                  }
-
-                  .exp-and-works {
-                    .experience,
-                    .works-count {
-                      font-size: 18px;
-                    }
+                .photo-wrapper {
+                  .advice {
+                    font-size: 15px;
                   }
                 }
 
-                .categories {
-                  margin-top: 10px;
+                .employer-card__info {
+                  gap: 0;
 
-                  .category {
-                    font-size: 14px;
+                  .bio {
+                    .fullname {
+                      font-size: 19px;
+                    }
+
+                    .exp-and-works {
+                      .experience,
+                      .works-count {
+                        font-size: 18px;
+                      }
+                    }
+                  }
+
+                  .categories {
+                    margin-top: 10px;
+
+                    .category {
+                      font-size: 14px;
+                    }
+                  }
+                }
+              }
+            }
+
+
+          }
+        }
+
+        .works-container {
+          .works-photos-tiles {
+            grid-template-columns: repeat(7, calc(100% / 7 - 5px / 7 * (7 - 1)));
+          }
+        }
+
+        .services-container {
+          .services {
+            .service-card {
+              .service-card__info {
+                .label-wrapper {
+                  span {
+                    font-size: 26px;
+                  }
+                }
+              }
+
+              &:hover {
+                .service-card__photo {
+                  scale: 1.4;
+                }
+
+                .service-card__info {
+                  background: rgba(black, 0.75);
+
+                  .label-wrapper {
+                    transform: translateY(0) translateZ(0);
                   }
                 }
               }
             }
           }
+        }
 
-          .works-photos-tiles {
-            grid-template-columns: repeat(7, calc(100% / 7 - 5px / 7 * (7 - 1)));
+        .page-admin__wrapper {
+          .admin-section {
+            .employers-wrapper {
+              grid-template-columns: repeat(5, calc(100% / 5 - 16px / 5 * (5 - 1)));
+              gap: 16px;
+
+              .employer-card__wrapper {
+                .employer-card {
+                  flex-direction: column;
+
+                  .employer-card__photo {
+
+                  }
+
+                  .employer-card__info {
+                    gap: 0;
+
+                    .bio {
+                      .fullname {
+                        font-size: 19px;
+                      }
+
+                      .exp-and-works {
+                        .experience,
+                        .works-count {
+                          font-size: 18px;
+                        }
+                      }
+                    }
+
+                    .categories {
+                      margin-top: 10px;
+
+                      .category {
+                        font-size: 14px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .services {
+              grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+              gap: 10px;
+            }
+          }
+        }
+
+        .time-container {
+          .time {
+            gap: 15px;
+          }
+        }
+
+        .employer-container{
+          .employer-info{
+            .info-section{
+              .section-title{
+
+              }
+
+              &.head{
+                .info{
+                  span{
+                    font-size: 24px;
+                  }
+                }
+              }
+
+              &.works{
+                .slider{
+                  .flickity-viewport{
+                    .flickity-slider{
+                      .image-wrapper{
+                        width: 20%;
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1130,18 +2793,5 @@ body {
 
   &.scroll-locked {
     overflow: hidden;
-  }
-
-  &::-webkit-scrollbar{
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb{
-    background: $color-font;
-    border-radius: 7px;
-  }
-
-  &::-webkit-scrollbar-track{
-    background: transparent;
   }
 }

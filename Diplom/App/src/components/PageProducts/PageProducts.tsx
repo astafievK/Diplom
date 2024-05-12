@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 const PageProducts: FC = () => {
     return(
         <motion.div
-            className="page products"
+            className="page products-container"
             initial={{y: -100, opacity: 0}}
             animate={{y: 0, opacity: 1}}
             exit={{y: 100, opacity: 0}}

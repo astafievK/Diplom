@@ -4,14 +4,15 @@ import OrderCard from "./OrderCard.tsx";
 
 const PageOrdersHistory: FC = () => {
     return (
+
         <motion.div
-            className="page orders"
+            className="page orders-container"
             initial={{y: -100, opacity: 0}}
             animate={{y: 0, opacity: 1}}
             exit={{y: 100, opacity: 0}}
         >
             <h1>История заказов</h1>
-            <div className="orders-container">
+            <div className="orders">
                 <OrderCard
                     date={"12.01.2023"}
                     summ={1500}

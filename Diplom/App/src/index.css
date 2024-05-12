@@ -7,6 +7,13 @@
   color: #e8e8e8;
   font-family: Poppins-Regular, sans-serif;
   text-decoration: none; }
+  *::-webkit-scrollbar {
+    width: 8px; }
+  *::-webkit-scrollbar-thumb {
+    background: #e8e8e8;
+    border-radius: 7px; }
+  *::-webkit-scrollbar-track {
+    background: transparent; }
 
 [class*="copyrights-pane"] {
   display: none !important; }
@@ -16,6 +23,7 @@
   flex-direction: row;
   border-radius: 7px;
   gap: 10px;
+  filter: none;
   align-items: center;
   transition: filter .2s; }
   .logo-wrapper img {
@@ -30,13 +38,42 @@
       font-size: 23px;
       font-weight: 800;
       line-height: 1; }
-  .logo-wrapper:hover, .logo-wrapper:active {
-    color: white;
-    transition: color .2s, background .2s; }
-  .logo-wrapper.selected {
+  .logo-wrapper:hover {
     filter: drop-shadow(0 0 0.7rem #fe313a);
     background: transparent;
     transition: filter .2s; }
+
+.modal {
+  display: flex;
+  visibility: hidden;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .modal .container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; }
+  .modal .spoiler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); }
+  .modal.active {
+    visibility: visible; }
+
+input {
+  text-overflow: ellipsis; }
 
 body, html {
   min-height: 100vh; }
@@ -63,12 +100,14 @@ body {
       color: #ffffff;
       transition: all 0.3s; }
   body #root {
-    min-height: 100vh; }
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; }
     body #root .header-wrapper {
       position: sticky;
       top: 0;
       background: #1f1f1f;
-      box-shadow: 0 9px 26px 10px #1f1f1f;
+      box-shadow: 0 4px 20px 4px #1f1f1f;
       transition: box-shadow 500ms, background 500ms;
       z-index: 9999; }
       body #root .header-wrapper .user-panel {
@@ -99,9 +138,10 @@ body {
         body #root .header-wrapper .user-panel .fullname {
           height: 100%;
           display: flex;
+          cursor: default;
           gap: 2px; }
           body #root .header-wrapper .user-panel .fullname span {
-            color: rgba(232, 232, 232, 0.7); }
+            color: #e8e8e8; }
           body #root .header-wrapper .user-panel .fullname span.sep {
             margin-left: 2px;
             margin-right: 2px; }
@@ -137,6 +177,8 @@ body {
             color: #e8e8e8; }
           body #root .header-wrapper .user-panel .cart:hover svg path {
             fill: #e8e8e8; }
+        body #root .header-wrapper .user-panel .admin {
+          margin-left: auto; }
       body #root .header-wrapper .main-panel {
         width: 100%;
         height: 70px;
@@ -161,13 +203,9 @@ body {
             font-size: 22px;
             text-wrap: nowrap;
             transition: color .2s, background .2s; }
-            body #root .header-wrapper .main-panel .nav .nav-item:hover, body #root .header-wrapper .main-panel .nav .nav-item:active {
+            body #root .header-wrapper .main-panel .nav .nav-item:hover {
               background: black;
               color: #e8e8e8;
-              transition: color .2s, background .2s; }
-            body #root .header-wrapper .main-panel .nav .nav-item.selected {
-              color: black;
-              background: #e8e8e8;
               transition: color .2s, background .2s; }
         body #root .header-wrapper .main-panel .login-button {
           display: none;
@@ -230,6 +268,41 @@ body {
       body #root .header-wrapper.opened {
         box-shadow: none;
         background: transparent; }
+    body #root .footer-wrapper {
+      display: flex;
+      margin-top: auto;
+      flex-direction: row;
+      padding: 10px 30px;
+      background: black; }
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: none;
+        font-size: 20px; }
+        body #root .footer-wrapper .phone-wrapper span,
+        body #root .footer-wrapper .address-wrapper span {
+          width: 100%; }
+      body #root .footer-wrapper div {
+        display: flex;
+        align-items: center;
+        flex: 1; }
+      body #root .footer-wrapper .title-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1; }
+        body #root .footer-wrapper .title-wrapper a {
+          color: rgba(232, 232, 232, 0.6);
+          font-size: 22px;
+          font-weight: 800;
+          display: flex;
+          transition: color 200ms; }
+          body #root .footer-wrapper .title-wrapper a:hover {
+            color: #e8e8e8; }
+      body #root .footer-wrapper .address-wrapper {
+        flex-direction: column;
+        justify-content: flex-start; }
+        body #root .footer-wrapper .address-wrapper span {
+          text-align: right; }
     body #root .mobile-menu__modal {
       display: flex;
       flex-direction: column;
@@ -248,7 +321,7 @@ body {
       body #root .mobile-menu__modal .menu {
         display: grid;
         align-items: center;
-        height: 60%;
+        height: 40%;
         width: 100%;
         grid-template-columns: repeat(2, calc(100% / 2 - 5px / 2 * (2 - 1)));
         gap: 5px; }
@@ -279,8 +352,261 @@ body {
           font-size: 15px; }
       body #root .mobile-menu__modal.active {
         transform: translateY(0) translateZ(0); }
+    body #root .work-photo__modal .container {
+      padding: 10px;
+      width: 100%;
+      max-width: 1000px;
+      max-height: 700px; }
+      body #root .work-photo__modal .container .photo-wrapper {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        body #root .work-photo__modal .container .photo-wrapper .work-photo {
+          display: block;
+          margin: auto;
+          width: 100%;
+          user-select: none; }
+      body #root .work-photo__modal .container .info-wrapper {
+        display: flex;
+        margin-top: 20px; }
+        body #root .work-photo__modal .container .info-wrapper .employer-label {
+          font-weight: 800;
+          line-height: 1.1;
+          font-size: 18px; }
+      body #root .work-photo__modal .container .controls {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        gap: 5px;
+        justify-content: space-between; }
+        body #root .work-photo__modal .container .controls .control {
+          height: 40px;
+          width: 100%;
+          color: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          background: #e8e8e8;
+          border-radius: 7px;
+          font-size: 18px; }
+    body #root .work-photo__modal .spoiler {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8); }
+    body #root .work-photo__modal.active {
+      visibility: visible; }
+    body #root .add-employer__modal .container,
+    body #root .change-employer__modal .container {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      gap: 15px;
+      border-radius: 7px;
+      padding: 30px 10px 20px;
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      max-height: 850px;
+      background: #1f1f1f; }
+      body #root .add-employer__modal .container .container-item,
+      body #root .change-employer__modal .container .container-item {
+        display: flex;
+        flex-direction: row;
+        gap: 5px; }
+        body #root .add-employer__modal .container .container-item.photo,
+        body #root .change-employer__modal .container .container-item.photo {
+          flex-direction: column;
+          gap: 15px; }
+          body #root .add-employer__modal .container .container-item.photo .photo-wrapper,
+          body #root .change-employer__modal .container .container-item.photo .photo-wrapper {
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            overflow: hidden;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+            body #root .add-employer__modal .container .container-item.photo .photo-wrapper img,
+            body #root .change-employer__modal .container .container-item.photo .photo-wrapper img {
+              height: 100%; }
+          body #root .add-employer__modal .container .container-item.photo .actions,
+          body #root .change-employer__modal .container .container-item.photo .actions {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+            height: 50px; }
+            body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper,
+            body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper {
+              flex: 4;
+              width: 100%;
+              border-radius: 7px;
+              background: #292929;
+              height: 100%;
+              transition: background-color 200ms; }
+              body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label,
+              body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                width: 100%;
+                height: 100%; }
+                body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label span,
+                body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label span {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: 700; }
+                body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo,
+                body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo {
+                  display: none; }
+              body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper:hover,
+              body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper:hover {
+                background: black; }
+            body #root .add-employer__modal .container .container-item.photo .actions #input-experience,
+            body #root .change-employer__modal .container .container-item.photo .actions #input-experience {
+              flex: 1;
+              background: #292929;
+              color: white;
+              font-size: 20px;
+              text-align: center;
+              padding: 0 15px;
+              height: 100%;
+              border-radius: 7px;
+              width: 100%;
+              border: 2px solid #292929;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms; }
+              body #root .add-employer__modal .container .container-item.photo .actions #input-experience:focus,
+              body #root .change-employer__modal .container .container-item.photo .actions #input-experience:focus {
+                border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.fields,
+        body #root .change-employer__modal .container .container-item.fields {
+          flex-direction: column; }
+          body #root .add-employer__modal .container .container-item.fields input[type=text],
+          body #root .change-employer__modal .container .container-item.fields input[type=text] {
+            background: #292929;
+            color: white;
+            font-size: 20px;
+            padding: 0 15px;
+            height: 50px;
+            border-radius: 7px;
+            width: 100%;
+            border: 2px solid #1f1f1f;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root .add-employer__modal .container .container-item.fields input[type=text]:focus,
+            body #root .change-employer__modal .container .container-item.fields input[type=text]:focus {
+              border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.services,
+        body #root .change-employer__modal .container .container-item.services {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          border-radius: 7px;
+          gap: 5px;
+          flex-grow: 1;
+          overflow: auto;
+          min-height: 150px; }
+          body #root .add-employer__modal .container .container-item.services .service,
+          body #root .change-employer__modal .container .container-item.services .service {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 6px; }
+            body #root .add-employer__modal .container .container-item.services .service .service-button,
+            body #root .change-employer__modal .container .container-item.services .service .service-button {
+              flex: 2;
+              background: #292929;
+              text-align: left;
+              padding: 5px 10px;
+              font-size: 18px;
+              font-weight: 600;
+              color: #ffffff;
+              border-radius: 7px;
+              cursor: pointer;
+              transition: background-color 200ms, color 200ms; }
+              body #root .add-employer__modal .container .container-item.services .service .service-button.selected,
+              body #root .change-employer__modal .container .container-item.services .service .service-button.selected {
+                background: #e8e8e8;
+                color: #292929; }
+            body #root .add-employer__modal .container .container-item.services .service .price-field,
+            body #root .change-employer__modal .container .container-item.services .service .price-field {
+              flex: 1;
+              background: #292929;
+              color: white;
+              font-size: 20px;
+              padding: 0 15px;
+              height: 50px;
+              border-radius: 7px;
+              width: 100%;
+              border: 2px solid #292929;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms; }
+              body #root .add-employer__modal .container .container-item.services .service .price-field:focus,
+              body #root .change-employer__modal .container .container-item.services .service .price-field:focus {
+                border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.actions,
+        body #root .change-employer__modal .container .container-item.actions {
+          margin-top: auto;
+          display: flex;
+          gap: 15px; }
+          body #root .add-employer__modal .container .container-item.actions button,
+          body #root .change-employer__modal .container .container-item.actions button {
+            flex-grow: 1;
+            border-radius: 7px;
+            height: 45px;
+            font-size: 18px;
+            background: transparent;
+            cursor: pointer;
+            border: 2px solid transparent;
+            font-weight: 700;
+            transition: background-color 200ms, color 200ms; }
+            body #root .add-employer__modal .container .container-item.actions button:hover,
+            body #root .change-employer__modal .container .container-item.actions button:hover {
+              color: black; }
+          body #root .add-employer__modal .container .container-item.actions #create-btn,
+          body #root .change-employer__modal .container .container-item.actions #create-btn {
+            border-color: lightgreen; }
+            body #root .add-employer__modal .container .container-item.actions #create-btn:hover,
+            body #root .change-employer__modal .container .container-item.actions #create-btn:hover {
+              background: lightgreen; }
+          body #root .add-employer__modal .container .container-item.actions #cancel-btn,
+          body #root .change-employer__modal .container .container-item.actions #cancel-btn {
+            border-color: red; }
+            body #root .add-employer__modal .container .container-item.actions #cancel-btn:hover,
+            body #root .change-employer__modal .container .container-item.actions #cancel-btn:hover {
+              background: red; }
+          body #root .add-employer__modal .container .container-item.actions #save-btn,
+          body #root .change-employer__modal .container .container-item.actions #save-btn {
+            border-color: dodgerblue; }
+            body #root .add-employer__modal .container .container-item.actions #save-btn:hover,
+            body #root .change-employer__modal .container .container-item.actions #save-btn:hover {
+              background: dodgerblue; }
+      body #root .add-employer__modal .container .cross,
+      body #root .change-employer__modal .container .cross {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #e8e8e8;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%); }
     body #root main {
-      padding: 36px 0 9px 0;
+      flex-grow: 1;
+      padding: 18px 0;
       position: relative; }
       body #root main .page {
         display: flex;
@@ -293,107 +619,108 @@ body {
         body #root main .page h1 {
           font-size: 24px;
           font-weight: 800; }
-      body #root main .employers .employers-wrapper {
+      body #root main .employers-container .employers-wrapper {
         width: 100%;
         grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
         gap: 8px;
         display: grid;
         row-gap: 10px; }
-        body #root main .employers .employers-wrapper .employer-card {
-          display: flex;
-          position: relative;
-          flex-direction: column;
-          background: rgba(232, 232, 232, 0.05);
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper {
+          background: #292929;
           border-radius: 7px;
-          cursor: pointer;
           transition: background 0.3s; }
-          body #root main .employers .employers-wrapper .employer-card .photo-wrapper {
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
             display: flex;
-            align-items: center;
             position: relative;
-            justify-content: center;
-            border-radius: 7px; }
-            body #root main .employers .employers-wrapper .employer-card .photo-wrapper .employer-card__photo {
-              position: relative;
-              border-radius: 7px;
-              margin: 0 auto;
-              height: 100%;
-              width: 100%; }
-            body #root main .employers .employers-wrapper .employer-card .photo-wrapper .advice {
-              position: absolute;
-              opacity: 0;
-              bottom: -10px;
-              left: 0;
-              width: 100%;
-              border-radius: 7px;
-              background: black;
-              padding: 6px 0;
-              font-weight: 600;
-              font-size: 12px;
-              margin-top: auto;
-              text-align: center;
-              z-index: 2;
-              transition: all 0.15s; }
-          body #root main .employers .employers-wrapper .employer-card .employer-card__info {
-            height: 100%;
-            position: relative;
-            display: flex;
-            gap: 10px;
             flex-direction: column;
-            flex-grow: 1;
-            padding: 10px 7px 15px 7px; }
-            body #root main .employers .employers-wrapper .employer-card .employer-card__info .bio {
+            border-radius: 7px;
+            cursor: pointer; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper {
               display: flex;
-              flex-direction: column; }
-              body #root main .employers .employers-wrapper .employer-card .employer-card__info .bio .fullname {
-                font-weight: 800;
-                word-break: break-word;
-                font-size: 14px;
-                line-height: 1.1; }
-              body #root main .employers .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works {
-                display: flex;
-                flex-direction: column;
-                margin-top: 10px;
-                gap: 2px;
-                text-wrap: nowrap; }
-                body #root main .employers .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
-                body #root main .employers .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
-                  font-size: 13px; }
-            body #root main .employers .employers-wrapper .employer-card .employer-card__info .categories {
-              display: flex;
-              flex-direction: row;
-              margin-top: auto;
-              gap: 4px;
-              flex-wrap: wrap; }
-              body #root main .employers .employers-wrapper .employer-card .employer-card__info .categories .category {
-                border: 2px solid white;
-                border-radius: 5px;
-                padding: 2px 4px;
-                opacity: 0.6;
+              align-items: center;
+              position: relative;
+              justify-content: center;
+              border-radius: 7px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .employer-card__photo {
+                position: relative;
+                border-radius: 7px;
+                margin: 0 auto;
+                height: 100%;
+                width: 100%; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+                position: absolute;
+                opacity: 0;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+                border-radius: 7px;
+                background: black;
+                padding: 6px 0;
+                font-weight: 600;
                 font-size: 12px;
-                text-align: center; }
-          body #root main .employers .employers-wrapper .employer-card:hover {
-            background: black;
-            transition: background 0.3s; }
-            body #root main .employers .employers-wrapper .employer-card:hover .photo-wrapper .advice {
+                margin-top: auto;
+                text-align: center;
+                z-index: 2;
+                transition: all 0.15s; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+              height: 100%;
+              position: relative;
+              display: flex;
+              gap: 10px;
+              flex-direction: column;
+              flex-grow: 1;
+              padding: 10px 7px 10px 7px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio {
+                display: flex;
+                flex-direction: column; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                  font-weight: 800;
+                  word-break: break-word;
+                  font-size: 14px;
+                  line-height: 1.1; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works {
+                  display: flex;
+                  flex-direction: column;
+                  margin-top: 10px;
+                  gap: 2px;
+                  text-wrap: nowrap; }
+                  body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                  body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                    font-size: 13px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                display: flex;
+                flex-direction: row;
+                margin-top: auto;
+                gap: 4px;
+                flex-wrap: wrap; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  border: 2px solid white;
+                  border-radius: 5px;
+                  padding: 2px 4px;
+                  opacity: 0.6;
+                  font-size: 12px;
+                  text-align: center; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card:hover .photo-wrapper .advice {
               opacity: 1;
               bottom: -1px;
               transition: all 0.15s; }
-      body #root main .works .works-photos-tiles {
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper:hover {
+            background: black;
+            transition: background 0.3s; }
+      body #root main .works-container .works-photos-tiles {
         display: grid;
-        grid-template-columns: repeat(3, calc(100% / 3 - 5px / 3 * (3 - 1)));
+        grid-template-columns: repeat(2, calc(100% / 2 - 5px / 2 * (2 - 1)));
         gap: 5px; }
-        body #root main .works .works-photos-tiles .tile-wrapper {
+        body #root main .works-container .works-photos-tiles .tile-wrapper {
           display: flex;
           background: pink;
           position: relative;
           aspect-ratio: 4/3;
-          cursor: pointer;
           transition: all 0.2s; }
-          body #root main .works .works-photos-tiles .tile-wrapper img {
+          body #root main .works-container .works-photos-tiles .tile-wrapper img {
             height: 100%;
             width: 100%; }
-          body #root main .works .works-photos-tiles .tile-wrapper .spoiler {
+          body #root main .works-container .works-photos-tiles .tile-wrapper .spoiler {
             position: absolute;
             top: 0;
             left: 0;
@@ -401,20 +728,6 @@ body {
             width: 100%;
             background: transparent;
             transition: background 0.2s; }
-          body #root main .works .works-photos-tiles .tile-wrapper.active {
-            scale: 2;
-            box-shadow: 0 0 1px 1px black;
-            z-index: 2; }
-            body #root main .works .works-photos-tiles .tile-wrapper.active .spoiler {
-              background: transparent; }
-            body #root main .works .works-photos-tiles .tile-wrapper.active:hover .spoiler {
-              background: transparent; }
-          body #root main .works .works-photos-tiles .tile-wrapper:hover {
-            transition: all 0.2s; }
-            body #root main .works .works-photos-tiles .tile-wrapper:hover .spoiler {
-              display: block;
-              background: rgba(0, 0, 0, 0.3);
-              transition: background 0.2s; }
       body #root main .page-admin__wrapper {
         height: 100%;
         position: relative;
@@ -423,14 +736,16 @@ body {
         body #root main .page-admin__wrapper .left-menu__wrapper {
           position: sticky;
           display: none;
-          box-shadow: 0 0 15px 2px black;
-          padding: 20px 12px;
+          padding: 0 15px;
+          width: 250px;
+          height: 100%;
           left: 0;
-          top: 0;
-          background: #1f1f1f;
+          top: 79px;
+          background: transparent;
           border-radius: 0 7px 0 0; }
           body #root main .page-admin__wrapper .left-menu__wrapper .left-menu {
             display: flex;
+            width: 100%;
             flex-direction: column;
             gap: 10px; }
             body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item {
@@ -447,18 +762,12 @@ body {
                 font-weight: 600;
                 color: rgba(232, 232, 232, 0.7);
                 transition: color .2s; }
-              body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:hover, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:active {
+              body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:hover, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:active, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item.selected {
                 background: black;
                 transition: background .2s; }
-                body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:hover span, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:active span {
+                body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:hover span, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:active span, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item.selected span {
                   transition: color .2s;
                   color: #e8e8e8; }
-              body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item.selected {
-                background: black;
-                transition: background .2s; }
-                body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item.selected span {
-                  color: red;
-                  transition: color .2s; }
         body #root main .page-admin__wrapper .bottom-menu__wrapper {
           position: fixed;
           display: flex;
@@ -466,6 +775,7 @@ body {
           left: 0;
           bottom: 0;
           right: 0;
+          z-index: 10;
           background: black; }
           body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu {
             display: flex;
@@ -492,238 +802,929 @@ body {
                 body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu .bottom-menu__item.selected span {
                   color: #e8e8e8;
                   transition: color .2s; }
-        body #root main .page-admin__wrapper .admin {
+        body #root main .page-admin__wrapper .admin-container {
           flex-grow: 1; }
-      body #root main .orders .orders-container {
+        body #root main .page-admin__wrapper .admin-section {
+          display: flex;
+          flex-direction: column;
+          gap: 15px; }
+          body #root main .page-admin__wrapper .admin-section .add-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            background: #292929;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 300ms; }
+            body #root main .page-admin__wrapper .admin-section .add-button span {
+              text-align: center;
+              font-size: 16px;
+              text-transform: uppercase;
+              user-select: none;
+              font-weight: 700;
+              color: rgba(232, 232, 232, 0.7);
+              transition: color 300ms; }
+            body #root main .page-admin__wrapper .admin-section .add-button:hover {
+              background: black; }
+              body #root main .page-admin__wrapper .admin-section .add-button:hover span {
+                color: #e8e8e8; }
+          body #root main .page-admin__wrapper .admin-section .employers-wrapper {
+            width: 100%;
+            grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
+            gap: 8px;
+            display: grid;
+            row-gap: 10px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper {
+              background: #292929;
+              border-radius: 7px;
+              transition: background 0.3s; }
+              body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                cursor: pointer; }
+                body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper {
+                  display: flex;
+                  align-items: center;
+                  position: relative;
+                  justify-content: center;
+                  border-radius: 7px; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .employer-card__photo {
+                    position: relative;
+                    border-radius: 7px;
+                    margin: 0 auto;
+                    height: 100%;
+                    width: 100%; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+                    position: absolute;
+                    opacity: 0;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    border-radius: 7px;
+                    background: black;
+                    padding: 6px 0;
+                    font-weight: 600;
+                    font-size: 12px;
+                    margin-top: auto;
+                    text-align: center;
+                    z-index: 2;
+                    transition: all 0.15s; }
+                body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+                  height: 100%;
+                  position: relative;
+                  display: flex;
+                  gap: 10px;
+                  flex-direction: column;
+                  flex-grow: 1;
+                  padding: 10px 7px 10px 7px; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio {
+                    display: flex;
+                    flex-direction: column; }
+                    body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                      font-weight: 800;
+                      word-break: break-word;
+                      font-size: 14px;
+                      line-height: 1.1; }
+                    body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works {
+                      display: flex;
+                      flex-direction: column;
+                      margin-top: 10px;
+                      gap: 2px;
+                      text-wrap: nowrap; }
+                      body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                      body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                        font-size: 13px; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: auto;
+                    gap: 4px;
+                    flex-wrap: wrap; }
+                    body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                      border: 2px solid white;
+                      border-radius: 5px;
+                      padding: 2px 4px;
+                      opacity: 0.6;
+                      font-size: 12px;
+                      text-align: center; }
+                body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card:hover .photo-wrapper .advice {
+                  opacity: 1;
+                  bottom: -1px;
+                  transition: all 0.15s; }
+              body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions {
+                display: flex;
+                flex-direction: row;
+                border-top: 2px solid #1f1f1f; }
+                body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  background: transparent;
+                  padding: 10px 0;
+                  color: #e8e8e8;
+                  font-size: 13px;
+                  font-weight: 600;
+                  width: 100%;
+                  flex: 1;
+                  transition: background 0.2s; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action.edit {
+                    border-radius: 0 0 0 7px; }
+                    body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action.edit:hover {
+                      background: gray;
+                      transition: background 0.2s; }
+                  body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action.delete {
+                    border-radius: 0 0 7px 0; }
+                    body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action.delete:hover {
+                      background: #fe313a;
+                      transition: background 0.2s; }
+              body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper:hover {
+                background: black;
+                transition: background 0.3s; }
+          body #root main .page-admin__wrapper .admin-section .services {
+            display: grid;
+            grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+            gap: 8px; }
+            body #root main .page-admin__wrapper .admin-section .services .service-card {
+              position: relative;
+              overflow: hidden;
+              width: 100%;
+              aspect-ratio: 4/3;
+              border-radius: 7px; }
+              body #root main .page-admin__wrapper .admin-section .services .service-card .service-card__photo {
+                width: 100%;
+                transition: scale 350ms; }
+              body #root main .page-admin__wrapper .admin-section .services .service-card .service-card__info {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                background: linear-gradient(transparent 50%, black);
+                transition: background 350ms; }
+                body #root main .page-admin__wrapper .admin-section .services .service-card .service-card__info .label-wrapper {
+                  transform: translateY(0) translateZ(0);
+                  height: 100%;
+                  width: 100%;
+                  padding: 10px;
+                  display: flex;
+                  margin-top: auto;
+                  transition: transform 350ms; }
+                  body #root main .page-admin__wrapper .admin-section .services .service-card .service-card__info .label-wrapper span {
+                    display: flex;
+                    align-items: center;
+                    font-weight: 800;
+                    margin-top: auto;
+                    font-size: 22px;
+                    line-height: 0.9;
+                    color: #e8e8e8;
+                    transition: color 400ms; }
+              body #root main .page-admin__wrapper .admin-section .services .service-card:hover .service-card__photo {
+                scale: 1.4; }
+              body #root main .page-admin__wrapper .admin-section .services .service-card:hover .service-card__info {
+                background: linear-gradient(transparent 0, black); }
+                body #root main .page-admin__wrapper .admin-section .services .service-card:hover .service-card__info .label-wrapper span {
+                  color: #fe313a;
+                  transition: color 400ms; }
+      body #root main .orders-container .orders {
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 20px; }
-        body #root main .orders .orders-container .order-card {
+        gap: 10px; }
+        body #root main .orders-container .orders .order-card {
           display: flex;
           flex-direction: column;
           background: black;
           border-radius: 7px; }
-          body #root main .orders .orders-container .order-card .card-header__wrapper {
+          body #root main .orders-container .orders .order-card .card-header__wrapper {
             display: flex;
             flex-direction: column;
             border-bottom: 2px solid #1f1f1f;
             padding: 8px;
             gap: 7px;
             font-size: 14px; }
-            body #root main .orders .orders-container .order-card .card-header__wrapper span {
+            body #root main .orders-container .orders .order-card .card-header__wrapper span {
               font-weight: 700; }
-            body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__title {
+            body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title {
               display: flex;
               flex-direction: row;
               align-items: center;
               gap: 5px; }
-              body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__title .code {
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .code {
                 font-size: 16px; }
-              body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__title .date {
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .date {
                 font-weight: 500; }
-            body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info {
+            body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info {
               display: flex;
               flex-direction: row;
               align-items: center;
               gap: 5px; }
-              body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info .summary {
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .summary {
                 font-size: 16px; }
-              body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info .status {
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status {
                 margin-left: auto;
                 padding: 3px 5px;
                 border-radius: 7px;
                 font-weight: 700; }
-                body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info .status.success {
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.success {
                   background-color: green; }
-                body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info .status.waiting {
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.waiting {
                   background-color: gray; }
-                body #root main .orders .orders-container .order-card .card-header__wrapper .card-header__info .status.canceled {
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.canceled {
                   background-color: #fe313a; }
-          body #root main .orders .orders-container .order-card .product-card {
+          body #root main .orders-container .orders .order-card .product-card {
             display: flex;
             flex-direction: row;
             padding: 8px; }
-            body #root main .orders .orders-container .order-card .product-card .image-wrapper {
+            body #root main .orders-container .orders .order-card .product-card .image-wrapper {
               display: flex;
-              align-items: flex-start;
-              aspect-ratio: 1/1; }
-              body #root main .orders .orders-container .order-card .product-card .image-wrapper img {
-                width: 100px; }
-            body #root main .orders .orders-container .order-card .product-card span {
-              font-size: 15px; }
-            body #root main .orders .orders-container .order-card .product-card .info {
+              align-items: flex-start; }
+              body #root main .orders-container .orders .order-card .product-card .image-wrapper img {
+                width: 100px;
+                border-radius: 7px; }
+            body #root main .orders-container .orders .order-card .product-card span {
+              font-size: 14px; }
+            body #root main .orders-container .orders .order-card .product-card .info {
               display: flex;
               flex-direction: column;
               gap: 4px;
               margin-left: 10px;
               flex-grow: 1; }
-              body #root main .orders .orders-container .order-card .product-card .info .title {
+              body #root main .orders-container .orders .order-card .product-card .info .title {
                 font-weight: 700; }
-      body #root main .login {
+              body #root main .orders-container .orders .order-card .product-card .info .code {
+                opacity: .6; }
+              body #root main .orders-container .orders .order-card .product-card .info .price {
+                font-weight: 700;
+                display: flex;
+                flex-direction: row;
+                word-break: keep-all; }
+      body #root main .services-container .services {
+        display: grid;
+        grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+        gap: 8px; }
+        body #root main .services-container .services .service-card {
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          aspect-ratio: 4/3;
+          border-radius: 7px; }
+          body #root main .services-container .services .service-card .service-card__photo {
+            width: 100%;
+            transition: scale 350ms; }
+          body #root main .services-container .services .service-card .service-card__info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: linear-gradient(transparent 50%, black);
+            transition: background 350ms; }
+            body #root main .services-container .services .service-card .service-card__info .label-wrapper {
+              transform: translateY(0) translateZ(0);
+              height: 100%;
+              width: 100%;
+              padding: 10px;
+              display: flex;
+              margin-top: auto;
+              transition: transform 350ms; }
+              body #root main .services-container .services .service-card .service-card__info .label-wrapper span {
+                display: flex;
+                align-items: center;
+                font-weight: 800;
+                margin-top: auto;
+                font-size: 22px;
+                line-height: 0.9;
+                color: #e8e8e8;
+                transition: color 400ms; }
+          body #root main .services-container .services .service-card:hover .service-card__photo {
+            scale: 1.4; }
+          body #root main .services-container .services .service-card:hover .service-card__info {
+            background: linear-gradient(transparent 0, black); }
+            body #root main .services-container .services .service-card:hover .service-card__info .label-wrapper span {
+              color: #fe313a;
+              transition: color 400ms; }
+      body #root main .time-container h1 {
+        text-align: center; }
+      body #root main .time-container .time {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 590px;
+        padding: 0 15px;
+        border-radius: 7px; }
+        body #root main .time-container .time .form-elem {
+          background: #292929;
+          border-radius: 7px; }
+        body #root main .time-container .time .dropdown {
+          position: relative;
+          width: 100%;
+          display: inline-block; }
+          body #root main .time-container .time .dropdown .dropdown-button {
+            background: transparent;
+            width: 100%;
+            color: white;
+            user-select: none;
+            font-size: 18px;
+            padding: 0 15px;
+            height: 50px;
+            text-overflow: ellipsis;
+            border: 2px solid transparent;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root main .time-container .time .dropdown .dropdown-button::selection {
+              background: transparent; }
+          body #root main .time-container .time .dropdown .dropdown-content {
+            display: none;
+            width: 100%;
+            position: absolute;
+            padding: 5px;
+            margin-top: 3px;
+            max-height: 275px;
+            overflow-y: auto;
+            box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.54);
+            background: #292929;
+            border-radius: 0 0 7px 7px;
+            min-width: 160px;
+            z-index: 1; }
+            body #root main .time-container .time .dropdown .dropdown-content .dropdown-content__item {
+              color: #e8e8e8;
+              font-size: 18px;
+              text-align: left;
+              width: 100%;
+              border-radius: 7px;
+              padding: 10px 15px;
+              text-decoration: none;
+              background: transparent;
+              cursor: pointer;
+              display: block;
+              transition: background 200ms; }
+              body #root main .time-container .time .dropdown .dropdown-content .dropdown-content__item:hover {
+                background-color: black;
+                transition: background 200ms; }
+          body #root main .time-container .time .dropdown.expanded {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
+            body #root main .time-container .time .dropdown.expanded .dropdown-button {
+              border-radius: 7px 7px 0 0;
+              border-color: #fe313a; }
+            body #root main .time-container .time .dropdown.expanded .dropdown-content {
+              display: block; }
+        body #root main .time-container .time .radios-wrapper {
+          display: flex;
+          flex-direction: column;
+          padding: 10px 15px;
+          gap: 10px; }
+          body #root main .time-container .time .radios-wrapper .radios-label__wrapper {
+            width: 100%;
+            gap: 30px;
+            align-items: center;
+            display: flex;
+            padding-left: 10px; }
+            body #root main .time-container .time .radios-wrapper .radios-label__wrapper .label {
+              font-size: 18px;
+              opacity: .75; }
+            body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown {
+              margin-left: auto;
+              width: auto; }
+              body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-button {
+                background: #1f1f1f;
+                font-size: 18px;
+                padding: 0;
+                text-align: center;
+                height: 40px; }
+                body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-button::placeholder {
+                  color: #e8e8e8;
+                  opacity: .75; }
+              body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-content {
+                background: #1f1f1f; }
+                body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-content .dropdown-content__item {
+                  font-size: 18px; }
+          body #root main .time-container .time .radios-wrapper .radios {
+            display: grid;
+            grid-template-columns: repeat(3, calc(100% / 3 - 4px / 3 * (3 - 1)));
+            gap: 4px; }
+            body #root main .time-container .time .radios-wrapper .radios input[type="radio"] {
+              display: none; }
+            body #root main .time-container .time .radios-wrapper .radios label {
+              font-size: 18px;
+              font-weight: 700;
+              padding: 8px 12px;
+              background: #1f1f1f;
+              border-radius: 7px;
+              cursor: pointer;
+              text-align: center;
+              user-select: none;
+              transition: background-color 200ms; }
+              body #root main .time-container .time .radios-wrapper .radios label:hover {
+                background: black; }
+            body #root main .time-container .time .radios-wrapper .radios input[type="radio"]:checked + label {
+              background: #fe313a;
+              transition: background-color 200ms; }
+        body #root main .time-container .time .client-info {
+          display: flex;
+          flex-direction: row;
+          gap: 10px; }
+          body #root main .time-container .time .client-info .form-elem {
+            flex-grow: 1;
+            color: white;
+            font-size: 18px;
+            padding: 0 15px;
+            height: 50px;
+            border-radius: 7px;
+            width: 100%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root main .time-container .time .client-info .form-elem:focus {
+              border-color: #fe313a; }
+        body #root main .time-container .time #timeConfirm {
+          font-size: 18px;
+          color: black;
+          background: #e8e8e8;
+          border-radius: 7px;
+          margin: 15px auto 0;
+          cursor: pointer;
+          font-weight: 700;
+          padding: 18px 15px;
+          transition: box-shadow 200ms; }
+          body #root main .time-container .time #timeConfirm:hover {
+            box-shadow: 0 0 30px #fe313a; }
+      body #root main .login-container {
         align-items: center; }
-        body #root main .login .auth-form__wrapper {
-          width: 80%;
+        body #root main .login-container .auth-form__wrapper {
+          width: 90%;
           display: flex;
           flex-direction: column;
           max-width: 420px;
           background: transparent; }
-          body #root main .login .auth-form__wrapper .label {
+          body #root main .login-container .auth-form__wrapper .label {
             font-size: 32px;
             text-align: center;
             color: #e8e8e8;
             font-weight: 800; }
-          body #root main .login .auth-form__wrapper .auth-form {
+          body #root main .login-container .auth-form__wrapper .auth-form {
             display: flex;
             flex-direction: column;
             position: relative;
             width: 100%;
-            margin-top: 50px; }
-            body #root main .login .auth-form__wrapper .auth-form #authLogin,
-            body #root main .login .auth-form__wrapper .auth-form #authPassword {
+            margin-top: 25px; }
+            body #root main .login-container .auth-form__wrapper .auth-form #authLogin,
+            body #root main .login-container .auth-form__wrapper .auth-form #authPassword {
               width: 100%;
               align-self: center;
               background: white;
               padding: 15px 40px 15px 20px;
               font-weight: 800;
               color: black;
-              font-size: 24px;
+              font-size: 16px;
               border: 2px solid transparent;
               transition: all 0.3s; }
-              body #root main .login .auth-form__wrapper .auth-form #authLogin:hover,
-              body #root main .login .auth-form__wrapper .auth-form #authPassword:hover {
+              body #root main .login-container .auth-form__wrapper .auth-form #authLogin:hover,
+              body #root main .login-container .auth-form__wrapper .auth-form #authPassword:hover {
                 background: #e8e8e8; }
-              body #root main .login .auth-form__wrapper .auth-form #authLogin:focus,
-              body #root main .login .auth-form__wrapper .auth-form #authPassword:focus {
+              body #root main .login-container .auth-form__wrapper .auth-form #authLogin:focus,
+              body #root main .login-container .auth-form__wrapper .auth-form #authPassword:focus {
                 border-color: #fe313a;
                 background: white; }
-              body #root main .login .auth-form__wrapper .auth-form #authLogin:placeholder-shown + #authSubmit,
-              body #root main .login .auth-form__wrapper .auth-form #authPassword:placeholder-shown + #authSubmit {
-                opacity: 0; }
-              body #root main .login .auth-form__wrapper .auth-form #authLogin:not(:placeholder-shown) + #authSubmit,
-              body #root main .login .auth-form__wrapper .auth-form #authPassword:not(:placeholder-shown) + #authSubmit {
-                opacity: 1; }
-            body #root main .login .auth-form__wrapper .auth-form #authLogin {
+            body #root main .login-container .auth-form__wrapper .auth-form #authLogin {
               border-radius: 7px 7px 0 0; }
-            body #root main .login .auth-form__wrapper .auth-form #authPassword {
+            body #root main .login-container .auth-form__wrapper .auth-form #authPassword {
               border-radius: 0 0 7px 7px; }
-            body #root main .login .auth-form__wrapper .auth-form #authSubmit {
+            body #root main .login-container .auth-form__wrapper .auth-form #authSubmit {
               position: absolute;
               border: 7px solid #1f1f1f;
               aspect-ratio: 1/1;
               background-color: white;
               width: 70px;
-              visibility: hidden;
               color: #1f1f1f;
               right: 0;
               top: 50%;
-              transform: translate(50%, -50%);
+              transform: translate(25%, -50%);
               border-radius: 50%;
               cursor: pointer;
               font-size: 24px;
               font-weight: 800;
               transition: all 0.3s; }
-              body #root main .login .auth-form__wrapper .auth-form #authSubmit:hover {
+              body #root main .login-container .auth-form__wrapper .auth-form #authSubmit:hover {
                 background: #e8e8e8; }
-              body #root main .login .auth-form__wrapper .auth-form #authSubmit:active {
+              body #root main .login-container .auth-form__wrapper .auth-form #authSubmit:active {
                 border-color: #fe313a;
                 background: white; }
-            body #root main .login .auth-form__wrapper .auth-form .sep {
+            body #root main .login-container .auth-form__wrapper .auth-form .sep {
               border-bottom: 2px solid #1f1f1f;
               width: 80%;
               margin-left: auto; }
-          body #root main .login .auth-form__wrapper .recover {
+          body #root main .login-container .auth-form__wrapper .recover {
             margin-top: 10px;
             font-size: 16px;
             color: dodgerblue; }
+      body #root main .employer-container .employer-info {
+        display: flex;
+        flex-direction: column;
+        gap: 15px; }
+        body #root main .employer-container .employer-info .info-section {
+          display: flex;
+          flex-direction: column;
+          gap: 10px; }
+          body #root main .employer-container .employer-info .info-section .section-title {
+            font-size: 22px; }
+          body #root main .employer-container .employer-info .info-section.head {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px; }
+            body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+              border-radius: 50%;
+              width: 110px;
+              height: 110px;
+              overflow: hidden;
+              align-self: center;
+              display: flex;
+              align-items: center;
+              justify-content: center; }
+              body #root main .employer-container .employer-info .info-section.head .image-wrapper img {
+                height: 100%; }
+            body #root main .employer-container .employer-info .info-section.head .employer-name {
+              text-align: center;
+              line-height: 1.05; }
+            body #root main .employer-container .employer-info .info-section.head .info {
+              display: flex;
+              justify-content: center;
+              gap: 3px; }
+              body #root main .employer-container .employer-info .info-section.head .info span {
+                font-weight: 700;
+                font-size: 16px;
+                opacity: .75; }
+          body #root main .employer-container .employer-info .info-section.works .slider {
+            margin-bottom: 40px; }
+            body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport {
+              border-radius: 7px;
+              transition: height 200ms; }
+              body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                margin-right: 5px; }
+                body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper img {
+                  width: 100%;
+                  border-radius: 7px; }
+                body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper.is-selected {
+                  transform: scale(1.1);
+                  z-index: 2; }
+            body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              bottom: 0;
+              right: 0;
+              padding: 16px 30px;
+              border-radius: 7px;
+              transform: translateY(125%); }
+              body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button.previous {
+                right: 70px; }
+              body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button .flickity-button-icon {
+                width: 50%;
+                height: 50%; }
+          body #root main .employer-container .employer-info .info-section.services .advice {
+            font-size: 13px;
+            opacity: .75; }
+          body #root main .employer-container .employer-info .info-section.services .services-container {
+            display: grid;
+            grid-template-columns: repeat(2, calc(100% / 2 - 3px / 2 * (2 - 1)));
+            gap: 3px; }
+            body #root main .employer-container .employer-info .info-section.services .services-container .service {
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              justify-content: center;
+              padding: 0 10px;
+              min-height: 55px;
+              font-size: 15px;
+              font-weight: 800;
+              background: #292929;
+              border-radius: 7px;
+              text-align: center;
+              text-wrap: wrap;
+              transition: background-color 200ms; }
+              body #root main .employer-container .employer-info .info-section.services .services-container .service:hover {
+                background: black; }
     @media (min-width: 768px) {
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 14px; }
+      body #root .add-employer__modal .container,
+      body #root .change-employer__modal .container {
+        gap: 30px; }
+        body #root .add-employer__modal .container .container-item,
+        body #root .change-employer__modal .container .container-item {
+          display: flex;
+          flex-direction: row;
+          gap: 5px; }
+          body #root .add-employer__modal .container .container-item.photo .file-input__wrapper,
+          body #root .change-employer__modal .container .container-item.photo .file-input__wrapper {
+            width: 100%;
+            border-radius: 7px;
+            background: #292929;
+            height: 60px;
+            transition: background-color 200ms; }
+            body #root .add-employer__modal .container .container-item.photo .file-input__wrapper label span,
+            body #root .change-employer__modal .container .container-item.photo .file-input__wrapper label span {
+              font-size: 22px; }
+          body #root .add-employer__modal .container .container-item.fields,
+          body #root .change-employer__modal .container .container-item.fields {
+            flex-direction: row; }
+            body #root .add-employer__modal .container .container-item.fields input[type=text],
+            body #root .change-employer__modal .container .container-item.fields input[type=text] {
+              flex-grow: 1;
+              font-size: 20px; }
+          body #root .add-employer__modal .container .container-item.services,
+          body #root .change-employer__modal .container .container-item.services {
+            gap: 7px; }
+            body #root .add-employer__modal .container .container-item.services .service-button,
+            body #root .change-employer__modal .container .container-item.services .service-button {
+              padding: 7px 12px;
+              font-size: 18px; }
+          body #root .add-employer__modal .container .container-item.actions button,
+          body #root .change-employer__modal .container .container-item.actions button {
+            font-size: 24px; }
       body #root main .page {
         padding: 0 16px; }
         body #root main .page h1 {
-          line-height: 1;
           font-size: 28px; }
-        body #root main .page .employers-wrapper {
-          grid-template-columns: repeat(4, calc(100% / 4 - 16px / 4 * (4 - 1)));
-          gap: 16px; }
-          body #root main .page .employers-wrapper .employer-card {
-            flex-direction: column; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info {
-              gap: 0;
-              padding: 10px 7px 15px 7px; }
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
-                font-size: 14px; }
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
-                font-size: 12px; }
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .categories {
-                margin-top: 10px; }
-        body #root main .page .works-photos-tiles {
-          grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1))); }
+      body #root main .employers-container .employers-wrapper {
+        grid-template-columns: repeat(4, calc(100% / 4 - 16px / 4 * (4 - 1)));
+        gap: 16px; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+          flex-direction: column; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+            font-size: 11px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0;
+            padding: 10px 7px 10px 7px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 14px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 13px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+              margin-top: 10px; }
+      body #root main .works-container .works-photos-tiles {
+        grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1))); }
       body #root main .page-admin__wrapper .left-menu__wrapper {
+        top: 88px;
         display: flex; }
       body #root main .page-admin__wrapper .bottom-menu__wrapper {
-        display: none; } }
-    @media (min-width: 1024px) {
-      body #root .header-wrapper .user-panel {
-        display: flex; }
-      body #root .header-wrapper .main-panel {
-        padding: 7px 2vw; }
-        body #root .header-wrapper .main-panel .nav {
-          display: flex; }
-        body #root .header-wrapper .main-panel .login-button {
-          display: flex; }
-        body #root .header-wrapper .main-panel .burger {
-          display: none; }
-      body #root main .page {
-        gap: 30px; }
-        body #root main .page h1 {
-          line-height: 1;
-          font-size: 28px; }
-        body #root main .page .employers-wrapper .employer-card {
+        display: none; }
+      body #root main .page-admin__wrapper .admin-section .employers-wrapper {
+        grid-template-columns: repeat(3, calc(100% / 3 - 16px / 3 * (3 - 1)));
+        gap: 16px; }
+        body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
           flex-direction: column; }
-          body #root main .page .employers-wrapper .employer-card .employer-card__info {
-            gap: 0; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
-              font-size: 19px; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
-              font-size: 18px; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .categories {
+          body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0;
+            padding: 10px 7px 10px 7px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 14px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 13px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
               margin-top: 10px; }
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .categories .category {
+      body #root main .page-admin__wrapper .admin-section .services {
+        grid-template-columns: repeat(2, calc(100% / 2 - 10px / 2 * (2 - 1)));
+        gap: 10px; }
+      body #root main .orders-container .orders .order-card .card-header__wrapper {
+        font-size: 18px; }
+        body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px; }
+          body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .code {
+            font-size: 22px; }
+        body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .summary {
+          font-size: 22px; }
+      body #root main .orders-container .orders .order-card .product-card .image-wrapper img {
+        width: 200px; }
+      body #root main .orders-container .orders .order-card .product-card .info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-left: 10px;
+        flex-grow: 1; }
+        body #root main .orders-container .orders .order-card .product-card .info span {
+          font-size: 20px; }
+        body #root main .orders-container .orders .order-card .product-card .info .title {
+          font-size: 24px;
+          font-weight: 700; }
+      body #root main .services-container .services {
+        grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+        gap: 10px; }
+      body #root main .time-container .time .dropdown .dropdown-button {
+        font-size: 20px; }
+      body #root main .time-container .time .dropdown .dropdown-content {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios-label {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios {
+        grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+        gap: 8px; }
+        body #root main .time-container .time .radios-wrapper .radios label {
+          font-size: 20px; }
+      body #root main .time-container .time .client-info .form-elem {
+        font-size: 20px; }
+      body #root main .time-container .time #timeConfirm {
+        font-size: 20px; }
+      body #root main .employer-container .employer-info .info-section .section-title {
+        font-size: 24px; }
+      body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+        width: 150px;
+        height: 150px; }
+      body #root main .employer-container .employer-info .info-section.head .info span {
+        font-size: 21px; }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper {
+        width: 25%; }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button {
+        padding: 20px 50px; }
+        body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button.previous {
+          right: 110px; }
+      body #root main .employer-container .employer-info .info-section.services .advice {
+        font-size: 16px; }
+      body #root main .employer-container .employer-info .info-section.services .services-container {
+        grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+        gap: 5px; }
+        body #root main .employer-container .employer-info .info-section.services .services-container .service {
+          min-height: 80px;
+          font-size: 18px; }
+      body #root .work-photo__modal .container .photo-wrapper .work-photo {
+        width: 70%; } }
+    @media (min-width: 1024px) {
+      body #root .header-wrapper {
+        box-shadow: 0 9px 26px 10px #1f1f1f; }
+        body #root .header-wrapper .user-panel {
+          display: flex; }
+        body #root .header-wrapper .main-panel {
+          padding: 7px 2vw; }
+          body #root .header-wrapper .main-panel .nav {
+            display: flex; }
+          body #root .header-wrapper .main-panel .login-button {
+            display: flex; }
+          body #root .header-wrapper .main-panel .burger {
+            display: none; }
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 18px; }
+      body #root .footer-wrapper .title-wrapper a {
+        font-size: 24px; }
+      body #root main {
+        padding-top: 36px; }
+        body #root main .page {
+          gap: 30px; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+          flex-direction: column; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+            font-size: 15px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 19px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 18px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+              margin-top: 10px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
                 font-size: 14px; }
-        body #root main .page .works-photos-tiles {
-          grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1))); } }
+        body #root main .works-container .works-photos-tiles {
+          grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1))); }
+        body #root main .services-container .services {
+          grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+          gap: 10px; }
+        body #root main .page-admin__wrapper .left-menu__wrapper {
+          display: flex;
+          top: 156px; }
+        body #root main .page-admin__wrapper .bottom-menu__wrapper {
+          display: none; }
+        body #root main .page-admin__wrapper .admin-section .add-button {
+          padding: 20px 0; }
+          body #root main .page-admin__wrapper .admin-section .add-button span {
+            font-size: 24px; }
+        body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+          flex-direction: column; }
+          body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 19px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 18px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+              margin-top: 10px; }
+              body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                font-size: 14px; }
+        body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .actions .action {
+          font-size: 18px; }
+        body #root main .page-admin__wrapper .admin-section .services {
+          grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+          gap: 10px; }
+        body #root main .time-container .time .dropdown .dropdown-button {
+          font-size: 20px; }
+        body #root main .time-container .time .dropdown .dropdown-content {
+          font-size: 20px; }
+        body #root main .time-container .time .radios-wrapper .radios-label {
+          font-size: 20px; }
+        body #root main .time-container .time .radios-wrapper .radios {
+          grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+          gap: 8px; }
+          body #root main .time-container .time .radios-wrapper .radios label {
+            font-size: 20px; }
+        body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+          width: 200px;
+          height: 200px; }
+        body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper {
+          width: 20%; }
+        body #root main .employer-container .employer-info .info-section.services .advice {
+          font-size: 18px; }
+        body #root main .employer-container .employer-info .info-section.services .services-container {
+          grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+          gap: 5px; }
+          body #root main .employer-container .employer-info .info-section.services .services-container .service {
+            min-height: 100px;
+            font-size: 22px; } }
     @media (min-width: 1280px) {
-      body #root main .page h1 {
-        line-height: 1;
-        font-size: 28px; }
-      body #root main .page .employers-wrapper {
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 20px; }
+      body #root .footer-wrapper .title-wrapper a {
+        font-size: 32px; }
+      body #root main .employers-container .employers-wrapper {
         grid-template-columns: repeat(6, calc(100% / 6 - 16px / 6 * (6 - 1)));
         gap: 16px; }
-        body #root main .page .employers-wrapper .employer-card {
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
           flex-direction: column; }
-          body #root main .page .employers-wrapper .employer-card .employer-card__info {
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+            font-size: 15px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
             gap: 0; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .fullname {
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
               font-size: 19px; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
               font-size: 18px; }
-            body #root main .page .employers-wrapper .employer-card .employer-card__info .categories {
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
               margin-top: 10px; }
-              body #root main .page .employers-wrapper .employer-card .employer-card__info .categories .category {
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
                 font-size: 14px; }
-      body #root main .page .works-photos-tiles {
-        grid-template-columns: repeat(7, calc(100% / 7 - 5px / 7 * (7 - 1))); } }
+      body #root main .works-container .works-photos-tiles {
+        grid-template-columns: repeat(7, calc(100% / 7 - 5px / 7 * (7 - 1))); }
+      body #root main .services-container .services .service-card .service-card__info .label-wrapper span {
+        font-size: 26px; }
+      body #root main .services-container .services .service-card:hover .service-card__photo {
+        scale: 1.4; }
+      body #root main .services-container .services .service-card:hover .service-card__info {
+        background: rgba(0, 0, 0, 0.75); }
+        body #root main .services-container .services .service-card:hover .service-card__info .label-wrapper {
+          transform: translateY(0) translateZ(0); }
+      body #root main .page-admin__wrapper .admin-section .employers-wrapper {
+        grid-template-columns: repeat(5, calc(100% / 5 - 16px / 5 * (5 - 1)));
+        gap: 16px; }
+        body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+          flex-direction: column; }
+          body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 19px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 18px; }
+            body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+              margin-top: 10px; }
+              body #root main .page-admin__wrapper .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                font-size: 14px; }
+      body #root main .page-admin__wrapper .admin-section .services {
+        grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+        gap: 10px; }
+      body #root main .time-container .time {
+        gap: 15px; }
+      body #root main .employer-container .employer-info .info-section.head .info span {
+        font-size: 24px; }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .image-wrapper {
+        width: 20%; } }
   body.scroll-locked {
     overflow: hidden; }
-  body::-webkit-scrollbar {
-    width: 8px; }
-  body::-webkit-scrollbar-thumb {
-    background: #e8e8e8;
-    border-radius: 7px; }
-  body::-webkit-scrollbar-track {
-    background: transparent; }
 
 /*# sourceMappingURL=index.css.map */

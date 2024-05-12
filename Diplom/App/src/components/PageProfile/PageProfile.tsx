@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 const PageProfile: FC = () => {
     return(
         <motion.div
-            className="page profile"
+            className="page profile-container"
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}

@@ -27,6 +27,7 @@ const OrderCard: FC<OrderCardProps> = (props) => {
                 productTitle={"Гель-лак <Ух-ты> "}
                 code={"123123"}
                 count={"4"}
+                price={1234}
             />
         </div>
     )

@@ -3,6 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 interface IChangeEmployerModalSlice {
     isOpen: boolean;
     employerId: number;
+    name: string
+    surname: string
+    patronymic: string
+    experience: number
+    servicesIds: number[]
 }
 
 const editEmployerModalSlice = createSlice({

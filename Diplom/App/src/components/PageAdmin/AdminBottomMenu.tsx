@@ -1,27 +1,24 @@
 import {FC} from "react";
 import {setSection} from "../../api/slices/adminPanelSlice.ts";
-import {useAppDispatch} from "../../store/hooks/redux.ts";
+import { useAppDispatch, useTypedSelector } from '../../store/hooks/redux.ts';
 
 const AdminBottomMenu: FC = () => {
     const dispatch = useAppDispatch()
+    const {sectionName} = useTypedSelector(state => state.adminPanelReducer);
 
     return (
         <div className="bottom-menu__wrapper">
             <nav className="bottom-menu">
-                <div className="bottom-menu__item" onClick={() => dispatch(setSection("statistic"))}>
-                    <img src={"/images/bottom-menu/statistic.png"} alt={""}/>
+                <div className={`bottom-menu__item ${sectionName == "statistic" ? "selected" : ""}`} onClick={() => dispatch(setSection("statistic"))}>
                     <span>Статистика</span>
                 </div>
-                <div className="bottom-menu__item" onClick={() => dispatch(setSection("employers"))}>
-                    <img src={"/images/bottom-menu/employers.png"} alt={""}/>
+                <div className={`bottom-menu__item ${sectionName == "employers" ? "selected" : ""}`} onClick={() => dispatch(setSection("employers"))}>
                     <span>Сотрудники</span>
                 </div>
-                <div className="bottom-menu__item" onClick={() => dispatch(setSection("products"))}>
-                    <img src={"/images/bottom-menu/products.png"} alt={""}/>
-                    <span>Товары</span>
+                <div className={`bottom-menu__item ${sectionName == "services" ? "selected" : ""}`} onClick={() => dispatch(setSection("services"))}>
+                    <span>Услуги</span>
                 </div>
-                <div className="bottom-menu__item" onClick={() => dispatch(setSection("clients"))}>
-                    <img src={"/images/bottom-menu/clients.png"} alt={""}/>
+                <div className={`bottom-menu__item ${sectionName == "clients" ? "selected" : ""}`} onClick={() => dispatch(setSection("clients"))}>
                     <span>Клиенты</span>
                 </div>
             </nav>

@@ -1,0 +1,2692 @@
+@font-face {
+  font-family: Campana;
+  src: url("/fonts/CampanaRegular.otf"); }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  color: #000000;
+  background: transparent;
+  font-family: Poppins-Regular, sans-serif;
+  text-decoration: none; }
+  *::-webkit-scrollbar {
+    width: 0; }
+  *::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 7px; }
+  *::-webkit-scrollbar-track {
+    background: #d4d4d4;
+    border-radius: 7px; }
+
+[class*="copyrights-pane"] {
+  display: none !important; }
+
+.ymaps-2-1-79-map {
+  border-radius: 32px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden; }
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  border-radius: 7px;
+  gap: 10px;
+  filter: none;
+  align-items: center;
+  transition: filter .2s; }
+  .logo-wrapper img {
+    height: 100%; }
+  .logo-wrapper .label-wrapper {
+    display: flex;
+    flex-direction: column; }
+    .logo-wrapper .label-wrapper span {
+      line-height: 0.55;
+      font-family: "Campana", sans-serif;
+      font-size: 45px;
+      transition: color 300ms; }
+    .logo-wrapper .label-wrapper span:nth-child(2) {
+      margin-left: 10px; }
+  .logo-wrapper:hover .label-wrapper span {
+    color: #fe313a; }
+
+.modal {
+  display: flex;
+  visibility: hidden;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh; }
+  .modal .container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 100%;
+    z-index: 2; }
+  .modal .spoiler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    transition: background-color 250ms; }
+  .modal.active {
+    visibility: visible; }
+
+input {
+  text-overflow: ellipsis; }
+
+body, html {
+  min-height: 100vh; }
+
+body {
+  position: relative;
+  background: -webkit-linear-gradient(90deg, #f0e0e9, #e9d3d5, #e0c7dc);
+  background: linear-gradient(90deg, #f0e0e9, #e9d3d5, #e0c7dc); }
+  body .ant-message {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 300px;
+    padding: 0;
+    font-weight: 800;
+    font-size: 16px;
+    background: transparent;
+    position: fixed;
+    z-index: 10001; }
+    body .ant-message .ant-message-notice-wrapper {
+      padding: 0 !important;
+      width: 100%; }
+      body .ant-message .ant-message-notice-wrapper .ant-message-notice .ant-message-notice-content {
+        width: 100%;
+        padding: 4px;
+        border-radius: 7px; }
+        body .ant-message .ant-message-notice-wrapper .ant-message-notice .ant-message-notice-content .ant-message-custom-content .anticon {
+          display: none; }
+  body .checkbox-styled {
+    display: none; }
+    body .checkbox-styled:checked + .label-styled {
+      background: #ffffff; }
+      body .checkbox-styled:checked + .label-styled .button-text {
+        color: black; }
+  body .label-styled {
+    border: 1px solid #ffffff;
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 7px;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.3s; }
+    body .label-styled .button-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      transition: all 0.3s; }
+  body #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; }
+    body #root .header-wrapper {
+      position: sticky;
+      top: 0;
+      background: #f7f7f7;
+      transition: box-shadow 500ms, background 500ms;
+      z-index: 9999; }
+      body #root .header-wrapper .main-panel {
+        width: 100%;
+        height: 80px;
+        max-width: 1600px;
+        padding: 0 1rem;
+        justify-content: center;
+        display: flex;
+        flex-direction: row; }
+        body #root .header-wrapper .main-panel .nav {
+          height: 100%;
+          align-self: center;
+          justify-content: center;
+          flex-grow: 1;
+          flex-direction: row; }
+          body #root .header-wrapper .main-panel .nav .nav-item {
+            display: none;
+            align-items: center;
+            position: relative;
+            border-radius: 7px;
+            font-weight: 700;
+            padding: 0 10px;
+            color: #000000;
+            font-size: 21px;
+            text-wrap: nowrap;
+            transition: color 300ms; }
+            body #root .header-wrapper .main-panel .nav .nav-item:hover {
+              color: #fe313a; }
+          body #root .header-wrapper .main-panel .nav .logo-wrapper {
+            overflow: hidden;
+            padding: 1rem 0;
+            gap: 3px;
+            height: 100%; }
+            body #root .header-wrapper .main-panel .nav .logo-wrapper img {
+              width: 85%;
+              height: 85%;
+              object-fit: cover;
+              display: none; }
+            body #root .header-wrapper .main-panel .nav .logo-wrapper .label-wrapper {
+              gap: 4px;
+              flex-direction: row; }
+              body #root .header-wrapper .main-panel .nav .logo-wrapper .label-wrapper span {
+                font-size: 52px; }
+          body #root .header-wrapper .main-panel .nav .dropdown-profile {
+            position: relative;
+            cursor: pointer;
+            align-items: center;
+            padding: 0 10px; }
+            body #root .header-wrapper .main-panel .nav .dropdown-profile .name {
+              display: flex;
+              font-weight: 700;
+              font-size: 21px;
+              user-select: none;
+              transition: color 200ms; }
+              body #root .header-wrapper .main-panel .nav .dropdown-profile .name:after {
+                content: "";
+                border-bottom: 3px solid #000000;
+                border-left: 3px solid #000000;
+                width: 10px;
+                height: 10px;
+                margin-left: 10px;
+                transform: rotate(-45deg) translateY(25%);
+                transition: border-color 200ms; }
+            body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content {
+              display: none;
+              position: absolute;
+              background: #fff;
+              top: 80px;
+              box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.45);
+              text-align: left;
+              flex-direction: column;
+              left: 50%;
+              transform: translateX(-65%);
+              border-radius: 24px;
+              padding: 7px;
+              z-index: 999; }
+              body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content .dropdown-content__item {
+                font-size: 18px;
+                width: 100%;
+                cursor: pointer;
+                border-radius: 7px;
+                color: #000000;
+                font-weight: 600;
+                padding: 10px 15px;
+                transition: color 200ms; }
+                body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content .dropdown-content__item:hover {
+                  color: #fe313a; }
+              body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content .exit {
+                text-align: left; }
+              body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content.visible {
+                display: flex; }
+            body #root .header-wrapper .main-panel .nav .dropdown-profile:hover .name, body #root .header-wrapper .main-panel .nav .dropdown-profile.expanded .name {
+              color: #fe313a; }
+              body #root .header-wrapper .main-panel .nav .dropdown-profile:hover .name:after, body #root .header-wrapper .main-panel .nav .dropdown-profile.expanded .name:after {
+                border-color: #fe313a; }
+        body #root .header-wrapper .main-panel .burger {
+          cursor: pointer;
+          display: flex;
+          padding: 0 5px;
+          align-self: center;
+          user-select: none;
+          margin-left: auto;
+          position: relative;
+          border: none;
+          background: transparent;
+          width: 40px;
+          height: 26px; }
+          body #root .header-wrapper .main-panel .burger::before, body #root .header-wrapper .main-panel .burger::after {
+            content: '';
+            left: 0;
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 4px;
+            border-radius: 10px;
+            background: #000000; }
+          body #root .header-wrapper .main-panel .burger::before {
+            top: 0;
+            box-shadow: 0 11px 0 #000000;
+            transition: box-shadow .3s .15s, top .3s .15s, transform .3s; }
+          body #root .header-wrapper .main-panel .burger::after {
+            bottom: 0;
+            transition: bottom .3s .15s, transform .3s; }
+          body #root .header-wrapper .main-panel .burger.active::before {
+            top: 11px;
+            transform: rotate(45deg);
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0);
+            transition: box-shadow .15s, top .3s, transform .3s .15s; }
+          body #root .header-wrapper .main-panel .burger.active::after {
+            bottom: 11px;
+            transform: rotate(-45deg);
+            transition: bottom .3s, transform .3s .15s; }
+      body #root .header-wrapper.opened {
+        box-shadow: none;
+        background: transparent; }
+    body #root .footer-wrapper {
+      display: flex;
+      margin-top: auto;
+      flex-direction: row;
+      padding: 10px 30px;
+      background: #000000; }
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: none;
+        font-size: 20px; }
+        body #root .footer-wrapper .phone-wrapper span,
+        body #root .footer-wrapper .address-wrapper span {
+          color: #e8e8e8;
+          width: 100%; }
+      body #root .footer-wrapper div {
+        display: flex;
+        align-items: center;
+        flex: 1; }
+      body #root .footer-wrapper .phone-wrapper {
+        flex: 1; }
+      body #root .footer-wrapper .title-wrapper {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        body #root .footer-wrapper .title-wrapper a {
+          line-height: 1;
+          color: #e8e8e8;
+          font-family: "Campana", sans-serif;
+          font-size: 45px;
+          transition: color 300ms; }
+      body #root .footer-wrapper .address-wrapper {
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start; }
+        body #root .footer-wrapper .address-wrapper span {
+          text-align: right; }
+    body #root .mobile-menu__modal {
+      z-index: 9998; }
+      body #root .mobile-menu__modal .container {
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 65%;
+        padding: 90px 5px 25px 5px;
+        transition: transform 250ms;
+        transform: translateX(100%) translateZ(0);
+        background: #f7f7f7; }
+        body #root .mobile-menu__modal .container .menu {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          flex-grow: 1;
+          padding: 10px 0;
+          gap: 5px; }
+          body #root .mobile-menu__modal .container .menu .menu-link {
+            display: flex;
+            border-radius: 7px;
+            word-break: break-word;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            width: 100%;
+            font-size: 19px;
+            font-weight: 600;
+            align-self: center; }
+            body #root .mobile-menu__modal .container .menu .menu-link.login-logout {
+              margin-top: auto; }
+            body #root .mobile-menu__modal .container .menu .menu-link:hover, body #root .mobile-menu__modal .container .menu .menu-link:active {
+              color: #fe313a; }
+        body #root .mobile-menu__modal .container .address {
+          display: flex;
+          margin-top: auto;
+          flex-direction: column;
+          width: 100%;
+          gap: 3px; }
+          body #root .mobile-menu__modal .container .address span {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 13px; }
+      body #root .mobile-menu__modal.active .container {
+        transform: translateX(0) translateZ(0); }
+    body #root .work-photo__modal {
+      justify-content: center;
+      align-items: center; }
+      body #root .work-photo__modal .container {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        background: #121212;
+        justify-content: center;
+        max-width: 900px;
+        margin: 0 auto;
+        align-self: center; }
+        body #root .work-photo__modal .container .work-photo {
+          width: 100%;
+          border-radius: 7px;
+          user-select: none; }
+        body #root .work-photo__modal .container .info-wrapper {
+          display: flex;
+          margin-top: 10px; }
+          body #root .work-photo__modal .container .info-wrapper .employer-label {
+            font-weight: 800;
+            color: #e8e8e8;
+            line-height: 1.1;
+            font-size: 16px; }
+        body #root .work-photo__modal .container .controls {
+          display: flex;
+          flex-direction: row;
+          margin-top: 20px;
+          gap: 5px;
+          justify-content: space-between; }
+          body #root .work-photo__modal .container .controls .control {
+            height: 40px;
+            width: 100%;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            background: #e8e8e8;
+            border-radius: 7px;
+            font-size: 16px;
+            transition: background-color 200ms; }
+            body #root .work-photo__modal .container .controls .control:hover {
+              background: #e1e1e1; }
+            body #root .work-photo__modal .container .controls .control:active {
+              background: #d4d4d4; }
+      body #root .work-photo__modal .spoiler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8); }
+      body #root .work-photo__modal .cross {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 3;
+        background-color: #e8e8e8;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%); }
+      body #root .work-photo__modal.active {
+        visibility: visible; }
+    body #root .add-employer__modal .container,
+    body #root .change-employer__modal .container {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      gap: 15px;
+      border-radius: 7px;
+      padding: 30px 10px 20px;
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      max-height: 850px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f7f7f7; }
+      body #root .add-employer__modal .container .container-item,
+      body #root .change-employer__modal .container .container-item {
+        display: flex;
+        flex-direction: row;
+        gap: 5px; }
+        body #root .add-employer__modal .container .container-item.photo,
+        body #root .change-employer__modal .container .container-item.photo {
+          flex-direction: column;
+          gap: 15px; }
+          body #root .add-employer__modal .container .container-item.photo .photo-wrapper,
+          body #root .change-employer__modal .container .container-item.photo .photo-wrapper {
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            overflow: hidden;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e8e8e8; }
+            body #root .add-employer__modal .container .container-item.photo .photo-wrapper img,
+            body #root .change-employer__modal .container .container-item.photo .photo-wrapper img {
+              height: 100%;
+              width: 100%;
+              object-fit: cover; }
+          body #root .add-employer__modal .container .container-item.photo .actions,
+          body #root .change-employer__modal .container .container-item.photo .actions {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+            height: 50px; }
+            body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper,
+            body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper {
+              flex: 4;
+              width: 100%;
+              border-radius: 7px;
+              background: #e8e8e8;
+              height: 100%;
+              transition: background-color 200ms; }
+              body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label,
+              body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                width: 100%;
+                height: 100%; }
+                body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label span,
+                body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label span {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                  color: #000000;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: 700; }
+                body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo-employer-edit,
+                body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo-employer-add,
+                body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo-employer-edit,
+                body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper label #upload-photo-employer-add {
+                  display: none; }
+              body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper:hover,
+              body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper:hover {
+                background: #e1e1e1; }
+              body #root .add-employer__modal .container .container-item.photo .actions .file-input__wrapper:active,
+              body #root .change-employer__modal .container .container-item.photo .actions .file-input__wrapper:active {
+                background: #d4d4d4; }
+            body #root .add-employer__modal .container .container-item.photo .actions .experience,
+            body #root .change-employer__modal .container .container-item.photo .actions .experience {
+              flex: 1;
+              background: #e8e8e8;
+              border: 2px solid #e8e8e8;
+              color: #000000;
+              font-size: 20px;
+              text-align: center;
+              padding: 0 15px;
+              height: 100%;
+              border-radius: 7px;
+              width: 100%;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms; }
+              body #root .add-employer__modal .container .container-item.photo .actions .experience:focus,
+              body #root .change-employer__modal .container .container-item.photo .actions .experience:focus {
+                border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.fields,
+        body #root .change-employer__modal .container .container-item.fields {
+          flex-direction: column; }
+          body #root .add-employer__modal .container .container-item.fields input[type=text],
+          body #root .change-employer__modal .container .container-item.fields input[type=text] {
+            background: #e8e8e8;
+            border: 2px solid #e8e8e8;
+            color: #000000;
+            font-size: 20px;
+            padding: 0 15px;
+            height: 50px;
+            border-radius: 7px;
+            width: 100%;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root .add-employer__modal .container .container-item.fields input[type=text]:focus,
+            body #root .change-employer__modal .container .container-item.fields input[type=text]:focus {
+              border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.services,
+        body #root .change-employer__modal .container .container-item.services {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          gap: 5px;
+          flex-grow: 1;
+          overflow: auto;
+          min-height: 150px; }
+          body #root .add-employer__modal .container .container-item.services .service,
+          body #root .change-employer__modal .container .container-item.services .service {
+            width: 100%;
+            display: flex;
+            border-radius: 24px;
+            flex-direction: row;
+            gap: 3px; }
+            body #root .add-employer__modal .container .container-item.services .service .service-button,
+            body #root .change-employer__modal .container .container-item.services .service .service-button {
+              flex: 2;
+              background: #e8e8e8;
+              text-align: left;
+              padding: 5px 10px;
+              font-size: 18px;
+              font-weight: 600;
+              color: #000000;
+              border-radius: 7px;
+              cursor: pointer;
+              transition: background-color 200ms, color 200ms; }
+              body #root .add-employer__modal .container .container-item.services .service .service-button:hover,
+              body #root .change-employer__modal .container .container-item.services .service .service-button:hover {
+                background: #e1e1e1; }
+              body #root .add-employer__modal .container .container-item.services .service .service-button:active,
+              body #root .change-employer__modal .container .container-item.services .service .service-button:active {
+                background: #d4d4d4; }
+              body #root .add-employer__modal .container .container-item.services .service .service-button.selected,
+              body #root .change-employer__modal .container .container-item.services .service .service-button.selected {
+                background: #000000;
+                color: #e8e8e8; }
+            body #root .add-employer__modal .container .container-item.services .service .price-field,
+            body #root .add-employer__modal .container .container-item.services .service .duration-field,
+            body #root .change-employer__modal .container .container-item.services .service .price-field,
+            body #root .change-employer__modal .container .container-item.services .service .duration-field {
+              flex: 1;
+              background: #e8e8e8;
+              border: 2px solid #e8e8e8;
+              color: #000000;
+              font-size: 20px;
+              padding: 0 15px;
+              height: 50px;
+              border-radius: 7px;
+              width: 100%;
+              cursor: pointer;
+              transition: border-color 200ms, border-radius 200ms; }
+              body #root .add-employer__modal .container .container-item.services .service .price-field:focus,
+              body #root .add-employer__modal .container .container-item.services .service .duration-field:focus,
+              body #root .change-employer__modal .container .container-item.services .service .price-field:focus,
+              body #root .change-employer__modal .container .container-item.services .service .duration-field:focus {
+                border-color: #fe313a; }
+        body #root .add-employer__modal .container .container-item.actions,
+        body #root .change-employer__modal .container .container-item.actions {
+          margin-top: auto;
+          display: flex;
+          gap: 15px; }
+          body #root .add-employer__modal .container .container-item.actions button,
+          body #root .change-employer__modal .container .container-item.actions button {
+            flex-grow: 1;
+            border-radius: 7px;
+            height: 45px;
+            font-size: 18px;
+            background: #e8e8e8;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 200ms, color 200ms; }
+            body #root .add-employer__modal .container .container-item.actions button:hover,
+            body #root .change-employer__modal .container .container-item.actions button:hover {
+              background: #e1e1e1; }
+            body #root .add-employer__modal .container .container-item.actions button:active,
+            body #root .change-employer__modal .container .container-item.actions button:active {
+              background: #d4d4d4; }
+      body #root .add-employer__modal .container .cross,
+      body #root .change-employer__modal .container .cross {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #000000;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%); }
+    body #root .add-service__modal .container,
+    body #root .change-service__modal .container {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      gap: 15px;
+      border-radius: 7px;
+      padding: 60px 10px 20px;
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      max-height: 850px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f7f7f7; }
+      body #root .add-service__modal .container .container-item,
+      body #root .change-service__modal .container .container-item {
+        display: flex;
+        flex-direction: row;
+        gap: 5px; }
+        body #root .add-service__modal .container .container-item.service .service-wrapper,
+        body #root .change-service__modal .container .container-item.service .service-wrapper {
+          display: flex;
+          overflow: hidden;
+          width: 100%;
+          flex-direction: column;
+          text-align: center;
+          transition: scale 350ms; }
+          body #root .add-service__modal .container .container-item.service .service-wrapper .service,
+          body #root .change-service__modal .container .container-item.service .service-wrapper .service {
+            display: flex;
+            min-height: 100px;
+            line-height: 1.1;
+            font-size: 17px;
+            width: 100%;
+            text-wrap: wrap;
+            user-select: none;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 0 10px;
+            align-items: center;
+            justify-content: center;
+            background: #e8e8e8;
+            border-radius: 24px;
+            transition: background-color 200ms; }
+            body #root .add-service__modal .container .container-item.service .service-wrapper .service:hover,
+            body #root .change-service__modal .container .container-item.service .service-wrapper .service:hover {
+              background: #e1e1e1; }
+            body #root .add-service__modal .container .container-item.service .service-wrapper .service:active,
+            body #root .change-service__modal .container .container-item.service .service-wrapper .service:active {
+              background: #d4d4d4; }
+          body #root .add-service__modal .container .container-item.service .service-wrapper:hover,
+          body #root .change-service__modal .container .container-item.service .service-wrapper:hover {
+            scale: 0.95; }
+        body #root .add-service__modal .container .container-item.fields,
+        body #root .change-service__modal .container .container-item.fields {
+          flex-direction: column; }
+          body #root .add-service__modal .container .container-item.fields input[type=text],
+          body #root .add-service__modal .container .container-item.fields textarea,
+          body #root .change-service__modal .container .container-item.fields input[type=text],
+          body #root .change-service__modal .container .container-item.fields textarea {
+            background: #e8e8e8;
+            border: 2px solid #e8e8e8;
+            color: #000000;
+            resize: none;
+            font-size: 20px;
+            padding: 0 15px;
+            height: 50px;
+            border-radius: 7px;
+            width: 100%;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root .add-service__modal .container .container-item.fields input[type=text]:focus,
+            body #root .add-service__modal .container .container-item.fields textarea:focus,
+            body #root .change-service__modal .container .container-item.fields input[type=text]:focus,
+            body #root .change-service__modal .container .container-item.fields textarea:focus {
+              border-color: #fe313a; }
+          body #root .add-service__modal .container .container-item.fields .field-descr,
+          body #root .change-service__modal .container .container-item.fields .field-descr {
+            padding: 10px 15px;
+            min-height: 150px;
+            align-items: start; }
+          body #root .add-service__modal .container .container-item.fields .price-duration,
+          body #root .change-service__modal .container .container-item.fields .price-duration {
+            display: flex;
+            flex-direction: row;
+            gap: 5px; }
+            body #root .add-service__modal .container .container-item.fields .price-duration .input-duration,
+            body #root .add-service__modal .container .container-item.fields .price-duration .input-price,
+            body #root .change-service__modal .container .container-item.fields .price-duration .input-duration,
+            body #root .change-service__modal .container .container-item.fields .price-duration .input-price {
+              flex: 1; }
+        body #root .add-service__modal .container .container-item.actions,
+        body #root .change-service__modal .container .container-item.actions {
+          margin-top: auto;
+          display: flex;
+          gap: 15px; }
+          body #root .add-service__modal .container .container-item.actions button,
+          body #root .change-service__modal .container .container-item.actions button {
+            flex-grow: 1;
+            border-radius: 7px;
+            height: 45px;
+            font-size: 18px;
+            background: #e8e8e8;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 200ms, color 200ms; }
+            body #root .add-service__modal .container .container-item.actions button:hover,
+            body #root .change-service__modal .container .container-item.actions button:hover {
+              background: #e1e1e1; }
+            body #root .add-service__modal .container .container-item.actions button:active,
+            body #root .change-service__modal .container .container-item.actions button:active {
+              background: #d4d4d4; }
+      body #root .add-service__modal .container .cross,
+      body #root .change-service__modal .container .cross {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-color: #000000;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%); }
+    body #root .price-list__modal {
+      justify-content: center; }
+      body #root .price-list__modal .container {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 1.5rem 1rem 0;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+        background: #f7f7f7; }
+        body #root .price-list__modal .container h2 {
+          font-size: 32px;
+          text-align: center; }
+        body #root .price-list__modal .container h3 {
+          margin-bottom: 20px;
+          text-align: center;
+          font-size: 21px; }
+        body #root .price-list__modal .container .rows {
+          display: flex;
+          overflow: auto;
+          border-radius: 7px;
+          flex-direction: column; }
+          body #root .price-list__modal .container .rows .row {
+            display: flex;
+            gap: 6px;
+            flex-direction: row;
+            align-items: center;
+            border-radius: 7px;
+            padding: 0.8rem 0.5rem;
+            cursor: pointer;
+            transition: background-color 200ms; }
+            body #root .price-list__modal .container .rows .row .name,
+            body #root .price-list__modal .container .rows .row .price {
+              user-select: none;
+              font-size: 19px; }
+            body #root .price-list__modal .container .rows .row .name {
+              text-align: left;
+              flex-grow: 1; }
+            body #root .price-list__modal .container .rows .row .price {
+              font-weight: 700;
+              text-align: right; }
+            body #root .price-list__modal .container .rows .row:hover {
+              background: #e1e1e1; }
+            body #root .price-list__modal .container .rows .row:active {
+              background: #d4d4d4; }
+          body #root .price-list__modal .container .rows::-webkit-scrollbar {
+            width: 11px; }
+        body #root .price-list__modal .container .advice {
+          position: sticky;
+          bottom: 0;
+          padding: 1rem 0;
+          background: #f7f7f7;
+          text-align: center;
+          user-select: none;
+          font-size: 16px;
+          width: 100%; }
+        body #root .price-list__modal .container .cross {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          background-color: #000000;
+          clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%); }
+    body #root main {
+      position: relative; }
+      body #root main .page {
+        display: flex;
+        flex-direction: column;
+        box-shadow: #0000002e 0 8px 24px;
+        padding: 10px;
+        background: #f7f7f7;
+        height: 100%;
+        gap: 15px;
+        max-width: 1600px;
+        margin: 0 auto; }
+        body #root main .page h1 {
+          font-size: 24px;
+          font-weight: 800; }
+      body #root main .employers-container .employers-wrapper {
+        width: 100%;
+        grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
+        gap: 8px;
+        display: grid;
+        row-gap: 10px; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper {
+          display: flex;
+          flex-direction: column;
+          background: #e8e8e8;
+          border-radius: 24px;
+          transition: background 200ms, scale 350ms; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+            display: flex;
+            flex-grow: 1;
+            position: relative;
+            flex-direction: column;
+            border-radius: 24px;
+            cursor: pointer; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper {
+              display: flex;
+              width: 100%;
+              aspect-ratio: 1/1;
+              overflow: hidden;
+              align-items: center;
+              position: relative;
+              justify-content: center;
+              border-radius: 24px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .employer-card__photo {
+                position: relative;
+                border-radius: 24px;
+                object-fit: cover;
+                height: 100%;
+                width: 100%; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+                position: absolute;
+                opacity: 0;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+                border-radius: 7px;
+                background: #e1e1e1;
+                padding: 6px 0;
+                font-weight: 600;
+                font-size: 12px;
+                margin-top: auto;
+                text-align: center;
+                z-index: 2;
+                transition: background-color 200ms, opacity 200ms, bottom 200ms; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+              position: relative;
+              display: flex;
+              gap: 10px;
+              flex-direction: column;
+              flex-grow: 1;
+              padding: 10px 7px 10px 7px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio {
+                height: 100%;
+                display: flex;
+                gap: 10px;
+                flex-direction: column; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                  font-weight: 800;
+                  word-break: break-word;
+                  font-size: 14px;
+                  line-height: 1.1; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works {
+                  display: flex;
+                  margin-top: auto;
+                  flex-direction: column;
+                  gap: 2px;
+                  text-wrap: nowrap; }
+                  body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                  body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                    font-size: 13px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                display: flex;
+                flex-direction: row;
+                margin-top: auto;
+                gap: 4px;
+                flex-wrap: wrap; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  border: 2px solid white;
+                  border-radius: 5px;
+                  padding: 2px 4px;
+                  opacity: 0.6;
+                  font-size: 12px;
+                  text-align: center; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper:hover {
+            scale: .95;
+            background: #e1e1e1; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper:hover .employer-card .photo-wrapper .advice {
+              background: #e1e1e1;
+              opacity: 1;
+              bottom: -1px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper:active {
+            background: #d4d4d4; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper:active .employer-card .photo-wrapper .advice {
+              background: #d4d4d4; }
+      body #root main .works-container .works-photos-tiles {
+        display: grid;
+        grid-template-columns: repeat(2, calc(100% / 2 - 5px / 2 * (2 - 1)));
+        gap: 5px; }
+        body #root main .works-container .works-photos-tiles .tile-wrapper {
+          display: flex;
+          background: pink;
+          position: relative;
+          overflow: hidden;
+          border-radius: 24px;
+          aspect-ratio: 4/3;
+          transition: all 0.2s; }
+          body #root main .works-container .works-photos-tiles .tile-wrapper img {
+            width: 100%;
+            object-fit: cover; }
+          body #root main .works-container .works-photos-tiles .tile-wrapper .delete {
+            position: absolute;
+            padding: 5px;
+            border-radius: 7px;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e8e8e8;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            transition: background-color 250ms; }
+            body #root main .works-container .works-photos-tiles .tile-wrapper .delete:hover {
+              background: #e1e1e1; }
+            body #root main .works-container .works-photos-tiles .tile-wrapper .delete:active {
+              background: #d4d4d4; }
+      body #root main .page-admin__wrapper {
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: row; }
+        body #root main .page-admin__wrapper .left-menu__wrapper {
+          position: sticky;
+          display: none;
+          padding: 10px 15px;
+          width: 250px;
+          left: 0;
+          top: 79px;
+          background: #f7f7f7;
+          border-radius: 0; }
+          body #root main .page-admin__wrapper .left-menu__wrapper .left-menu {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: 10px; }
+            body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item {
+              width: 100%;
+              height: 45px;
+              border-radius: 7px;
+              display: flex;
+              align-items: center;
+              padding: 0 12px;
+              cursor: pointer; }
+              body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item span {
+                font-size: 22px;
+                font-weight: 600;
+                color: #000000;
+                transition: color 200ms; }
+              body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:hover span, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item:active span, body #root main .page-admin__wrapper .left-menu__wrapper .left-menu .left-menu__item.selected span {
+                color: #fe313a; }
+        body #root main .page-admin__wrapper .bottom-menu__wrapper {
+          position: fixed;
+          display: flex;
+          padding: 5px;
+          height: 50px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+          background: #e8e8e8; }
+          body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            flex-direction: row;
+            z-index: 999; }
+            body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu .bottom-menu__item {
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+              justify-content: center;
+              flex: 1 1 0;
+              border-radius: 7px;
+              height: 100%;
+              gap: 3px;
+              transition: background 200ms; }
+              body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu .bottom-menu__item span {
+                user-select: none;
+                font-size: 13px;
+                color: #000000; }
+              body #root main .page-admin__wrapper .bottom-menu__wrapper .bottom-menu .bottom-menu__item.selected {
+                background: #d4d4d4; }
+        body #root main .page-admin__wrapper .admin-container {
+          flex-grow: 1; }
+          body #root main .page-admin__wrapper .admin-container .admin-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .add-button {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 15px 0;
+              background: #e8e8e8;
+              border-radius: 24px;
+              cursor: pointer;
+              transition: background 200ms; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .add-button span {
+                text-align: center;
+                font-size: 16px;
+                text-transform: uppercase;
+                user-select: none;
+                font-weight: 700;
+                color: #000000; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .add-button:hover {
+                background: #e1e1e1; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .add-button:active {
+                background: #d4d4d4; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper {
+              width: 100%;
+              grid-template-columns: repeat(2, calc(100% / 2 - 8px / 2 * (2 - 1)));
+              gap: 8px;
+              display: grid;
+              row-gap: 10px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper {
+                display: flex;
+                flex-direction: column;
+                background: #e8e8e8;
+                border-radius: 24px;
+                transition: background 200ms, scale 350ms; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+                  display: flex;
+                  flex-grow: 1;
+                  border-radius: 24px 24px 0 0;
+                  position: relative;
+                  flex-direction: column;
+                  cursor: pointer;
+                  transition: background 200ms; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper {
+                    display: flex;
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    overflow: hidden;
+                    align-items: center;
+                    position: relative;
+                    justify-content: center;
+                    border-radius: 24px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .employer-card__photo {
+                      position: relative;
+                      border-radius: 24px;
+                      object-fit: cover;
+                      height: 100%;
+                      width: 100%; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+                    position: relative;
+                    display: flex;
+                    gap: 10px;
+                    flex-direction: column;
+                    flex-grow: 1;
+                    padding: 10px 7px 10px 7px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio {
+                      display: flex;
+                      height: 100%;
+                      gap: 10px;
+                      flex-direction: column; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                        font-weight: 800;
+                        word-break: break-word;
+                        font-size: 14px;
+                        line-height: 1.1; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works {
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: auto;
+                        gap: 2px;
+                        text-wrap: nowrap; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                        body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                          font-size: 13px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                      display: flex;
+                      flex-direction: row;
+                      margin-top: auto;
+                      gap: 4px;
+                      flex-wrap: wrap; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                        border: 2px solid white;
+                        border-radius: 5px;
+                        padding: 2px 4px;
+                        opacity: 0.6;
+                        font-size: 12px;
+                        text-align: center; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card:hover {
+                    background-color: #e1e1e1; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card:active {
+                    background-color: #d4d4d4; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions {
+                  display: flex;
+                  flex-direction: row;
+                  border-top: 2px solid #f7f7f7; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    background: transparent;
+                    padding: 10px 0;
+                    color: #000000;
+                    font-size: 13px;
+                    font-weight: 600;
+                    width: 100%;
+                    flex: 1;
+                    transition: background 0.2s; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action.edit {
+                      border-radius: 0 0 0 24px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action.delete {
+                      border-radius: 0 0 24px 0; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action:hover {
+                      background-color: #e1e1e1; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action:active {
+                      background-color: #d4d4d4; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper:hover .employer-card .photo-wrapper .advice {
+                  background: #e1e1e1; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper:active .employer-card .photo-wrapper .advice {
+                  background: #d4d4d4; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .services {
+              display: grid;
+              grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+              gap: 8px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper {
+                display: flex;
+                overflow: hidden;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                transition: scale 350ms; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .service {
+                  display: flex;
+                  min-height: 55px;
+                  line-height: 1.1;
+                  font-size: 17px;
+                  width: 100%;
+                  text-wrap: wrap;
+                  user-select: none;
+                  font-weight: 800;
+                  cursor: pointer;
+                  padding: 0 10px;
+                  align-items: center;
+                  justify-content: center;
+                  background: #e8e8e8;
+                  border-radius: 24px 24px 0 0;
+                  transition: background-color 200ms; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .service:hover {
+                    background: #e1e1e1; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .service:active {
+                    background: #d4d4d4; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions {
+                  display: flex;
+                  width: 100%;
+                  border-top: 2px solid #f7f7f7; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action {
+                    flex: 1;
+                    font-size: 13px;
+                    user-select: none;
+                    cursor: pointer;
+                    padding: 10px 0;
+                    color: #000000;
+                    font-weight: 600;
+                    width: 100%;
+                    background: #e8e8e8;
+                    text-align: center;
+                    transition: background-color 200ms; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action.edit {
+                      border-radius: 0 0 0 24px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action.delete {
+                      border-radius: 0 0 24px 0; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action:hover {
+                      background: #e1e1e1; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action:active {
+                      background: #d4d4d4; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper:hover {
+                  scale: 0.95; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .clients {
+              display: table; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody {
+                display: flex;
+                gap: 4px;
+                flex-direction: column; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row {
+                  display: flex;
+                  align-items: center;
+                  min-height: 30px;
+                  width: 100%;
+                  gap: 5px; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    height: 100%; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .name,
+                    body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .info {
+                      font-size: 15px; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .info {
+                      opacity: 0.5; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions {
+                    margin-left: auto;
+                    display: flex;
+                    height: 100%;
+                    gap: 5px;
+                    flex-direction: row; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown {
+                      vertical-align: middle;
+                      position: relative;
+                      display: inline-block; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button {
+                        height: 100%;
+                        max-width: 100px;
+                        color: #000000;
+                        user-select: none;
+                        font-size: 18px;
+                        padding: 0 8px;
+                        text-overflow: ellipsis;
+                        border: 2px solid #e8e8e8;
+                        border-radius: 7px;
+                        cursor: pointer;
+                        transition: border-color 200ms, border-radius 200ms; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button::selection {
+                          background: transparent; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button:hover {
+                          background-color: #e8e8e8; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content {
+                        display: none;
+                        width: 100%;
+                        position: absolute;
+                        padding: 5px;
+                        margin-top: 3px;
+                        max-height: 275px;
+                        overflow-y: auto;
+                        box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.54);
+                        background: #e8e8e8;
+                        border-radius: 0 0 7px 7px;
+                        min-width: 160px;
+                        z-index: 1; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item {
+                          color: #000000;
+                          font-size: 16px;
+                          text-align: left;
+                          width: 100%;
+                          border-radius: 7px;
+                          padding: 5px 8px;
+                          text-decoration: none;
+                          background: transparent;
+                          cursor: pointer;
+                          display: block;
+                          transition: background 200ms; }
+                          body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item:hover {
+                            background-color: #e1e1e1; }
+                          body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item:active {
+                            background-color: #d4d4d4; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown.expanded {
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown.expanded .dropdown-button {
+                          border-radius: 7px 7px 0 0;
+                          background-color: #e8e8e8;
+                          border-color: #fe313a; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown.expanded .dropdown-content {
+                          display: block; }
+                    body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .action-delete {
+                      height: 100%;
+                      border: 2px solid #e8e8e8;
+                      aspect-ratio: 1/1;
+                      border-radius: 7px;
+                      cursor: pointer;
+                      transition: background-color 200ms, border-color 200ms; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .action-delete svg {
+                        height: 65%;
+                        transition: fill 200ms; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .action-delete:hover {
+                        background-color: #e1e1e1;
+                        border-color: #e1e1e1; }
+                        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .action-delete:hover svg {
+                          fill: #fe313a; }
+                      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .action-delete:active {
+                        background-color: #d4d4d4;
+                        border-color: #d4d4d4; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row.admin .name-wrapper .role {
+                    color: #939322; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row.employer .name-wrapper .role {
+                    color: #fe313a; }
+                  body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row:last-child {
+                    border: none; }
+      body #root main .orders-container .orders {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px; }
+        body #root main .orders-container .orders .order-card {
+          display: flex;
+          flex-direction: column;
+          background: black;
+          border-radius: 7px; }
+          body #root main .orders-container .orders .order-card .card-header__wrapper {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 2px solid #e8e8e8;
+            padding: 8px;
+            gap: 7px;
+            font-size: 14px; }
+            body #root main .orders-container .orders .order-card .card-header__wrapper span {
+              font-weight: 700; }
+            body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 5px; }
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .code {
+                font-size: 16px; }
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .date {
+                font-weight: 500; }
+            body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 5px; }
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .summary {
+                font-size: 16px; }
+              body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status {
+                margin-left: auto;
+                padding: 3px 5px;
+                border-radius: 7px;
+                font-weight: 700; }
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.success {
+                  background-color: green; }
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.waiting {
+                  background-color: gray; }
+                body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .status.canceled {
+                  background-color: #fe313a; }
+          body #root main .orders-container .orders .order-card .product-card {
+            display: flex;
+            flex-direction: row;
+            padding: 8px; }
+            body #root main .orders-container .orders .order-card .product-card .image-wrapper {
+              display: flex;
+              align-items: flex-start; }
+              body #root main .orders-container .orders .order-card .product-card .image-wrapper img {
+                width: 100px;
+                border-radius: 7px; }
+            body #root main .orders-container .orders .order-card .product-card span {
+              font-size: 14px; }
+            body #root main .orders-container .orders .order-card .product-card .info {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              margin-left: 10px;
+              flex-grow: 1; }
+              body #root main .orders-container .orders .order-card .product-card .info .title {
+                font-weight: 700; }
+              body #root main .orders-container .orders .order-card .product-card .info .code {
+                opacity: .6; }
+              body #root main .orders-container .orders .order-card .product-card .info .price {
+                font-weight: 700;
+                display: flex;
+                flex-direction: row;
+                word-break: keep-all; }
+      body #root main .services-container .advice {
+        font-size: 13px;
+        opacity: .75; }
+      body #root main .services-container .services {
+        display: grid;
+        grid-template-columns: repeat(1, calc(100% / 1 - 8px / 1 * (1 - 1)));
+        gap: 8px; }
+        body #root main .services-container .services .service {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          user-select: none;
+          justify-content: center;
+          padding: 0 10px;
+          min-height: 55px;
+          font-size: 17px;
+          font-weight: 800;
+          background: #e8e8e8;
+          border-radius: 24px;
+          text-align: center;
+          text-wrap: wrap;
+          transition: background-color 200ms, scale 350ms; }
+          body #root main .services-container .services .service:hover {
+            scale: 0.95;
+            background: #e1e1e1; }
+          body #root main .services-container .services .service:active {
+            background: #d4d4d4; }
+      body #root main .time-container h1 {
+        text-align: center; }
+      body #root main .time-container .time {
+        display: flex;
+        background: #f7f7f7;
+        padding: 10px;
+        flex-direction: column;
+        gap: 7px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 590px;
+        border-radius: 7px; }
+        body #root main .time-container .time .form-elem {
+          border-radius: 7px; }
+        body #root main .time-container .time .dropdown {
+          position: relative;
+          width: 100%;
+          display: inline-block; }
+          body #root main .time-container .time .dropdown .dropdown-button {
+            background: #e8e8e8;
+            width: 100%;
+            color: #000000;
+            user-select: none;
+            font-size: 18px;
+            padding: 0 15px;
+            height: 50px;
+            text-overflow: ellipsis;
+            border: 2px solid transparent;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root main .time-container .time .dropdown .dropdown-button::selection {
+              background: transparent; }
+          body #root main .time-container .time .dropdown .dropdown-content {
+            display: none;
+            width: 100%;
+            position: absolute;
+            padding: 5px;
+            margin-top: 3px;
+            max-height: 275px;
+            overflow-y: auto;
+            box-shadow: 0 8px 16px 1px rgba(0, 0, 0, 0.54);
+            background: #e8e8e8;
+            border-radius: 0 0 7px 7px;
+            min-width: 160px;
+            z-index: 1; }
+            body #root main .time-container .time .dropdown .dropdown-content .dropdown-content__item {
+              color: #000000;
+              font-size: 18px;
+              text-align: left;
+              width: 100%;
+              border-radius: 7px;
+              padding: 10px 15px;
+              text-decoration: none;
+              background: transparent;
+              cursor: pointer;
+              display: block;
+              transition: background 200ms; }
+              body #root main .time-container .time .dropdown .dropdown-content .dropdown-content__item:hover {
+                background-color: #e1e1e1; }
+              body #root main .time-container .time .dropdown .dropdown-content .dropdown-content__item:active {
+                background-color: #d4d4d4; }
+          body #root main .time-container .time .dropdown.expanded {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
+            body #root main .time-container .time .dropdown.expanded .dropdown-button {
+              border-radius: 7px 7px 0 0;
+              border-color: #fe313a; }
+            body #root main .time-container .time .dropdown.expanded .dropdown-content {
+              display: block; }
+        body #root main .time-container .time .radios-wrapper {
+          padding: 10px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px; }
+          body #root main .time-container .time .radios-wrapper .radios-label__wrapper {
+            width: 100%;
+            gap: 30px;
+            align-items: center;
+            display: flex;
+            padding-left: 10px; }
+            body #root main .time-container .time .radios-wrapper .radios-label__wrapper .label {
+              font-size: 18px;
+              opacity: .75; }
+            body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown {
+              margin-left: auto;
+              width: auto; }
+              body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-button {
+                background: #e8e8e8;
+                font-size: 18px;
+                padding: 0;
+                text-align: center;
+                height: 40px; }
+                body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-button::placeholder {
+                  color: #000000;
+                  opacity: .75; }
+              body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-content {
+                background: #e8e8e8; }
+                body #root main .time-container .time .radios-wrapper .radios-label__wrapper .dropdown .dropdown-content .dropdown-content__item {
+                  font-size: 18px; }
+          body #root main .time-container .time .radios-wrapper .radios {
+            display: grid;
+            grid-template-columns: repeat(3, calc(100% / 3 - 4px / 3 * (3 - 1)));
+            gap: 4px; }
+            body #root main .time-container .time .radios-wrapper .radios input[type="radio"] {
+              display: none; }
+              body #root main .time-container .time .radios-wrapper .radios input[type="radio"]:disabled {
+                opacity: 0.6; }
+            body #root main .time-container .time .radios-wrapper .radios label {
+              font-size: 18px;
+              font-weight: 700;
+              padding: 8px 12px;
+              background: #e8e8e8;
+              border-radius: 7px;
+              cursor: pointer;
+              text-align: center;
+              user-select: none;
+              transition: background-color 200ms; }
+              body #root main .time-container .time .radios-wrapper .radios label:hover {
+                background: #e1e1e1; }
+              body #root main .time-container .time .radios-wrapper .radios label:active {
+                background: #d4d4d4; }
+            body #root main .time-container .time .radios-wrapper .radios input[type="radio"]:disabled + label {
+              opacity: 0.5; }
+            body #root main .time-container .time .radios-wrapper .radios input[type="radio"]:checked + label {
+              background: #d4d4d4;
+              transition: background-color 200ms; }
+        body #root main .time-container .time .client-info {
+          display: flex;
+          flex-direction: row;
+          gap: 10px; }
+          body #root main .time-container .time .client-info .form-elem {
+            flex-grow: 1;
+            color: #000000;
+            font-size: 18px;
+            padding: 0 9px;
+            height: 50px;
+            border-radius: 7px;
+            width: 100%;
+            background: #e8e8e8;
+            border: 2px solid #e8e8e8;
+            cursor: pointer;
+            transition: border-color 200ms, border-radius 200ms; }
+            body #root main .time-container .time .client-info .form-elem:focus {
+              border-color: #fe313a; }
+        body #root main .time-container .time .info {
+          display: flex;
+          margin-top: 10px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 8px; }
+          body #root main .time-container .time .info span {
+            width: 100%;
+            text-align: center;
+            font-size: 17px; }
+            body #root main .time-container .time .info span.info-title {
+              font-weight: 800;
+              font-size: 20px; }
+            body #root main .time-container .time .info span.info-time, body #root main .time-container .time .info span.info-price {
+              font-size: 18px;
+              font-weight: 700; }
+            body #root main .time-container .time .info span.employee-name__wrapper, body #root main .time-container .time .info span.service-name__wrapper {
+              display: flex;
+              flex-direction: column; }
+              body #root main .time-container .time .info span.employee-name__wrapper .employee-name,
+              body #root main .time-container .time .info span.employee-name__wrapper .service-name, body #root main .time-container .time .info span.service-name__wrapper .employee-name,
+              body #root main .time-container .time .info span.service-name__wrapper .service-name {
+                font-size: 18px;
+                font-weight: 700; }
+        body #root main .time-container .time #timeConfirm {
+          font-size: 18px;
+          color: #000000;
+          background: #e8e8e8;
+          border-radius: 7px;
+          margin: 15px auto 0;
+          cursor: pointer;
+          font-weight: 700;
+          padding: 18px 15px;
+          transition: box-shadow 200ms, background-color 200ms; }
+          body #root main .time-container .time #timeConfirm:hover {
+            box-shadow: 0 0 30px #fe313a;
+            background: #e1e1e1; }
+          body #root main .time-container .time #timeConfirm:active {
+            box-shadow: 0 0 0 #fe313a;
+            background: #d4d4d4; }
+      body #root main .login-container {
+        align-items: center; }
+        body #root main .login-container .auth-form__wrapper {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          max-width: 420px;
+          background: transparent; }
+          body #root main .login-container .auth-form__wrapper .label {
+            font-size: 32px;
+            text-align: center;
+            color: #000000;
+            font-weight: 800; }
+          body #root main .login-container .auth-form__wrapper .auth-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 6px;
+            margin-top: 25px; }
+            body #root main .login-container .auth-form__wrapper .auth-form .form-elem {
+              width: 100%;
+              align-self: center;
+              background: #e8e8e8;
+              padding: 7px 15px;
+              font-weight: 800;
+              color: #000000;
+              font-size: 20px;
+              border-radius: 7px;
+              border: 2px solid #e8e8e8;
+              transition: all 0.3s; }
+              body #root main .login-container .auth-form__wrapper .auth-form .form-elem:hover {
+                background: #f7f7f7; }
+              body #root main .login-container .auth-form__wrapper .auth-form .form-elem:focus {
+                border-color: #fe313a;
+                background: #f7f7f7; }
+              body #root main .login-container .auth-form__wrapper .auth-form .form-elem::placeholder {
+                font-weight: 600; }
+            body #root main .login-container .auth-form__wrapper .auth-form .actions {
+              display: flex;
+              flex-direction: column;
+              gap: 10px; }
+              body #root main .login-container .auth-form__wrapper .auth-form .actions .action {
+                width: 100%;
+                text-align: center;
+                font-size: 19px; }
+              body #root main .login-container .auth-form__wrapper .auth-form .actions #authSubmit {
+                width: 60%;
+                align-self: center;
+                border-radius: 7px;
+                margin-top: 10px;
+                border: 2px solid #fe313a;
+                padding: 10px 0;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background-color 200ms; }
+                body #root main .login-container .auth-form__wrapper .auth-form .actions #authSubmit:hover {
+                  background: #e1e1e1; }
+                body #root main .login-container .auth-form__wrapper .auth-form .actions #authSubmit:active {
+                  background: #fe313a; }
+              body #root main .login-container .auth-form__wrapper .auth-form .actions a {
+                color: blue;
+                transition: color 200ms; }
+                body #root main .login-container .auth-form__wrapper .auth-form .actions a:hover {
+                  color: darkblue; }
+          body #root main .login-container .auth-form__wrapper .recover {
+            margin-top: 10px;
+            font-size: 16px;
+            color: dodgerblue; }
+      body #root main .registration-container {
+        align-items: center; }
+        body #root main .registration-container .registration-form__wrapper {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          max-width: 420px;
+          background: transparent; }
+          body #root main .registration-container .registration-form__wrapper .label {
+            font-size: 32px;
+            text-align: center;
+            color: #000000;
+            font-weight: 800; }
+          body #root main .registration-container .registration-form__wrapper .reg-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 6px;
+            margin-top: 25px; }
+            body #root main .registration-container .registration-form__wrapper .reg-form .form-elem {
+              width: 100%;
+              align-self: center;
+              background: #e8e8e8;
+              padding: 7px 15px;
+              font-weight: 800;
+              color: #000000;
+              font-size: 20px;
+              border-radius: 7px;
+              border: 2px solid #e8e8e8;
+              transition: all 0.3s; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .form-elem:hover {
+                background: #f7f7f7; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .form-elem:focus {
+                border-color: #fe313a;
+                background: #f7f7f7; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .form-elem::placeholder {
+                font-weight: 600; }
+            body #root main .registration-container .registration-form__wrapper .reg-form .actions {
+              display: flex;
+              flex-direction: column;
+              gap: 10px; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .actions .action {
+                width: 100%;
+                text-align: center;
+                font-size: 19px; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .actions #authSubmit {
+                width: 60%;
+                align-self: center;
+                border-radius: 7px;
+                margin-top: 10px;
+                border: 2px solid #fe313a;
+                padding: 10px 0;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background-color 200ms; }
+                body #root main .registration-container .registration-form__wrapper .reg-form .actions #authSubmit:hover {
+                  background: #e1e1e1; }
+                body #root main .registration-container .registration-form__wrapper .reg-form .actions #authSubmit:active {
+                  background: #fe313a; }
+              body #root main .registration-container .registration-form__wrapper .reg-form .actions a {
+                color: blue;
+                transition: color 200ms; }
+                body #root main .registration-container .registration-form__wrapper .reg-form .actions a:hover {
+                  color: darkblue; }
+          body #root main .registration-container .registration-form__wrapper .recover {
+            margin-top: 10px;
+            font-size: 16px;
+            color: dodgerblue; }
+      body #root main .employer-container {
+        position: relative; }
+        body #root main .employer-container .employer-info {
+          display: flex;
+          flex-direction: column;
+          gap: 15px; }
+          body #root main .employer-container .employer-info .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; }
+            body #root main .employer-container .employer-info .info-section .section-title {
+              font-size: 22px; }
+            body #root main .employer-container .employer-info .info-section.head {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              gap: 8px; }
+              body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+                border-radius: 50%;
+                width: 110px;
+                height: 110px;
+                overflow: hidden;
+                align-self: center;
+                display: flex;
+                align-items: center;
+                justify-content: center; }
+                body #root main .employer-container .employer-info .info-section.head .image-wrapper img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover; }
+              body #root main .employer-container .employer-info .info-section.head .employer-name {
+                text-align: center;
+                line-height: 1.05; }
+              body #root main .employer-container .employer-info .info-section.head .info {
+                display: flex;
+                justify-content: center;
+                gap: 3px; }
+                body #root main .employer-container .employer-info .info-section.head .info span {
+                  font-weight: 700;
+                  font-size: 16px;
+                  opacity: .75; }
+            body #root main .employer-container .employer-info .info-section.works .file-input__wrapper {
+              width: 100%;
+              height: 60px;
+              border-radius: 7px;
+              background: #e8e8e8;
+              transition: background-color 200ms; }
+              body #root main .employer-container .employer-info .info-section.works .file-input__wrapper label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                width: 100%;
+                height: 100%; }
+                body #root main .employer-container .employer-info .info-section.works .file-input__wrapper label span {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                  color: #000000;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: 700; }
+                body #root main .employer-container .employer-info .info-section.works .file-input__wrapper label #upload-photo-employer-edit,
+                body #root main .employer-container .employer-info .info-section.works .file-input__wrapper label #upload-photo-employer-add {
+                  display: none; }
+              body #root main .employer-container .employer-info .info-section.works .file-input__wrapper:hover {
+                background: #e1e1e1; }
+              body #root main .employer-container .employer-info .info-section.works .file-input__wrapper:active {
+                background: #d4d4d4; }
+            body #root main .employer-container .employer-info .info-section.works .slider {
+              padding: 3px;
+              border-radius: 7px;
+              margin-bottom: 40px; }
+              body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport {
+                border-radius: 7px;
+                height: 200px;
+                transition: height 200ms; }
+                body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider {
+                  display: flex;
+                  align-items: center; }
+                  body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+                    height: 100%;
+                    width: 50%;
+                    overflow: hidden;
+                    border-radius: 7px;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    margin-right: 5px; }
+                    body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper img {
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover; }
+                    body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete {
+                      display: none;
+                      position: absolute;
+                      padding: 5px;
+                      border-radius: 7px;
+                      bottom: 5px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background: #e8e8e8;
+                      cursor: pointer;
+                      font-size: 12px;
+                      font-weight: 700;
+                      transition: background-color 250ms; }
+                      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete:hover {
+                        background: #e1e1e1; }
+                      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete:active {
+                        background: #d4d4d4; }
+              body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                bottom: 0;
+                right: 0;
+                padding: 16px 30px;
+                border-radius: 7px;
+                transform: translateY(125%); }
+                body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button.previous {
+                  right: 70px; }
+                body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button .flickity-button-icon {
+                  width: 50%;
+                  height: 50%; }
+            body #root main .employer-container .employer-info .info-section.services .advice {
+              font-size: 13px;
+              opacity: .75; }
+            body #root main .employer-container .employer-info .info-section.services .services-container {
+              display: grid;
+              grid-template-columns: repeat(1, calc(100% / 1 - 3px / 1 * (1 - 1)));
+              gap: 3px; }
+              body #root main .employer-container .employer-info .info-section.services .services-container .service {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                user-select: none;
+                justify-content: center;
+                padding: 0 10px;
+                min-height: 55px;
+                font-size: 17px;
+                font-weight: 800;
+                background: #e8e8e8;
+                border-radius: 24px;
+                text-align: center;
+                text-wrap: wrap;
+                transition: background-color 200ms, scale 350ms; }
+                body #root main .employer-container .employer-info .info-section.services .services-container .service:hover {
+                  scale: 0.95;
+                  background: #e1e1e1; }
+                body #root main .employer-container .employer-info .info-section.services .services-container .service:active {
+                  background: #d4d4d4; }
+      body #root main .home-container .home-elem {
+        display: flex;
+        flex-direction: column;
+        gap: 6px; }
+        body #root main .home-container .home-elem .link {
+          padding-left: 10px;
+          font-size: 22px;
+          font-weight: 700; }
+        body #root main .home-container .home-elem.employees .slider {
+          padding: 3px;
+          border-radius: 7px;
+          margin-bottom: 40px; }
+          body #root main .home-container .home-elem.employees .slider .flickity-viewport {
+            border-radius: 7px;
+            height: 250px; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper {
+              width: 50%;
+              display: flex;
+              flex-direction: column;
+              margin-right: 5px;
+              border-radius: 24px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card {
+                display: flex;
+                flex-grow: 1;
+                height: 100%;
+                background: #e8e8e8;
+                position: relative;
+                flex-direction: column;
+                border-radius: 24px;
+                cursor: pointer;
+                transition: background 200ms, scale 350ms; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper {
+                  display: flex;
+                  aspect-ratio: 1/1;
+                  width: 100%;
+                  align-items: center;
+                  position: relative;
+                  overflow: hidden;
+                  justify-content: center;
+                  border-radius: 24px; }
+                  body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .employer-card__photo {
+                    position: relative;
+                    border-radius: 24px;
+                    margin: 0 auto;
+                    object-fit: cover;
+                    height: 100%;
+                    width: 100%; }
+                  body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .advice {
+                    position: absolute;
+                    opacity: 0;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    border-radius: 7px;
+                    background: #e8e8e8;
+                    padding: 6px 0;
+                    font-weight: 600;
+                    font-size: 12px;
+                    margin-top: auto;
+                    text-align: center;
+                    z-index: 2;
+                    transition: background-color 200ms, opacity 200ms, bottom 200ms; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info {
+                  height: 100%;
+                  position: relative;
+                  display: flex;
+                  gap: 10px;
+                  flex-direction: column;
+                  flex-grow: 1;
+                  padding: 10px 7px 10px 7px; }
+                  body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio {
+                    display: flex;
+                    height: 100%;
+                    gap: 10px;
+                    flex-direction: column; }
+                    body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                      font-weight: 800;
+                      word-break: break-word;
+                      font-size: 14px;
+                      line-height: 1.1; }
+                    body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works {
+                      display: flex;
+                      margin-top: auto;
+                      flex-direction: column;
+                      gap: 2px;
+                      text-wrap: nowrap; }
+                      body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                      body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                        font-size: 13px; }
+                  body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: auto;
+                    gap: 4px;
+                    flex-wrap: wrap; }
+                    body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                      border: 2px solid white;
+                      border-radius: 5px;
+                      padding: 2px 4px;
+                      opacity: 0.6;
+                      font-size: 12px;
+                      text-align: center; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card:hover .photo-wrapper .advice {
+                  opacity: 1;
+                  bottom: -1px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper:hover .employer-card {
+                scale: .95; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper:hover .employer-card .employer-card {
+                  background-color: #e1e1e1; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper:active .employer-card {
+                background-color: #d4d4d4; }
+          body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 0;
+            right: 0;
+            padding: 16px 30px;
+            border-radius: 7px;
+            transform: translateY(125%); }
+            body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button.previous {
+              right: 70px; }
+            body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button .flickity-button-icon {
+              width: 50%;
+              height: 50%; }
+        body #root main .home-container .home-elem.works .slider {
+          padding: 3px;
+          border-radius: 7px;
+          margin-bottom: 40px; }
+          body #root main .home-container .home-elem.works .slider .flickity-viewport {
+            border-radius: 7px;
+            height: 200px;
+            transition: height 200ms; }
+            body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider {
+              display: flex;
+              align-items: center; }
+              body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+                height: 100%;
+                width: 50%;
+                overflow: hidden;
+                border-radius: 7px;
+                position: relative;
+                margin-right: 5px;
+                display: flex;
+                justify-content: center; }
+                body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover; }
+                body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete {
+                  display: none;
+                  position: absolute;
+                  padding: 5px;
+                  border-radius: 7px;
+                  bottom: 5px;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  background: #e8e8e8;
+                  cursor: pointer;
+                  font-size: 12px;
+                  font-weight: 700;
+                  transition: background-color 250ms; }
+                  body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete:hover {
+                    background: #e1e1e1; }
+                  body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper .delete:active {
+                    background: #d4d4d4; }
+          body #root main .home-container .home-elem.works .slider .flickity-prev-next-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 0;
+            right: 0;
+            padding: 16px 30px;
+            border-radius: 7px;
+            transform: translateY(125%); }
+            body #root main .home-container .home-elem.works .slider .flickity-prev-next-button.previous {
+              right: 70px; }
+            body #root main .home-container .home-elem.works .slider .flickity-prev-next-button .flickity-button-icon {
+              width: 50%;
+              height: 50%; }
+    @media (min-width: 768px) {
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 14px; }
+      body #root .modal .container {
+        border-radius: 24px; }
+      body #root .add-employer__modal .container,
+      body #root .change-employer__modal .container {
+        gap: 30px; }
+        body #root .add-employer__modal .container .container-item,
+        body #root .change-employer__modal .container .container-item {
+          display: flex;
+          flex-direction: row;
+          gap: 5px; }
+          body #root .add-employer__modal .container .container-item.photo .file-input__wrapper,
+          body #root .change-employer__modal .container .container-item.photo .file-input__wrapper {
+            width: 100%;
+            border-radius: 7px;
+            background: #f7f7f7;
+            height: 60px;
+            transition: background-color 200ms; }
+            body #root .add-employer__modal .container .container-item.photo .file-input__wrapper label span,
+            body #root .change-employer__modal .container .container-item.photo .file-input__wrapper label span {
+              font-size: 22px; }
+          body #root .add-employer__modal .container .container-item.fields,
+          body #root .change-employer__modal .container .container-item.fields {
+            flex-direction: row; }
+            body #root .add-employer__modal .container .container-item.fields input[type=text],
+            body #root .change-employer__modal .container .container-item.fields input[type=text] {
+              flex-grow: 1;
+              font-size: 20px; }
+          body #root .add-employer__modal .container .container-item.services,
+          body #root .change-employer__modal .container .container-item.services {
+            gap: 7px; }
+            body #root .add-employer__modal .container .container-item.services .service-button,
+            body #root .change-employer__modal .container .container-item.services .service-button {
+              padding: 7px 12px;
+              font-size: 18px; }
+          body #root .add-employer__modal .container .container-item.actions button,
+          body #root .change-employer__modal .container .container-item.actions button {
+            font-size: 24px; }
+      body #root .price-list__modal .container {
+        height: 90%; }
+        body #root .price-list__modal .container h2 {
+          font-size: 34px; }
+        body #root .price-list__modal .container h3 {
+          margin-bottom: 30px;
+          font-size: 24px; }
+        body #root .price-list__modal .container .rows {
+          gap: 5px; }
+          body #root .price-list__modal .container .rows .row {
+            padding: 0.8rem; }
+            body #root .price-list__modal .container .rows .row .name,
+            body #root .price-list__modal .container .rows .row .price {
+              font-size: 22px; }
+        body #root .price-list__modal .container .advice {
+          padding: 2rem 0;
+          font-size: 20px; }
+      body #root main .page {
+        padding: 16px; }
+        body #root main .page h1 {
+          font-size: 28px; }
+      body #root main .employers-container .employers-wrapper {
+        grid-template-columns: repeat(4, calc(100% / 4 - 16px / 4 * (4 - 1)));
+        gap: 16px; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+          flex-direction: column; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+            font-size: 11px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+            gap: 0;
+            padding: 10px 7px 10px 7px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+              font-size: 14px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+              font-size: 13px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+              margin-top: 10px; }
+      body #root main .works-container .works-photos-tiles {
+        grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1))); }
+      body #root main .page-admin__wrapper .left-menu__wrapper {
+        width: 200px;
+        top: 88px;
+        display: flex; }
+      body #root main .page-admin__wrapper .bottom-menu__wrapper {
+        display: none; }
+      body #root main .page-admin__wrapper .admin-container {
+        padding: 20px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper {
+          grid-template-columns: repeat(3, calc(100% / 3 - 16px / 3 * (3 - 1)));
+          gap: 16px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0;
+              padding: 10px 7px 10px 7px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 14px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 13px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .services {
+          grid-template-columns: repeat(2, calc(100% / 2 - 10px / 2 * (2 - 1)));
+          gap: 10px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .service {
+            min-height: 80px;
+            font-size: 18px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action {
+            font-size: 18px;
+            padding: 12px 0; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody {
+          gap: 12px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row {
+            height: 45px;
+            gap: 10px; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .name {
+              font-size: 18px; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .info {
+              font-size: 16px; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions {
+              gap: 5px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button {
+                max-width: 180px;
+                font-size: 18px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content {
+                max-height: 300px; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item {
+                  font-size: 18px; }
+      body #root main .orders-container .orders .order-card .card-header__wrapper {
+        font-size: 18px; }
+        body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px; }
+          body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__title .code {
+            font-size: 22px; }
+        body #root main .orders-container .orders .order-card .card-header__wrapper .card-header__info .summary {
+          font-size: 22px; }
+      body #root main .orders-container .orders .order-card .product-card .image-wrapper img {
+        width: 200px; }
+      body #root main .orders-container .orders .order-card .product-card .info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-left: 10px;
+        flex-grow: 1; }
+        body #root main .orders-container .orders .order-card .product-card .info span {
+          font-size: 20px; }
+        body #root main .orders-container .orders .order-card .product-card .info .title {
+          font-size: 24px;
+          font-weight: 700; }
+      body #root main .services-container .advice {
+        font-size: 16px; }
+      body #root main .services-container .services {
+        grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+        gap: 10px; }
+        body #root main .services-container .services .service {
+          padding: 0 10px;
+          min-height: 80px;
+          font-size: 18px; }
+      body #root main .time-container .time .dropdown .dropdown-button {
+        font-size: 20px; }
+      body #root main .time-container .time .dropdown .dropdown-content {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios-label {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios {
+        grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+        gap: 8px; }
+        body #root main .time-container .time .radios-wrapper .radios label {
+          font-size: 20px; }
+      body #root main .time-container .time .client-info .form-elem {
+        font-size: 20px; }
+      body #root main .time-container .time #timeConfirm {
+        font-size: 20px; }
+      body #root main .employer-container .employer-info .info-section .section-title {
+        font-size: 24px; }
+      body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+        width: 150px;
+        height: 150px; }
+      body #root main .employer-container .employer-info .info-section.head .info span {
+        font-size: 21px; }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+        width: calc(100% / 3); }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button {
+        padding: 20px 50px; }
+        body #root main .employer-container .employer-info .info-section.works .slider .flickity-prev-next-button.previous {
+          right: 110px; }
+      body #root main .employer-container .employer-info .info-section.services .advice {
+        font-size: 16px; }
+      body #root main .employer-container .employer-info .info-section.services .services-container {
+        grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+        gap: 5px; }
+        body #root main .employer-container .employer-info .info-section.services .services-container .service {
+          min-height: 80px;
+          font-size: 18px; }
+      body #root main .home-container .home-elem {
+        gap: 10px; }
+        body #root main .home-container .home-elem .link {
+          font-size: 24px; }
+        body #root main .home-container .home-elem .slider .flickity-prev-next-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          bottom: 0;
+          right: 0;
+          padding: 16px 30px;
+          border-radius: 7px;
+          transform: translateY(125%); }
+          body #root main .home-container .home-elem .slider .flickity-prev-next-button.previous {
+            right: 70px; }
+          body #root main .home-container .home-elem .slider .flickity-prev-next-button .flickity-button-icon {
+            width: 50%;
+            height: 50%; }
+        body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper {
+          width: calc(100% / 3); }
+          body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .advice {
+              font-size: 11px; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0;
+              padding: 10px 7px 10px 7px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 14px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 13px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+        body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+          width: calc(100% / 3); }
+      body #root .work-photo__modal .container .photo-wrapper .work-photo {
+        width: 70%; } }
+    @media (min-width: 1024px) {
+      body #root .header-wrapper {
+        background: none;
+        display: flex;
+        padding: 10px;
+        justify-content: center; }
+        body #root .header-wrapper .main-panel {
+          box-shadow: #0000002e 0 8px 24px;
+          width: 90%;
+          border-radius: 24px;
+          background: #f7f7f7; }
+          body #root .header-wrapper .main-panel .nav {
+            display: flex; }
+            body #root .header-wrapper .main-panel .nav .nav-item {
+              display: flex; }
+            body #root .header-wrapper .main-panel .nav .logo-wrapper {
+              padding: 0 20px; }
+              body #root .header-wrapper .main-panel .nav .logo-wrapper img {
+                display: flex; }
+              body #root .header-wrapper .main-panel .nav .logo-wrapper .label-wrapper {
+                gap: 0;
+                flex-direction: column; }
+          body #root .header-wrapper .main-panel .burger {
+            display: none; }
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 18px; }
+      body #root .price-list__modal .container h2 {
+        font-size: 34px; }
+      body #root .price-list__modal .container h3 {
+        margin-bottom: 30px;
+        font-size: 27px; }
+      body #root .price-list__modal .container .rows {
+        gap: 5px; }
+        body #root .price-list__modal .container .rows .row {
+          padding: 1rem; }
+          body #root .price-list__modal .container .rows .row .name,
+          body #root .price-list__modal .container .rows .row .price {
+            font-size: 25px; }
+      body #root .price-list__modal .container .advice {
+        padding: 2rem 0;
+        font-size: 20px; }
+      body #root main .page {
+        gap: 15px; }
+      body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+        flex-direction: column; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+          font-size: 15px; }
+        body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+          gap: 0; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+            font-size: 19px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+            font-size: 18px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+            margin-top: 10px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+              font-size: 14px; }
+      body #root main .works-container .works-photos-tiles {
+        grid-template-columns: repeat(5, calc(100% / 5 - 5px / 5 * (5 - 1))); }
+      body #root main .services-container .services {
+        grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+        gap: 10px; }
+        body #root main .services-container .services .service {
+          min-height: 100px;
+          font-size: 22px; }
+      body #root main .page-admin__wrapper .left-menu__wrapper {
+        display: flex;
+        top: 156px; }
+      body #root main .page-admin__wrapper .bottom-menu__wrapper {
+        display: none; }
+      body #root main .page-admin__wrapper .admin-container .admin-section .add-button {
+        padding: 20px 0; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .add-button span {
+          font-size: 24px; }
+      body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+        flex-direction: column; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+          gap: 0; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+            font-size: 19px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+            font-size: 18px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+            margin-top: 10px; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+              font-size: 14px; }
+      body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .actions .action {
+        font-size: 18px; }
+      body #root main .page-admin__wrapper .admin-container .admin-section .services {
+        grid-template-columns: repeat(3, calc(100% / 3 - 10px / 3 * (3 - 1)));
+        gap: 10px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .service {
+          min-height: 100px;
+          font-size: 20px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .services .service-wrapper .actions .action {
+          font-size: 18px; }
+      body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row {
+        gap: 10px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .name {
+          font-size: 22px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .info {
+          font-size: 20px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button {
+          max-width: 260px;
+          font-size: 22px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content {
+          max-height: 300px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item {
+            font-size: 22px; }
+      body #root main .time-container .time .dropdown .dropdown-button {
+        font-size: 20px; }
+      body #root main .time-container .time .dropdown .dropdown-content {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios-label {
+        font-size: 20px; }
+      body #root main .time-container .time .radios-wrapper .radios {
+        grid-template-columns: repeat(6, calc(100% / 6 - 8px / 6 * (6 - 1)));
+        gap: 8px; }
+        body #root main .time-container .time .radios-wrapper .radios label {
+          font-size: 20px; }
+      body #root main .employer-container .employer-info .info-section.head .image-wrapper {
+        width: 200px;
+        height: 200px; }
+      body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport {
+        height: 225px; }
+        body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+          width: calc(100% / 4); }
+      body #root main .employer-container .employer-info .info-section.services .advice {
+        font-size: 18px; }
+      body #root main .employer-container .employer-info .info-section.services .services-container {
+        grid-template-columns: repeat(4, calc(100% / 4 - 5px / 4 * (4 - 1)));
+        gap: 5px; }
+        body #root main .employer-container .employer-info .info-section.services .services-container .service {
+          min-height: 100px;
+          font-size: 22px; }
+      body #root main .home-container .home-elem {
+        gap: 15px; }
+        body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .image-wrapper {
+          width: 20%; }
+        body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper {
+          width: 25%; }
+          body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .advice {
+              font-size: 15px; }
+            body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0; }
+              body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 19px; }
+              body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 18px; }
+              body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+                body #root main .home-container .home-elem .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  font-size: 14px; }
+        body #root main .home-container .home-elem .slider .flickity-prev-next-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          bottom: 0;
+          right: 0;
+          padding: 16px 30px;
+          border-radius: 7px;
+          transform: translateY(125%); }
+          body #root main .home-container .home-elem .slider .flickity-prev-next-button.previous {
+            right: 70px; }
+          body #root main .home-container .home-elem .slider .flickity-prev-next-button .flickity-button-icon {
+            width: 50%;
+            height: 50%; }
+        body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper {
+          width: calc(100% / 4); }
+          body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .advice {
+              font-size: 15px; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 19px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 18px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  font-size: 14px; }
+        body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          bottom: 0;
+          right: 0;
+          padding: 16px 30px;
+          border-radius: 7px;
+          transform: translateY(125%); }
+          body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button.previous {
+            right: 70px; }
+          body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button .flickity-button-icon {
+            width: 50%;
+            height: 50%; }
+        body #root main .home-container .home-elem.works .slider .flickity-viewport {
+          height: 225px; }
+          body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+            width: 25%; } }
+    @media (min-width: 1280px) {
+      body #root .header-wrapper .main-panel .nav .nav-item {
+        padding: 0 20px;
+        font-size: 23px; }
+      body #root .header-wrapper .main-panel .nav .dropdown-profile {
+        padding: 0 20px; }
+        body #root .header-wrapper .main-panel .nav .dropdown-profile .name {
+          font-size: 23px; }
+          body #root .header-wrapper .main-panel .nav .dropdown-profile .name:after {
+            width: 12px;
+            height: 12px; }
+        body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content {
+          top: 90px;
+          flex-direction: column;
+          transform: translateX(-65%); }
+          body #root .header-wrapper .main-panel .nav .dropdown-profile .dropdown-content .dropdown-content__item {
+            font-size: 20px; }
+      body #root .footer-wrapper .phone-wrapper,
+      body #root .footer-wrapper .address-wrapper {
+        display: flex;
+        font-size: 20px; }
+      body #root main {
+        padding: 24px 0; }
+        body #root main .page {
+          border-radius: 24px; }
+        body #root main .employers-container .employers-wrapper {
+          grid-template-columns: repeat(6, calc(100% / 6 - 16px / 6 * (6 - 1)));
+          gap: 16px; }
+          body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .photo-wrapper .advice {
+              font-size: 15px; }
+            body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 19px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 18px; }
+              body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+                body #root main .employers-container .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  font-size: 14px; }
+        body #root main .services-container {
+          grid-template-columns: repeat(5, calc(100% / 5 - 10px / 5 * (5 - 1)));
+          gap: 10px; }
+          body #root main .services-container .services .service {
+            min-height: 100px;
+            font-size: 22px; }
+        body #root main .page-admin__wrapper .left-menu__wrapper {
+          border-radius: 0 24px 24px 0;
+          box-shadow: #0000002e 0 8px 24px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper {
+          grid-template-columns: repeat(5, calc(100% / 5 - 16px / 5 * (5 - 1)));
+          gap: 16px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card {
+            flex-direction: column; }
+            body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info {
+              gap: 0; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                font-size: 19px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                font-size: 18px; }
+              body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories {
+                margin-top: 10px; }
+                body #root main .page-admin__wrapper .admin-container .admin-section .employers-wrapper .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                  font-size: 14px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .services {
+          grid-template-columns: repeat(4, calc(100% / 4 - 10px / 4 * (4 - 1)));
+          gap: 10px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .services .service {
+            min-height: 100px;
+            font-size: 22px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .name {
+          font-size: 24px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .name-wrapper .info {
+          font-size: 22px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-button {
+          max-width: 260px;
+          font-size: 24px; }
+        body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content {
+          max-height: 300px; }
+          body #root main .page-admin__wrapper .admin-container .admin-section .clients tbody .client-row .actions .dropdown .dropdown-content .dropdown-content__item {
+            font-size: 24px; }
+        body #root main .time-container .time {
+          gap: 15px; }
+        body #root main .employer-container .employer-info .info-section.head .info span {
+          font-size: 24px; }
+        body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport {
+          height: 300px; }
+          body #root main .employer-container .employer-info .info-section.works .slider .flickity-viewport .flickity-slider .time-wrapper {
+            width: calc(100% / 5); }
+        body #root main .home-container .home-elem {
+          gap: 20px; }
+          body #root main .home-container .home-elem .slider .flickity-prev-next-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 0;
+            right: 0;
+            padding: 16px 30px;
+            border-radius: 7px;
+            transform: translateY(125%); }
+            body #root main .home-container .home-elem .slider .flickity-prev-next-button.previous {
+              right: 70px; }
+            body #root main .home-container .home-elem .slider .flickity-prev-next-button .flickity-button-icon {
+              width: 50%;
+              height: 50%; }
+          body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper {
+            width: 20%; }
+            body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card {
+              flex-direction: column; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .photo-wrapper .advice {
+                font-size: 15px; }
+              body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info {
+                gap: 0; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .fullname {
+                  font-size: 19px; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .experience,
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .bio .exp-and-works .works-count {
+                  font-size: 18px; }
+                body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories {
+                  margin-top: 10px; }
+                  body #root main .home-container .home-elem.employees .slider .flickity-viewport .flickity-slider .employer-card__wrapper .employer-card .employer-card__info .categories .category {
+                    font-size: 14px; }
+          body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 0;
+            right: 0;
+            padding: 16px 30px;
+            border-radius: 7px;
+            transform: translateY(125%); }
+            body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button.previous {
+              right: 70px; }
+            body #root main .home-container .home-elem.employees .slider .flickity-prev-next-button .flickity-button-icon {
+              width: 50%;
+              height: 50%; }
+          body #root main .home-container .home-elem.works .slider .flickity-viewport {
+            height: 300px; }
+            body #root main .home-container .home-elem.works .slider .flickity-viewport .flickity-slider .tile-wrapper {
+              width: 25%; } }
+  body.scroll-locked {
+    overflow: hidden; }
+  @media (min-width: 1024px) {
+    body .ant-message {
+      font-size: 19px; }
+      body .ant-message .ant-message-notice-wrapper .ant-message-notice .ant-message-notice-content {
+        padding: 10px; } }
+
+/*# sourceMappingURL=index.css.map */

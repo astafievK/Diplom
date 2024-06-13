@@ -1,0 +1,3 @@
+interface IDeleteUserCommand{
+    idUser: number
+}

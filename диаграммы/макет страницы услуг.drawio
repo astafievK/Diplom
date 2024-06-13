@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" modified="2024-06-03T14:23:46.769Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="4BrPGE2ROzwqFu0Ou6to" version="24.4.13" type="device">
+  <diagram name="Страница — 1" id="SKp3QWRFZ0QjD7VVX2Bq">
+    <mxGraphModel dx="2876" dy="1103" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-1" value="" style="group;fillColor=default;" vertex="1" connectable="0" parent="1">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-2" value="" style="group" vertex="1" connectable="0" parent="aiUSKIScfsz_ApLmLBtH-1">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;fillColor=none;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-2">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-4" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;ссылка&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-2">
+          <mxGeometry x="640" y="15" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-5" value="" style="group" vertex="1" connectable="0" parent="aiUSKIScfsz_ApLmLBtH-1">
+          <mxGeometry x="80" y="15" width="540" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-6" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;логотип&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-5">
+          <mxGeometry x="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-7" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;ссылка&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-5">
+          <mxGeometry x="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-8" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;ссылка&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-5">
+          <mxGeometry x="140" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-9" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;ссылка&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-5">
+          <mxGeometry width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-10" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="-0.5" y="640" width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-11" value="" style="group;fillColor=default;" vertex="1" connectable="0" parent="aiUSKIScfsz_ApLmLBtH-10">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-12" value="" style="group" vertex="1" connectable="0" parent="aiUSKIScfsz_ApLmLBtH-11">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-13" value="" style="rounded=0;whiteSpace=wrap;html=1;fillStyle=auto;fillColor=none;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-12">
+          <mxGeometry width="827" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-14" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;логотип&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-12">
+          <mxGeometry x="354" y="15" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-27" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="50" y="120" width="730" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-22" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-27">
+          <mxGeometry x="299" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-23" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-27">
+          <mxGeometry x="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-24" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-27">
+          <mxGeometry x="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-25" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-27">
+          <mxGeometry x="600" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-26" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-27">
+          <mxGeometry width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-29" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="48" y="220" width="730" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-30" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-29">
+          <mxGeometry x="299" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-31" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-29">
+          <mxGeometry x="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-32" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-29">
+          <mxGeometry x="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-33" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-29">
+          <mxGeometry x="600" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-34" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-29">
+          <mxGeometry width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-35" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="48" y="320" width="730" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-36" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-35">
+          <mxGeometry x="299" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-37" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-35">
+          <mxGeometry x="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-38" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-35">
+          <mxGeometry x="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-39" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-35">
+          <mxGeometry x="600" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-40" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-35">
+          <mxGeometry width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-41" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="48" y="420" width="730" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-42" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-41">
+          <mxGeometry x="299" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-43" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-41">
+          <mxGeometry x="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-44" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-41">
+          <mxGeometry x="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-45" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-41">
+          <mxGeometry x="600" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-46" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-41">
+          <mxGeometry width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-47" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="48" y="520" width="730" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-48" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-47">
+          <mxGeometry x="299" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-49" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-47">
+          <mxGeometry x="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-50" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-47">
+          <mxGeometry x="450" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-51" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-47">
+          <mxGeometry x="600" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aiUSKIScfsz_ApLmLBtH-52" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;услуга&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="aiUSKIScfsz_ApLmLBtH-47">
+          <mxGeometry width="130" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

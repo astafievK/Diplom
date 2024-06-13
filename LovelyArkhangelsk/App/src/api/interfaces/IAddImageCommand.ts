@@ -1,0 +1,4 @@
+interface IAddImageCommand{
+    path: string
+}
+

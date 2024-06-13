@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  database:
+    container_name: diplom_database
+    image: mysql:8.0
+    hostname: databasediplomapi
+    ports:
+      - "3306:3306"
+    build:
+      network: host
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "lovely_arkhangelsk"
+    volumes:
+      - ./SQL:/docker-entrypoint-initdb.d
+    logging:
+      driver: none
+    restart: always
+
+  react:
+    container_name: diplom_react
+    image: diplom_react
+    hostname: reactdiplomapi
+    build:
+      network: host
+      context: ./App
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    stdin_open: true
+    logging:
+      driver: none
+    restart: always
+
+  api:
+    container_name: diplom_api
+    image: diplom_api
+    hostname: diplomapi
+    build:
+      network: host
+      context: ./Api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    restart: always
+
+volumes:
+  db:
+
+networks:
+  backend:
+    external: false
+    driver: bridge
